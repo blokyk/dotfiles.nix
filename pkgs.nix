@@ -18,8 +18,6 @@ in {
     delta
     # a general-purpose command-line fuzzy finder
     fzf
-    # # a safer, friendlier alternative to git-update-ref
-    # git-point
     # kindle comic converter
     kcc
     # pretty diff between two derivations
@@ -40,8 +38,21 @@ in {
     nix-sweep
     # explore dependency trees of derivations
     nix-tree
-    # androidsdk
-    # nh # search is broken + other commands are flake-centric :(
-    # nix-prefetch-github # replaced by alias
   ] ++ (builtins.attrValues scripts) ++ (builtins.attrValues aliases);
+
+  # removed packages:
+  #   androidsdk
+  #   git-point # a safer, friendlier alternative to git-update-ref
+  #   nh # search is broken + other commands are flake-centric :(
+  #   nix-prefetch-github # replaced by alias
+  #
+  #   androidsdk = (pkgs.androidenv.composeAndroidPackages {
+  #     platformVersions = [ "35" ];
+  #     systemImageTypes = [ "google_apis_playstore" ];
+  #     abiVersions = [ "arm64-v8a" ];
+  #     includeNDK = true;
+  #   }).androidsdk;
+
+  # todo: add git-point (doesn't work currently because of weird packaging)
+  #   git-point = import <git-point> { inherit pkgs; };
 }
