@@ -39,6 +39,12 @@
     text = builtins.readFile ./nix-drv-out.sh;
   };
 
+  nixp = writeShellApplication {
+    name = "nixp";
+    runtimeInputs = [ fzf nix-impl-cli ];
+    text = builtins.readFile ./nixp.sh;
+  };
+
   pr-fzf = writeShellApplication {
     name = "pr-fzf";
     runtimeInputs = [ fzf gh ];
