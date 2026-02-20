@@ -21,6 +21,8 @@ let
   # }).androidsdk;
 in {
   home.packages = with pkgs; [
+    # a fancy alternative to cat(1)
+    bat
     # # a safer, friendlier alternative to git-update-ref
     # git-point
     # kindle comic converter
