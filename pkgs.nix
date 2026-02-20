@@ -23,10 +23,14 @@ in {
   home.packages = with pkgs; [
     # a fancy alternative to cat(1)
     bat
+    # a colorful diff viewer
+    delta
+    # a general-purpose command-line fuzzy finder
+    fzf
     # # a safer, friendlier alternative to git-update-ref
     # git-point
     # kindle comic converter
-    kcc 
+    kcc
     # pretty diff between two derivations
     lix-diff
     # simple alternative to strace
@@ -36,7 +40,7 @@ in {
     # official nix formatter
     nixfmt
     # dev tool for nixpkgs PR
-    nixpkgs-review 
+    nixpkgs-review
     # a wrapper around nix-shell for debugging derivations
     nix-debug
     # prettify and summarize nix build output
