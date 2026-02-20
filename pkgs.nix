@@ -7,18 +7,9 @@ let
   nix-debug-src = pkgs.fetchFromGitHub {
     owner = "blokyk";
     repo = "nix-debug";
-    rev = "2d503b8a8321e916a2687cea7f7a4b0a4bd19339";
-    hash = "sha256-5hUtUArOVU2OdSkV51S1q9cNxbTrxc5HoE3/W9Mxq5M=";
+    rev = "8f839960a08accc27e179978986dec558ea176fb";
+    hash = "sha256-p8r2xRUZZTVM/A5lv68fxpy/w9uW5CWReMniezWkR3o=";
   };
-
-  git-point = import <git-point> { inherit pkgs; };
-
-  # androidsdk = (pkgs.androidenv.composeAndroidPackages {
-  #   platformVersions = [ "35" ];
-  #   systemImageTypes = [ "google_apis_playstore" ];
-  #   abiVersions = [ "arm64-v8a" ];
-  #   includeNDK = true;
-  # }).androidsdk;
 in {
   home.packages = with pkgs; [
     # a fancy alternative to cat(1)
