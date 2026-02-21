@@ -12,12 +12,20 @@ let
   };
 in {
   home.packages = with pkgs; [
-    # a fancy alternative to cat(1)
+    # fancy alternative to cat(1)
     bat
-    # a colorful diff viewer
+    # colorful diff viewer
     delta
-    # a general-purpose command-line fuzzy finder
+    # du, but more interactive
+    dust
+    # simple, fast and user-friendly alternative to find
+    fd
+    # general-purpose command-line fuzzy finder
     fzf
+    # command-line hex viewer
+    hexyl
+    # command-line benchmarking tool
+    hyperfine
     # kindle comic converter
     kcc
     # pretty diff between two derivations
@@ -30,7 +38,7 @@ in {
     nixfmt
     # dev tool for nixpkgs PR
     nixpkgs-review
-    # a wrapper around nix-shell for debugging derivations
+    # wrapper around nix-shell for debugging derivations
     nix-debug
     # prettify and summarize nix build output
     nix-output-monitor
@@ -38,6 +46,18 @@ in {
     nix-sweep
     # explore dependency trees of derivations
     nix-tree
+    # recursively searches directories for a pattern
+    ripgrep
+    # manage systemd services through a TUI
+    systemd-manager-tui
+    # 'tldr.sh' client written in rust
+    tlrc
+    # quick code line counter
+    tokei
+    # markup-based typesetting
+    typst
+    # terminal file explorer
+    yazi
   ] ++ (builtins.attrValues scripts) ++ (builtins.attrValues aliases);
 
   # removed packages:
