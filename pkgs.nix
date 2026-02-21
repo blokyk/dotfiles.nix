@@ -60,9 +60,11 @@ in {
     yazi
   ] ++ (builtins.attrValues scripts) ++ (builtins.attrValues aliases);
 
+  # todo: add git-point (doesn't work currently because of weird packaging)
+  #   git-point = import <git-point> { inherit pkgs; };
+
   # removed packages:
   #   androidsdk
-  #   git-point # a safer, friendlier alternative to git-update-ref
   #   nh # search is broken + other commands are flake-centric :(
   #   nix-prefetch-github # replaced by alias
   #
@@ -72,7 +74,4 @@ in {
   #     abiVersions = [ "arm64-v8a" ];
   #     includeNDK = true;
   #   }).androidsdk;
-
-  # todo: add git-point (doesn't work currently because of weird packaging)
-  #   git-point = import <git-point> { inherit pkgs; };
 }
