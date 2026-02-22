@@ -1,7 +1,6 @@
 { ... }:
 let
   valence = { lat = 44.93; long = 4.89; };
-  porto = { lat = 41.1579; long = 8.6291; };
 in {
   services.redshift = {
     enable = true;
@@ -13,8 +12,8 @@ in {
     };
 
     provider = "manual";
-    latitude = porto.lat;
-    longitude = porto.long;
+    latitude = valence.lat;
+    longitude = valence.long;
 
     settings.redshift.transition = 1;
   };
