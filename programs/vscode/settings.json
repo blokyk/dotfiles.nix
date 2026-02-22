@@ -1,0 +1,486 @@
+{
+    // -------------
+    // -- general --
+    // -------------
+    // general
+    "window.zoomLevel": 2,
+    "workbench.sideBar.location": "right",
+    "workbench.colorTheme": "One Dark Pro Darker",
+    "workbench.iconTheme": "seti-minimal-folder",
+    "window.commandCenter": false,
+    "editor.fontFamily": "'Iosevka Extended', 'Droid Sans Mono', 'monospace', monospace",
+    "editor.fontLigatures": false,
+    "editor.wrapOnEscapedLineFeeds": true, // WHY did no one tell me about this
+    "editor.rulers": [
+        120
+    ],
+    "editor.guides.bracketPairs": true,
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.expand": false,
+    "explorer.fileNesting.patterns": {
+        "*.c": "$(capture).h",
+        "*.cs": "$(capture).*.cs",
+        "*.csproj": "$(capture).props, $(capture).targets"
+    },
+    // git
+    "git.blame.editorDecoration.enabled": false,
+    "gitlens.currentLine.enabled": false,
+    "git.blame.editorDecorationForeground": "#f8f8ff3f",
+    "git.blame.statusBarItem.enabled": false,
+    // semantic highlighting
+    "editor.semanticTokenColorCustomizations": {
+        "[One Dark Pro Darker]": {
+            "rules": {
+                "*.deprecated": {
+                    "fontStyle": "strikethrough"
+                },
+                "macro": "#C678DD", // keyword.cs
+                "variable": "#ABB2BF", // text
+                "parameter": "#ABB2BF",
+            }
+        },
+    },
+    // ----------------
+    // -- extensions --
+    // ----------------
+    // better-comments
+    "better-comments.tags": [
+        {
+            "tag": "!",
+            "color": "#FF2D00",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false
+        },
+    ],
+    // todo-tree
+    "todo-tree.tree.sort": true,
+    "todo-tree.tree.sortTagsOnlyViewAlphabetically": true,
+    "todo-tree.filtering.useBuiltInExcludes": "file excludes",
+    "todo-tree.filtering.ignoreGitSubmodules": true,
+    "todo-tree.tree.trackFile": false,
+    "todo-tree.regex.regexCaseSensitive": false,
+    "todo-tree.general.statusBar": "tags",
+    "todo-tree.tree.groupedBySubTag": true,
+    "todo-tree.general.tags": [
+        "FIXME",
+        "TODO",
+        "MAYBE",
+        "CHOICE",
+        "IDEA",
+        "QUESTION",
+        "NOTE",
+        "[ ]",
+        "[x]"
+    ],
+    "todo-tree.general.tagGroups": {
+        "MAYBE": [
+            "CHOICE",
+            "IDEA",
+            "QUESTION"
+        ]
+    },
+    // https://www.nodexr.net/?parse=%5E%5Cs*%5C(((%3F%3A%5Ba-zA-Z0-9%5D%7C%7C_%7C-%7C%23)%2B)%5C)
+    "todo-tree.regex.subTagRegex": "^\\s*\\(((?:[a-z]|[A-Z]|_|-|#)+)\\)",
+    "todo-tree.highlights.useColourScheme": false,
+    "todo-tree.highlights.defaultHighlight": {
+        "type": "tag-and-subTag",
+        "opacity": 75
+    },
+    "todo-tree.highlights.customHighlight": {
+        "TODO": {
+            "icon": "info",
+            "foreground": "#00e1ffd0",
+            "background": "#05262b",
+            "type": "tag-and-subTag",
+        },
+        "FIXME": {
+            "icon": "x-circle",
+            "iconColour": "#d34c4c",
+            "foreground": "red",
+            "background": "#340000",
+            "type": "text-and-comment",
+        },
+        "MAYBE": {
+            "icon": "question",
+            "foreground": "white",
+            "background": "#0000",
+            // "foreground": "#f79822",
+            // "background": "#5f3800",
+        },
+        "NOTE": {
+            "icon": "note",
+            "iconColour": "#ab56eb",
+            "foreground": "white",
+            "background": "#ab56eb",
+        },
+        "[ ]": {
+            "icon": "issue-draft",
+            "iconColour": "#ff1515ec",
+            "foreground": "white",
+            // "background": "#ff1515",
+            "background": "#ff3737",
+            "type": "tag",
+        },
+        "[x]": {
+            "icon": "issue-closed",
+            "iconColour": "#7bff7bec",
+            // "background": "#7bff7b",
+            "foreground": "white",
+            "background": "#68ff5e",
+            "type": "tag",
+        }
+    },
+    // misc
+    "terminal.integrated.inheritEnv": false, // terminal stuff doesn't work cause .zshrc is not in HOME
+    "gitlens.plusFeatures.enabled": false, // fewer annoying gitlens bs
+    "redhat.telemetry.enabled": false,
+    "extensions.experimental.deferredStartupFinishedActivation": true,
+
+    // ---------------
+    // -- languages --
+    // ---------------
+
+    // csharp
+    "csharp.debug.symbolOptions.searchMicrosoftSymbolServer": true,
+    "csharp.debug.symbolOptions.searchNuGetOrgSymbolServer": true,
+    "csharp.semanticHighlighting.enabled": true,
+    "dotnet.automaticallyCreateSolutionInWorkspace": false,
+    "dotnet.backgroundAnalysis.compilerDiagnosticsScope": "fullSolution",
+    "dotnet.backgroundAnalysis.analyzerDiagnosticsScope": "fullSolution",
+    "dotnet.inlayHints.suppressInlayHintsForParametersThatMatchArgumentName": true,
+    // if method has a single parameter, and starts with Enable/Disable/Set/From, don't show inlay hint
+    // cf: https://github.com/dotnet/roslyn/blob/b7e891b8a884be1519a709edc7121140c5a1fac2/src/Features/Core/Portable/InlineHints/AbstractInlineParameterNameHintsService.cs#L227
+    "dotnet.inlayHints.suppressInlayHintsForParametersThatMatchMethodIntent": true,
+    "dotnet.server.suppressMiscellaneousFilesToasts": true,
+    "dotnet.typeMembers.memberInsertionLocation": "withOtherMembersOfTheSameKind",
+    "dotnet.typeMembers.propertyGenerationBehavior": "preferAutoProperties",
+
+    // c/cpp
+    "clangd.path": "clangd",
+    "clangd.fallbackFlags": [
+        "-xc"
+    ],
+    "[cpp]": {
+        "editor.inlayHints.enabled": "offUnlessPressed"
+    },
+
+    // dart
+    "dart.flutterRunAdditionalArgs": ["--no-pub"],
+    "dart.debugExternalPackageLibraries": true,
+    "dart.debugSdkLibraries": true,
+    "[dart]": {
+        "editor.formatOnSave": true,
+        "editor.formatOnType": true,
+        "editor.rulers": [
+            120
+        ],
+        "editor.selectionHighlight": false,
+        "editor.tabCompletion": "onlySnippets",
+        "editor.wordBasedSuggestions": "off"
+    },
+
+    // glsl
+    "glsl-analyzer.path": "/home/blokyk/.config/Code/User/globalStorage/nolanderc.glsl-analyzer/glsl_analyzer_install/bin/glsl_analyzer",
+    "glsllint.useIncludeDirOfFile": true,
+    "glsllint.glslangValidatorArgs": [
+        "-I/home/blokyk/.local/share/flutter/engine/src/flutter/impeller/compiler/shader_lib",
+        "-I/home/blokyk/.local/share/flutter/engine/src/flutter/impeller/compiler/shader_lib/flutter",
+        "-C",
+        "--error-column",
+        "--enhanced-msgs"
+    ],
+
+    // markdown
+    "[markdown]": {
+        "editor.rulers": [
+            80
+        ],
+        "diffEditor.ignoreTrimWhitespace": false,
+        "editor.wordWrap": "on",
+        "editor.quickSuggestions": {
+            "comments": "off",
+            "strings": "off",
+            "other": "off"
+        },
+        "cSpell.fixSpellingWithRenameProvider": true,
+        "cSpell.advanced.feature.useReferenceProviderWithRename": true,
+        "cSpell.advanced.feature.useReferenceProviderRemove": "/^#+\\s/"
+    },
+
+    // nix
+    "nix.enableLanguageServer": true,
+    "nix.serverPath": "nixd",
+    // "nix.hiddenLanguageServerErrors":[
+    //     "textDocument/definition",
+    //     "textDocument/documentSymbol",
+    //     "textDocument/formatting"
+    // ],
+    "nix.serverSettings": {
+        "nixd": {
+            "formatting": {
+                "command": [ "nixfmt" ],
+            },
+            "options": {
+                "nixpkgs": {
+                    "expr": "import <nixpkgs> { }"
+                },
+                "home-manager": {
+                    "expr": "import <home-manager> { }"
+                },
+                "zoeee": {
+                    "expr": "import <zoeee> { }"
+                },
+                "zoeee/pkgs": {
+                    "expr": "import <zoeee/pkgs> { }"
+                },
+                "zoeee/modules": {
+                    "expr": "import <zoeee/modules> { }"
+                },
+                "zoeee/hm-modules": {
+                    "expr": "import <zoeee/hm-modules> { }"
+                }
+            }
+        }
+    },
+    "[nix]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.fontLigatures": false,
+        "editor.formatOnPaste": true,
+        // "editor.formatOnSave": true,
+    },
+
+    // typst
+    "[typst]": {
+        "editor.wordSeparators": "`~!@#$%^&*()=+[{]}\\|;:'\",.<>/?",
+        "editor.wordWrap": "bounded",
+        "editor.rulers": [
+            120
+        ],
+    },
+    "[typst-code]": {
+        "cSpell.reportUnknownWords": "simple",
+        "editor.wordSeparators": "`~!@#$%^&*()=+[{]}\\|;:'\",.<>/?"
+    },
+
+    "cSpell.language": "en,fr",
+    "cSpell.userWords": [
+        "AABB",
+        "ADHD",
+        "Arity",
+        "astlib",
+        "attaqueurs",
+        "attrsets",
+        "Avalonia",
+        "AVX",
+        "Barthelemy",
+        "BCL's",
+        "Behaviour",
+        "bitmask",
+        "blokyk",
+        "Blokyk",
+        "Bokeh",
+        "Browsable",
+        "C'mon",
+        "castable",
+        "chdir",
+        "chercheur.euse.s",
+        "chercheur·euse·s",
+        "ciphertext",
+        "CO4SYS",
+        "codefix",
+        "coeff",
+        "coeffs",
+        "coeur",
+        "combinators",
+        "concat",
+        "Consolas",
+        "coreutils",
+        "Courvoisier",
+        "Courvoisier-Clément",
+        "cpuid",
+        "CPUID",
+        "Cray",
+        "cref",
+        "cringy",
+        "CTSYS",
+        "curr",
+        "Debuggee",
+        "decompilation",
+        "decompiled",
+        "delim",
+        "différent.e.s",
+        "différent·e·s",
+        "dotnet",
+        "EBNF",
+        "écrivable",
+        "endianness",
+        "endtemplate",
+        "ESISAR",
+        "euse",
+        "fmap",
+        "foldr",
+        "Framebuffer",
+        "Fullscreen",
+        "funcs",
+        "ghci",
+        "github",
+        "Gonnord",
+        "graphviz",
+        "grib",
+        "halfs",
+        "hexlets",
+        "Hexlets",
+        "idxs",
+        "IMAG",
+        "INP",
+        "Intrinsics",
+        "invokable",
+        "Invokable",
+        "Invokables",
+        "isdigit",
+        "itertools",
+        "keyframes",
+        "Koning",
+        "Laffemas",
+        "lcis",
+        "LCIS",
+        "Lerp",
+        "Libertinus",
+        "Linebreaks",
+        "linux",
+        "listenables",
+        "lval",
+        "Marionnet",
+        "memseq",
+        "Michelland",
+        "MOTD",
+        "mult",
+        "nameof",
+        "nginx",
+        "nixos",
+        "nixpkgs",
+        "noeud",
+        "notnull",
+        "nullable",
+        "omnisharp",
+        "ORSYS",
+        "parbreak",
+        "parslet",
+        "Parslet",
+        "Parslets",
+        "pkgs",
+        "popcnt",
+        "POSIX",
+        "préemptivement",
+        "présumablement",
+        "protobuf",
+        "Rasterizer",
+        "reconsume",
+        "Reconsume",
+        "reconsumes",
+        "Rects",
+        "reddit",
+        "regfile",
+        "rémi",
+        "repos",
+        "repr",
+        "rerouter",
+        "retcode",
+        "REUSEPORT",
+        "Rgba",
+        "RISC",
+        "Rjindael",
+        "robbyrussell",
+        "rosetta",
+        "roslyn",
+        "rsonpath",
+        "rval",
+        "seccomp",
+        "sfml",
+        "SIMD",
+        "Single Instruction, Multiple Data",
+        "SLOC",
+        "SPIRV",
+        "starkid",
+        "struct",
+        "structs",
+        "subclassing",
+        "subcmd",
+        "subcommande",
+        "subfolders",
+        "submatrices",
+        "suwayomi",
+        "Suwayomi",
+        "Swapchain",
+        "SxC",
+        "syscall",
+        "tldr",
+        "Tokenizes",
+        "Toklet",
+        "Toklets",
+        "tou.te.s",
+        "tou·te·s",
+        "typechecker",
+        "UGA",
+        "unicode",
+        "upject",
+        "Uuid",
+        "Veldrid",
+        "verimag",
+        "Verimag",
+        "VERIMAG",
+        "Viewports",
+        "vsync",
+        "wireshark",
+        "xilinx",
+        "xkcd",
+        "zoë",
+        "Zoë"
+    ],
+
+    // ai/agent/chat stuff
+    "chat.extensionTools.enabled": false,
+    "chat.agent.enabled": false,
+    "chat.detectParticipant.enabled": false,
+    "inlineChat.holdToSpeech": false,
+    "inlineChat.lineNaturalLanguageHint": false,
+    "chat.useFileStorage": false,
+    "chat.sendElementsToChat.enabled": false,
+    "chat.sendElementsToChat.attachImages": false,
+    "chat.sendElementsToChat.attachCSS": false,
+    "chat.promptFiles": false,
+    "chat.mcp.discovery.enabled": {
+        "claude-desktop": false,
+        "windsurf": false,
+        "cursor-global": false,
+        "cursor-workspace": false
+    },
+
+    "gitlens.views.scm.grouped.views": {
+        "commits": true,
+        "branches": true,
+        "remotes": true,
+        "stashes": true,
+        "tags": true,
+        "worktrees": true,
+        "contributors": true,
+        "fileHistory": false,
+        "repositories": true,
+        "searchAndCompare": false,
+        "launchpad": true
+    },
+    "chat.mcp.access": "none",
+    "python.analysis.typeCheckingMode": "standard",
+    "errorLens.messageEnabled": false,
+    "files.associations": {
+        "allgen5x5": "plaintext"
+    },
+    "workbench.productIconTheme": "old-codicon",
+    "haskell.manageHLS": "GHCup",
+    "explorer.confirmDragAndDrop": false,
+    "diffEditor.ignoreTrimWhitespace": false,
+}
