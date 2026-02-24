@@ -4,10 +4,12 @@
     // -------------
     // general
     "window.zoomLevel": 2,
+    "window.commandCenter": false,
     "workbench.sideBar.location": "right",
     "workbench.colorTheme": "One Dark Pro Darker",
     "workbench.iconTheme": "seti-minimal-folder",
-    "window.commandCenter": false,
+    "workbench.productIconTheme": "old-codicon",
+    "files.insertFinalNewline": true,
     "editor.fontFamily": "'Iosevka Extended', 'Droid Sans Mono', 'monospace', monospace",
     "editor.fontLigatures": false,
     "editor.wrapOnEscapedLineFeeds": true, // WHY did no one tell me about this
@@ -15,6 +17,7 @@
         120
     ],
     "editor.guides.bracketPairs": true,
+    "explorer.confirmDragAndDrop": false,
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.expand": false,
     "explorer.fileNesting.patterns": {
@@ -22,6 +25,7 @@
         "*.cs": "$(capture).*.cs",
         "*.csproj": "$(capture).props, $(capture).targets"
     },
+
     // git
     "git.blame.editorDecoration.enabled": false,
     "gitlens.currentLine.enabled": false,
@@ -55,6 +59,8 @@
             "italic": false
         },
     ],
+    // error lens
+    "errorLens.messageEnabled": false,
     // todo-tree
     "todo-tree.tree.sort": true,
     "todo-tree.tree.sortTagsOnlyViewAlphabetically": true,
@@ -193,6 +199,9 @@
         "--enhanced-msgs"
     ],
 
+    // haskell
+    "haskell.manageHLS": "GHCup",
+
     // markdown
     "[markdown]": {
         "editor.rulers": [
@@ -253,6 +262,9 @@
         // "editor.formatOnSave": true,
     },
 
+    // python
+    "python.analysis.typeCheckingMode": "standard",
+
     // typst
     "[typst]": {
         "editor.wordSeparators": "`~!@#$%^&*()=+[{]}\\|;:'\",.<>/?",
@@ -273,6 +285,7 @@
         "Arity",
         "astlib",
         "attaqueurs",
+        "attrset",
         "attrsets",
         "Avalonia",
         "AVX",
@@ -474,13 +487,4 @@
         "launchpad": true
     },
     "chat.mcp.access": "none",
-    "python.analysis.typeCheckingMode": "standard",
-    "errorLens.messageEnabled": false,
-    "files.associations": {
-        "allgen5x5": "plaintext"
-    },
-    "workbench.productIconTheme": "old-codicon",
-    "haskell.manageHLS": "GHCup",
-    "explorer.confirmDragAndDrop": false,
-    "diffEditor.ignoreTrimWhitespace": false,
 }
