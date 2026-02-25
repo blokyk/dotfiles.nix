@@ -1,0 +1,14 @@
+diff --git a/git.nanorc b/git.nanorc
+index 0aaf475..4593e8c 100644
+--- a/git.nanorc
++++ b/git.nanorc
+@@ -19,7 +19,8 @@ color ,red "	+"
+ syntax "git-commit" "COMMIT_EDITMSG|TAG_EDITMSG"
+ 
+ # Commit message
+-color yellow ".*"
++color red "^.*"
++color yellow "^.{0,72}"
+ 
+ # Comments
+ color brightblack "^#.*"
