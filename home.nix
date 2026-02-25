@@ -10,6 +10,7 @@ in {
     ./pkgs.nix
 
     ./programs
+    ./zsh
   ];
 
   nixpkgs.overlays = [(
