@@ -1,6 +1,6 @@
-{ ... }: {
+{ config, ... }: {
   home.sessionVariables = {
-    EDITOR = "/bin/nano";
-    NIXD_FLAGS = "-log=error";
+    TERM = "xterm-256color";
+    ANDROID_HOME = config.home.homeDirectory + "/Android/Sdk";
   };
 }

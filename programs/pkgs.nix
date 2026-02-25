@@ -1,8 +1,5 @@
 { pkgs, ... }:
 let
-  scripts = pkgs.callValue ./scripts {};
-  aliases = pkgs.callValue ./aliases.nix {};
-
   nix-debug = pkgs.callPackage nix-debug-src {};
   nix-debug-src = pkgs.fetchFromGitHub {
     owner = "blokyk";
@@ -14,8 +11,6 @@ in {
   home.packages = with pkgs; [
     # fancy alternative to cat(1)
     bat
-    # colorful diff viewer
-    delta
     # du, but more interactive
     dust
     # simple, fast and user-friendly alternative to find
@@ -58,7 +53,7 @@ in {
     typst
     # terminal file explorer
     yazi
-  ] ++ (builtins.attrValues scripts) ++ (builtins.attrValues aliases);
+  ];
 
   # todo: add git-point (doesn't work currently because of weird packaging)
   #   git-point = import <git-point> { inherit pkgs; };

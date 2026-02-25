@@ -1,15 +1,10 @@
-{
-  hm-config,
-  pkgs,
-  lib,
-
-  wrapper-manager,
-  ...
-}:
+{ config, lib, pkgs, ... }:
 let
-  wrap = wrapper-manager.wrap;
-  mkAlias = pkgs.callPackage ./misc/mkAlias.nix {};
-  HOME = hm-config.home.homeDirectory;
+  inherit (builtins) attrValues;
+
+  wrap = pkgs.wrapper-manager.wrap;
+  mkAlias = pkgs.callPackage ../misc/mkAlias.nix {};
+  HOME = config.home.homeDirectory;
 
   # wrappers REPLACE the original binary (and there's no direct way to get the original)
   wrappers = {
@@ -57,5 +52,7 @@ let
     lib.mapAttrs
       (alias: attrs: mkAlias ({ name = alias; } // attrs))
       aliases;
-in
-  wrappers // realAliases
+in {
+  home.packages =
+    (attrValues wrappers) ++ (attrValues realAliases);
+}

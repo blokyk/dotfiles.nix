@@ -1,4 +1,7 @@
-{ ... }: {
+# GNOME Terminal fork with split panes and added functionality
+{ pkgs, ... }: {
+  home.packages = [ pkgs.tilix ];
+
   xdg.configFile = {
     # modified dracula
     "tilix/schemes/dracula.json".text = builtins.toJSON {

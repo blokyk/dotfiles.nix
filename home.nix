@@ -7,26 +7,26 @@ in {
 
   imports = [
     ./env.nix
-    ./pkgs.nix
 
     ./programs
+    ./scripts
     ./zsh
   ];
 
   nixpkgs.overlays = [(
     final: prev: {
-      # a helper to use `callPackage` on non-attrset values
-      # or on sets that shouldn't have the override* attributes
-      callValue = file: pkgs:
-        removeAttrs
-          (final.callPackage file pkgs)
-          [ "override" "overrideAttrs" "overrideDerivation" ];
-      # make home-manager config easily accessible with callPackage/callValue
-      hm-config = config;
-      # create a virtual package for the nix implementation we use so
-      # that our scripts/aliases don't have to worry about choosing it
-      nix-impl-cli = final.lixPackageSets.latest.lix;
-      wrapper-manager.wrap = (final.callPackage ./misc/wrapper-manager.nix {}).lib.wrapWith final;
+      # a helper to use `callPackage` on non-derivation values (attrset or not)
+      # that shouldn't have the 'override*' attrs on them
+      callValue = file: overrides:
+        let raw = final.callPackage file overrides; in
+        if (builtins.isAttrs raw)
+          then removeAttrs raw [ "override" "overrideAttrs" "overrideDerivation" ]
+          else raw;
+
+      wrapper-manager =
+        (final.callPackage ./misc/wrapper-manager.nix {}) // {
+          wrap = final.wrapper-manager.lib.wrapWith final;
+        };
     }
   )];
 
