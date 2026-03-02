@@ -151,8 +151,9 @@ in
     )"
     unset -f getAllPkgsDumb getAllPkgsAverage getAllPkgsSmart nixListToLines
 
-    # only print package info if not empty
+    # try to edit package, and then show the package information (esp. useful if edit fails)
     if [[ "$res" != "" ]]; then
+        nix edit --impure -E '(import '"$pkgs"' {}).'"$res"'' || true
         getPkgInfo "$res"
     fi
 else
