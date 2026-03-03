@@ -7,13 +7,14 @@
   lix-diff,
   nano,
   nix-impl-cli,
+  nix-output-monitor,
   npins,
   ripgrep,
   xclip,
 
   writeShellApplication,
   ...
-}: {
+}: rec {
   figlet-fzf = writeShellApplication {
     name = "figlet-fzf";
     runtimeInputs = [ figlet fzf xclip ];
@@ -25,6 +26,12 @@
     name = "hm-diff";
     runtimeInputs = [ lix-diff /*home-manager*/ ];
     text = builtins.readFile ./hm-diff.sh;
+  };
+
+  hm-switch = writeShellApplication {
+    name = "hm-switch";
+    runtimeInputs = [ nix-output-monitor npins-shell ];
+    text = builtins.readFile ./hm-switch.sh;
   };
 
   issue-fzf = writeShellApplication {
