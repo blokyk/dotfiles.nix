@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ lib, pkgs, ... }: {
   programs.git = {
     enable = true;
 
@@ -7,10 +7,10 @@
 
       # show/checkout last branches
       lb =
-        "!git reflog show --pretty=format format:'%gs ~ %gd' --date=relative | " +
+        "!git reflog show --pretty=format:'%gs ~ %gd' --date=relative | " +
         "grep 'checkout:' | grep -oE '[^ ]+ ~ .*' | awk -F~ '!seen[$1]++' | head -n 10 | " +
         "awk -F' ~ HEAD@{' '{printf(\"  \\x1b[33m%s: \\x1b[0m\\x1b[1m %s\\x1b[0m\\n\", substr($2, 1, length($2)-1), $1)}'";
-      clb = ''!git checkout "$(git lb | ${pkgs.fzf} --ansi | cut -d':' -f2)"'';
+      clb = ''!git checkout "$(git lb | ${lib.getExe pkgs.fzf} --ansi | cut -d':' -f2)"'';
     };
 
     lfs.enable = true;
