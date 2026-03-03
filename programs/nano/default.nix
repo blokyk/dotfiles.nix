@@ -4,7 +4,7 @@ let
   rc-format = import ./format.nix { inherit lib; };
 in {
   home.packages = [ pkgs.nano ];
-  home.sessionVariables.EDITOR = pkgs.nano;
+  home.sessionVariables.EDITOR = lib.getExe pkgs.nano;
   home.file.".nanorc".text = ''
     include "${nanorc-pkg}/share/*.nanorc"
 
