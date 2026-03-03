@@ -7,6 +7,7 @@
   lix-diff,
   nano,
   nix-impl-cli,
+  npins,
   ripgrep,
   xclip,
 
@@ -43,6 +44,12 @@
     name = "nixp";
     runtimeInputs = [ fzf nix-impl-cli ];
     text = builtins.readFile ./nixp.sh;
+  };
+
+  npins-shell = writeShellApplication {
+    name = "npins-shell";
+    runtimeInputs = [ npins ];
+    text = builtins.readFile ./npins-shell.sh;
   };
 
   pr-fzf = writeShellApplication {
