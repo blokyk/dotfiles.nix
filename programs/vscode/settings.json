@@ -378,6 +378,7 @@
         "nixpkgs",
         "noeud",
         "notnull",
+        "npins",
         "nullable",
         "omnisharp",
         "ORSYS",
