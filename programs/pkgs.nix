@@ -41,6 +41,8 @@ in {
     nix-sweep
     # explore dependency trees of derivations
     nix-tree
+    # tool for pinning and managing nix dependencies
+    npins
     # recursively searches directories for a pattern
     ripgrep
     # manage systemd services through a TUI

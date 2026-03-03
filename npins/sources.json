@@ -1,0 +1,37 @@
+{
+  "pins": {
+    "home-manager": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nix-community",
+        "repo": "home-manager"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "f140aa04d7d14f8a50ab27f3691b5766b17ae961",
+      "url": "https://github.com/nix-community/home-manager/archive/f140aa04d7d14f8a50ab27f3691b5766b17ae961.tar.gz",
+      "hash": "sha256-O3ukj3Bb3V0Tiy/4LUfLlBpWypJ9P0JeUgsKl2nmZZY="
+    },
+    "nixpkgs": {
+      "type": "Channel",
+      "name": "nixpkgs-unstable",
+      "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.05pre956909.93178f6a00c2/nixexprs.tar.xz",
+      "hash": "sha256-xAHiI07j8nMZuA53r40AoWgYH9bKCgaVowNq5MpkE3g="
+    },
+    "zoeee": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "blokyk",
+        "repo": "packages.nix"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "b28d526448c49dd295be253093f65929b906067d",
+      "url": "https://github.com/blokyk/packages.nix/archive/b28d526448c49dd295be253093f65929b906067d.tar.gz",
+      "hash": "sha256-98gOwx0ZOp1GE0HpBdhXcIriki1WbnZAT3YcqyCLZk8="
+    }
+  },
+  "version": 7
+}
