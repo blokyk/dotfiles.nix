@@ -19,6 +19,9 @@ let
   };
 
   # aliases simply add new names in a shell, they shouldn't have the same name as a command
+  # note: doing things like this isn't really equivalent to an actual shell alias.
+  #       importantly, since we get the package from nixpkgs, it won't have any wrapping
+  #       from wrapper-manager; this can be a pro or a con, but it's important to remember.
   aliases = {
     # `git` with the right arguments to manage my dotfiles
     ".f" = {
