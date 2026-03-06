@@ -1,7 +1,19 @@
 # GNOME Terminal fork with split panes and added functionality
 { pkgs, ... }: {
-  # fixme: disabled because fonts don't work :( (cause of weird patched env or something idk)
-  # home.packages = [ pkgs.tilix ];
+  # fix tilix using weird XDG_DATA_DIRS value that fucks up the fonts :(
+  nixpkgs.overlays = [
+    (final: prev: {
+      tilix = prev.tilix.overrideAttrs (final: prev: {
+        preFixup = ''
+          gappsWrapperArgs+=(
+            --unset XDG_DATA_DIRS
+          )
+        '';
+      });
+    })
+  ];
+
+  home.packages = [ pkgs.tilix ];
 
   xdg.configFile = {
     # modified dracula
