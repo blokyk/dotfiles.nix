@@ -59,6 +59,10 @@ ${pkg.meta.homepage or ""}
 }
 export -f getPkgInfo
 
+editPkg() {
+    nix edit --impure -E '(import '"$pkgs"' {}).'"$1"''
+}
+
 pkgs='<nixpkgs>'
 if [[ "${1:-}" = "-s" ]] || [[ "${1:-}" = "--source" ]]; then
     pkgs="$2"
@@ -139,9 +143,9 @@ in
 
     export -f getAllPkgsDumb getAllPkgsAverage getAllPkgsSmart nixListToLines
     # initially, display a list of all attrs inside <pkgs>, assuming all of them are normal packages.
-    # however, in the background we're running a similar query that rewrites/explores the values
+    # however, in the background we're running a similar query that rewrites/explopkg the values
     # that are package sets; once it's done, we display the new refined list
-    res="$(getAllPkgsDumb | SHELL="$(which bash)" fzf \
+    pkg="$(getAllPkgsDumb | SHELL="$(which bash)" fzf \
         --no-height \
         --preview-window 'bottom,25%' \
         --bind 'start:preview(echo "Loading packages")+reload-sync()' \
@@ -151,12 +155,28 @@ in
     )"
     unset -f getAllPkgsDumb getAllPkgsAverage getAllPkgsSmart nixListToLines
 
-    # try to edit package, and then show the package information (esp. useful if edit fails)
-    if [[ "$res" != "" ]]; then
-        nix edit --impure -E '(import '"$pkgs"' {}).'"$res"'' || true
-        getPkgInfo "$res"
+    if [[ -z "$pkg" ]]; then
+        echo -e "\e[2mNo package selected\e[0m"
+        exit 1
     fi
 else
-    # precise mode
-    getPkgInfo "$1"
+    pkg="$1"
 fi
+
+# try to edit package, and then show the package information (esp. useful if edit fails)
+
+getPkgInfo "$pkg"
+
+echo
+echo -en "Open definition in \e[1m$(basename "$EDITOR")\e[0m? (Y/n) "
+
+read -r yn_answer
+case "$yn_answer" in
+    [nN][oO]|[nN])
+        exit
+    ;;
+    # default is yes
+    *)
+        editPkg "$pkg"
+    ;;
+esac
