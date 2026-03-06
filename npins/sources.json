@@ -19,6 +19,19 @@
       "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.05pre956909.93178f6a00c2/nixexprs.tar.xz",
       "hash": "sha256-xAHiI07j8nMZuA53r40AoWgYH9bKCgaVowNq5MpkE3g="
     },
+    "wrapper-manager": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "viperML",
+        "repo": "wrapper-manager"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "801dd9c876fcada046af45543e8c7e0bbccf20ea",
+      "url": "https://github.com/viperML/wrapper-manager/archive/801dd9c876fcada046af45543e8c7e0bbccf20ea.tar.gz",
+      "hash": "sha256-OGXsTE5jWhGiFfK6OwMvjksrYSobsIFUSUzKsexCDxY="
+    },
     "zoeee": {
       "type": "Git",
       "repository": {

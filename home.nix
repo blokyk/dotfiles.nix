@@ -1,4 +1,4 @@
-{ config, ... }:
+{ ... }:
 let
 in {
   home.username = "blokyk";
@@ -26,7 +26,7 @@ in {
           else raw;
 
       wrapper-manager =
-        (final.callPackage ./misc/wrapper-manager.nix {}) // {
+        (import <wrapper-manager>) // {
           wrap = final.wrapper-manager.lib.wrapWith final;
         };
     }
