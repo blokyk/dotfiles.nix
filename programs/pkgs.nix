@@ -43,6 +43,8 @@ in {
     nix-tree
     # tool for pinning and managing nix dependencies
     npins
+    # graphics debugger
+    renderdoc
     # recursively searches directories for a pattern
     ripgrep
     # manage systemd services through a TUI
