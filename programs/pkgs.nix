@@ -43,6 +43,8 @@ in {
     nix-tree
     # tool for pinning and managing nix dependencies
     npins
+    # a modern manual viewer
+    qman
     # graphics debugger
     renderdoc
     # recursively searches directories for a pattern
