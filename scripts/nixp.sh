@@ -78,8 +78,9 @@ if [[ "${1:-}" = "" ]]; then
     # fuzzy-finding mode
 
     # strip the opening and closing '[]', then the quotes, and finally put each name on a separate line
+    # (and filter out the empty lines for good measure)
     nixListToLines() {
-        head --bytes=-2 | tail --bytes=+2 | tr ' ' '\n' | tr --delete '"'
+        head --bytes=-2 | tail --bytes=+2 | tr ' ' '\n' | tr --delete '"' | awk NF
     }
 
     # shellcheck disable=SC2329 # yes it's used, but indirectly by fzf
@@ -143,13 +144,17 @@ in
 
     export -f getAllPkgsDumb getAllPkgsAverage getAllPkgsSmart nixListToLines
     # initially, display a list of all attrs inside <pkgs>, assuming all of them are normal packages.
-    # however, in the background we're running a similar query that rewrites/explopkg the values
-    # that are package sets; once it's done, we display the new refined list
+    # however, in the background we're running a similar query that only selects packages that can eval,
+    # and then display it once it's done.
+    # in addition, when pressing Ctrl-A, we expand the values that are package sets (and Alt-A hides them)
     pkg="$(getAllPkgsDumb | SHELL="$(which bash)" fzf \
         --no-height \
         --preview-window 'bottom,25%' \
+        --ghost 'Type for normal search / Ctrl/Alt-A to toggle nested package sets' \
         --bind 'start:preview(echo "Loading packages")+reload-sync()' \
-        --bind 'load:preview(echo "Refining package list")+reload-sync(getAllPkgsSmart)+unbind(load)' \
+        --bind 'load:change-header(Refining package list...)+reload-sync(getAllPkgsAverage)+unbind(load)' \
+        --bind 'ctrl-a:change-header(Exploring nested package sets...)+reload-sync(getAllPkgsSmart)+unbind(ctrl-a)' \
+        --bind 'alt-a:change-header(fuck u)+rebind(load)+trigger(load)+rebind(ctrl-a)' \
         --preview 'getPkgInfo {1}' \
         --preview-window wrap \
     )"
@@ -163,7 +168,7 @@ else
     pkg="$1"
 fi
 
-# try to edit package, and then show the package information (esp. useful if edit fails)
+# show the package information, then ask the user if they want to edit the declaration
 
 getPkgInfo "$pkg"
 
