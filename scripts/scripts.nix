@@ -1,4 +1,7 @@
 {
+  lib,
+  hm-config,
+
   bat,
   coreutils,
   figlet,
@@ -8,7 +11,9 @@
   gnused,
   jq,
   lix-diff,
+  lld,
   nix-impl-cli,
+  nix-index,
   nix-output-monitor,
   npins,
   ripgrep,
@@ -61,6 +66,12 @@ in rec {
     runtimeInputs = [ jq nix-impl-cli ];
     text = read ./nix-drv-out.sh;
   };
+
+  nixlld = lib.mkIf (hm-config.programs.nix-index.enable) (writeShellApplication {
+    name = "nixlld";
+    runtimeInputs = [ coreutils gnused lld nix-index ];
+    text = read ./nixlld.sh;
+  });
 
   nixp = writeShellApplication {
     name = "nixp";

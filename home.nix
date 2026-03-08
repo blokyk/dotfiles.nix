@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 let
 in {
   home.username = "blokyk";
@@ -27,6 +27,9 @@ in {
         if (builtins.isAttrs raw)
           then removeAttrs raw [ "override" "overrideAttrs" "overrideDerivation" ]
           else raw;
+
+      # allow packages to be based on the home-manager config
+      hm-config = config;
 
       wrapper-manager =
         (import <wrapper-manager>) // {
