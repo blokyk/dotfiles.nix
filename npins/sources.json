@@ -1,5 +1,18 @@
 {
   "pins": {
+    "figlet-fonts": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "xero",
+        "repo": "figlet-fonts"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "5c250192890856486be8a85085e7915b1b655f3e",
+      "url": "https://github.com/xero/figlet-fonts/archive/5c250192890856486be8a85085e7915b1b655f3e.tar.gz",
+      "hash": "sha256-wT1DjM+3+UasAm2IHavBXs0R8eNMJn9uLtWSqwS+XU0="
+    },
     "home-manager": {
       "type": "Git",
       "repository": {
