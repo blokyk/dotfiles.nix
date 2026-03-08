@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, zpkgs, ... }:
 let
   nix-debug = pkgs.callPackage nix-debug-src {};
   nix-debug-src = pkgs.fetchFromGitHub {
@@ -46,7 +46,7 @@ in {
     # tool for pinning and managing nix dependencies
     npins
     # a modern manual viewer
-    qman
+    zpkgs.qman
     # graphics debugger
     renderdoc
     # recursively searches directories for a pattern

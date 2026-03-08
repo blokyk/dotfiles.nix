@@ -1,9 +1,12 @@
-{ ... }:
+{ pkgs, ... }:
 let
 in {
   home.username = "blokyk";
   home.homeDirectory = "/home/blokyk";
   targets.genericLinux.enable = true; # non-NixOS system
+
+  # inject 'zpkgs' arg into other modules to easily get zoeee/pkgs
+  _module.args.zpkgs = pkgs.callPackage <zoeee/pkgs> {};
 
   imports = [
     ./env.nix
