@@ -80,7 +80,7 @@ if [[ "${1:-}" = "" ]]; then
     # strip the opening and closing '[]', then the quotes, and finally put each name on a separate line
     # (and filter out the empty lines for good measure)
     nixListToLines() {
-        head --bytes=-2 | tail --bytes=+2 | tr ' ' '\n' | tr --delete '"' | awk NF
+        head --bytes=-2 | tail --bytes=+2 | tr ' ' '\n' | tr --delete '"' | sed '/^[[:space:]]*$/d'
     }
 
     # shellcheck disable=SC2329 # yes it's used, but indirectly by fzf

@@ -1,11 +1,13 @@
 {
   bat,
+  coreutils,
   figlet,
   fzf,
+  gawk,
   gh,
+  gnused,
   jq,
   lix-diff,
-  nano,
   nix-impl-cli,
   nix-output-monitor,
   npins,
@@ -24,7 +26,7 @@
 
   hm-diff = writeShellApplication {
     name = "hm-diff";
-    runtimeInputs = [ lix-diff /*home-manager*/ ];
+    runtimeInputs = [ coreutils gawk lix-diff /*home-manager*/ ];
     text = builtins.readFile ./hm-diff.sh;
   };
 
@@ -36,7 +38,7 @@
 
   issue-fzf = writeShellApplication {
     name = "issue-fzf";
-    runtimeInputs = [ fzf gh ];
+    runtimeInputs = [ coreutils fzf gh gnused /* $EDITOR */ ];
     excludeShellChecks = [ "SC2016" ];
     text = builtins.readFile ./issue-fzf.sh;
   };
@@ -49,26 +51,26 @@
 
   nixp = writeShellApplication {
     name = "nixp";
-    runtimeInputs = [ fzf nix-impl-cli ];
+    runtimeInputs = [ coreutils fzf nix-impl-cli /* $EDITOR */ ];
     text = builtins.readFile ./nixp.sh;
   };
 
   npins-shell = writeShellApplication {
     name = "npins-shell";
-    runtimeInputs = [ npins ];
+    runtimeInputs = [ coreutils npins ];
     text = builtins.readFile ./npins-shell.sh;
   };
 
   pr-fzf = writeShellApplication {
     name = "pr-fzf";
-    runtimeInputs = [ fzf gh ];
+    runtimeInputs = [ coreutils fzf gh ];
     excludeShellChecks = [ "SC2016" ];
     text = builtins.readFile ./pr-fzf.sh;
   };
 
   frg = writeShellApplication {
     name = "frg";
-    runtimeInputs = [ bat fzf nano ripgrep ];
+    runtimeInputs = [ bat fzf ripgrep ];
     excludeShellChecks = [ "SC2016" ];
     text = builtins.readFile ./rg-fzf.sh;
   };

@@ -30,5 +30,5 @@ fzf --tmux 80%,100%,border-native --ansi \
     --bind 'start:preview(echo Loading issues ...)+reload:GH_FORCE_TTY=95% gh issue list --limit=1000' \
     --bind 'load:transform:(( FZF_TOTAL_COUNT )) || echo become:echo No issues' \
     --bind 'ctrl-o:execute-silent:gh issue view --web {1}' \
-    --bind 'enter:execute:gh issue view {1} | sed "s/\r//g" | view - +"setf markdown"' \
+    --bind 'enter:execute:gh issue view {1} | sed "s/\r//g" | $EDITOR -' \
     --footer 'Press Enter to open in editor / CTRL-O to open in browser' "$@"
