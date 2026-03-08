@@ -17,6 +17,8 @@ in {
     fd
     # general-purpose command-line fuzzy finder
     fzf
+    # github cli
+    gh
     # command-line hex viewer
     hexyl
     # command-line benchmarking tool
