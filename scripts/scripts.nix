@@ -81,6 +81,8 @@ in rec {
     text = read ./pr-fzf.sh;
   };
 
+  syno = callPackage ./syno {};
+
   frg = writeShellApplication {
     name = "frg";
     runtimeInputs = [ bat fzf ripgrep ];
