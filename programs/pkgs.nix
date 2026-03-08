@@ -19,6 +19,8 @@ in {
     fzf
     # github cli
     gh
+    # reverse-engineering tools, including an advanced decompiler
+    ghidra
     # command-line hex viewer
     hexyl
     # command-line benchmarking tool
