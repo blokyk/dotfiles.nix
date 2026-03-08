@@ -15,6 +15,7 @@
   xclip,
   unixtools,
 
+  callPackage,
   writeShellApplication,
   ...
 }:
@@ -26,6 +27,8 @@ in rec {
     runtimeInputs = [ coreutils figlet unixtools.watch ];
     text = read ./clock.sh;
   };
+
+  dircnt = callPackage ./dircnt {};
 
   figlet-fzf = writeShellApplication {
     name = "figlet-fzf";
