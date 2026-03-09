@@ -35,6 +35,8 @@ in {
         (import <wrapper-manager>) // {
           wrap = final.wrapper-manager.lib.wrapWith final;
         };
+
+      zpkgs = config._module.args.zpkgs;
     }
   )];
 
