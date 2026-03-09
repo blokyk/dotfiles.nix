@@ -42,8 +42,8 @@
     "nixpkgs": {
       "type": "Channel",
       "name": "nixpkgs-unstable",
-      "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.05pre956909.93178f6a00c2/nixexprs.tar.xz",
-      "hash": "sha256-xAHiI07j8nMZuA53r40AoWgYH9bKCgaVowNq5MpkE3g="
+      "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.05pre958959.e38213b91d37/nixexprs.tar.xz",
+      "hash": "sha256-SDEGkbscgwFhxzfvNdDNcvsA82gAQcyOh0/BZOb6fWg="
     },
     "wrapper-manager": {
       "type": "Git",
@@ -67,9 +67,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "b28d526448c49dd295be253093f65929b906067d",
-      "url": "https://github.com/blokyk/packages.nix/archive/b28d526448c49dd295be253093f65929b906067d.tar.gz",
-      "hash": "sha256-98gOwx0ZOp1GE0HpBdhXcIriki1WbnZAT3YcqyCLZk8="
+      "revision": "e1294a46f965ae071e07ea78551c4ed1f0c85e7c",
+      "url": "https://github.com/blokyk/packages.nix/archive/e1294a46f965ae071e07ea78551c4ed1f0c85e7c.tar.gz",
+      "hash": "sha256-BY/Cl8RQupopHgapY9U/xldXwmugdFGHPuzEbQwAPUE="
     }
   },
   "version": 7
