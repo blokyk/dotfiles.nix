@@ -1,13 +1,4 @@
-{ pkgs, zpkgs, ... }:
-let
-  nix-debug = pkgs.callPackage nix-debug-src {};
-  nix-debug-src = pkgs.fetchFromGitHub {
-    owner = "blokyk";
-    repo = "nix-debug";
-    rev = "8f839960a08accc27e179978986dec558ea176fb";
-    hash = "sha256-p8r2xRUZZTVM/A5lv68fxpy/w9uW5CWReMniezWkR3o=";
-  };
-in {
+{ pkgs, zpkgs, ... }: {
   home.packages = with pkgs; [
     # fancy alternative to cat(1)
     bat

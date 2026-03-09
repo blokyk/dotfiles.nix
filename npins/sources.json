@@ -26,6 +26,19 @@
       "url": "https://github.com/nix-community/home-manager/archive/f140aa04d7d14f8a50ab27f3691b5766b17ae961.tar.gz",
       "hash": "sha256-O3ukj3Bb3V0Tiy/4LUfLlBpWypJ9P0JeUgsKl2nmZZY="
     },
+    "nix-debug": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "blokyk",
+        "repo": "nix-debug"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "8f839960a08accc27e179978986dec558ea176fb",
+      "url": "https://github.com/blokyk/nix-debug/archive/8f839960a08accc27e179978986dec558ea176fb.tar.gz",
+      "hash": "sha256-p8r2xRUZZTVM/A5lv68fxpy/w9uW5CWReMniezWkR3o="
+    },
     "nixpkgs": {
       "type": "Channel",
       "name": "nixpkgs-unstable",

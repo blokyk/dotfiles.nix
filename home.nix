@@ -31,6 +31,8 @@ in {
       # allow packages to be based on the home-manager config
       hm-config = config;
 
+      nix-debug = pkgs.callPackage <nix-debug> {};
+
       wrapper-manager =
         (import <wrapper-manager>) // {
           wrap = final.wrapper-manager.lib.wrapWith final;
