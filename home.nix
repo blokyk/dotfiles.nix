@@ -11,8 +11,6 @@ in {
   imports = [
     ./env.nix
 
-    ./hm-issue-8786.nix
-
     ./programs
     ./scripts
     ./zsh
