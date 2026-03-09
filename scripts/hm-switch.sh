@@ -23,3 +23,6 @@ fi
 
 # otherwise, launch the activation
 "$gen_path"/activate
+
+echo -e "\e[1mdiff:\e[0m"
+hm-diff

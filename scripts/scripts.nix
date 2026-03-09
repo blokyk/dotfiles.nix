@@ -50,7 +50,7 @@ in rec {
 
   hm-switch = writeShellApplication {
     name = "hm-switch";
-    runtimeInputs = [ nix-output-monitor npins-shell ];
+    runtimeInputs = [ hm-diff nix-output-monitor npins-shell ];
     text = read ./hm-switch.sh;
   };
 
