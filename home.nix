@@ -47,6 +47,11 @@ in {
     # ".gradle/gradle.properties".text = "..";
   };
 
+  programs.home-manager.report-changes = {
+    enable = true;
+    askForConfirmation = true;
+  };
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
   home.stateVersion = "25.11";
