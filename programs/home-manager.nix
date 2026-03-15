@@ -19,18 +19,21 @@ in {
     # use `lix-diff` to check and show the differences from the previous hm generation
     reportChanges = dag.entryBefore [ "writeBoundary" ] ''
       __do_diff() {
-        run ${lib.getExe pkgs.lix-diff} \
+        run ${lib.getExe pkgs.lix-diff} --no-header --return \
           $(readlink --canonicalize "''${oldGenPath:-$genProfilePath}") \
           $(readlink --canonicalize "$newGenPath")
       }
-      __diff_output="$(__do_diff)"
 
-      __has_diff() { ! [[ "$__diff_output" =~ "No differences found." ]]; }
+      _iNote "Differences from the previous generation:"
 
-      if __has_diff; then
-        _iNote "Differences from the previous generation:"
-        __do_diff
-      else
+      # the activation script has `set errexit`, but we expect errors here,
+      # so use the retcode of diff to choose the value of the variable.
+      #
+      # lix-diff returns 1 on no-diff, 0 on differences, don't ask me why /shrug
+      # therefore, we have to invert it
+      __do_diff && __had_diffs=true || __had_diffs=false
+
+      if ! "$__had_diffs"; then
         verboseEcho "no surface-level differences between current gen and next one"
       fi
     '';
@@ -39,7 +42,7 @@ in {
     confirmChanges = lib.mkIf (hm.report-changes.askForConfirmation) (
       dag.entryBetween [ "writeBoundary" ] [ "reportChanges" ] ''
         # only ask if there ARE differences
-        if __has_diff; then
+        if "$__had_diffs"; then
           # only ask if stdin is a tty; otherwise, just assume yes
           if [ -t 0 ] && [ "X''${TERM:-}" != "Xdumb" ]; then
             echo -n "Proceed with the activation? (Y/n) "
