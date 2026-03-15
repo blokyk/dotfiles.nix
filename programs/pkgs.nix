@@ -52,6 +52,8 @@
     tokei
     # markup-based typesetting
     typst
+    # note-taking and pdf annotation
+    xournalpp
     # terminal file explorer
     yazi
   ];
