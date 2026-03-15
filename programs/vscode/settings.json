@@ -222,11 +222,11 @@
     // nix
     "nix.enableLanguageServer": true,
     "nix.serverPath": "nixd",
-    // "nix.hiddenLanguageServerErrors":[
-    //     "textDocument/definition",
-    //     "textDocument/documentSymbol",
-    //     "textDocument/formatting"
-    // ],
+    "nix.hiddenLanguageServerErrors":[
+        "textDocument/definition",
+        // "textDocument/documentSymbol",
+        // "textDocument/formatting"
+    ],
     "nix.serverSettings": {
         "nixd": {
             "formatting": {
