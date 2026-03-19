@@ -268,11 +268,6 @@
   },
   {
     "key": "ctrl+q",
-    "command": "workbench.action.quit",
-    "when": "activeEditorGroupEmpty"
-  },
-  {
-    "key": "ctrl+q",
     "command": "-workbench.action.quit"
   },
   {
@@ -316,5 +311,14 @@
     "key": "alt+left",
     "command": "-workbench.action.terminal.sendSequence",
     "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+q",
+    "command": "workbench.action.closeWindow",
+    "when": "activeEditorGroupEmpty"
+  },
+  {
+    "key": "alt+f4",
+    "command": "-workbench.action.closeWindow"
   }
 ]
