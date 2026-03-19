@@ -46,6 +46,12 @@ in rec {
     text = read ./figlet-fzf.sh;
   };
 
+  full-figlet = writeShellApplication {
+    name = "full-figlet";
+    runtimeInputs = [ coreutils figlet ];
+    text = read ./full-figlet.sh;
+  };
+
   hm-diff = writeShellApplication {
     name = "hm-diff";
     runtimeInputs = [ coreutils gawk lix-diff /*home-manager*/ ];
