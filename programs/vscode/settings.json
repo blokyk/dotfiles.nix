@@ -339,6 +339,7 @@
         "fmap",
         "foldr",
         "Framebuffer",
+        "frozenpins",
         "Fullscreen",
         "funcs",
         "ghci",
