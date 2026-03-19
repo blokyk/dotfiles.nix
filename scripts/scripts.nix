@@ -27,6 +27,10 @@
 let
   read = builtins.readFile;
 in rec {
+  # todo: flutter-docs (get docs + serve)
+  # todo: watch_size (support both stat and df depending on path file type)
+  # todo: manga-downloader(?)
+
   clock = writeShellApplication {
     name = "clock";
     runtimeInputs = [ coreutils figlet unixtools.watch ];
