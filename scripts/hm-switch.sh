@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 
-# home-manager switch with native npins use and nix-output-monitor
+# home-manager switch but much simpler and with nix-output-monitor
 
 # recognize the '--backup EXT' option
 if [[ -v 1 ]] && { [[ "$1" = "-b" ]] || [[ "$1" = "--backup" ]]; }; then
@@ -12,8 +12,7 @@ fi
 
 conf_dir="$HOME/.config/home-manager"
 
-build_cmd="nom-build --no-out-link $* '<home-manager/home-manager/home-manager.nix>' --argstr confPath $conf_dir/home.nix"
-gen_path=$(npins-shell -d "$conf_dir/npins" -- -c "$build_cmd")
+gen_path="$(nom-build --no-out-link "$@" "$conf_dir")"
 ret=$?
 
 # if the build failed, exit immediately
