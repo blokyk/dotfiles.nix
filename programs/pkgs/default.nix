@@ -5,7 +5,6 @@
     ./essential.nix
   ];
 
-  # todo: ncdu -- essential
   # todo: ryubing
   # todo: vineflower
   # todo: waver

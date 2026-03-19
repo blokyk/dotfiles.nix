@@ -6,6 +6,8 @@
     fd
     # general-purpose command-line fuzzy finder
     fzf
+    # du with a TUI
+    ncdu
     # recursively searches directories for a pattern
     ripgrep
     # 'tldr.sh' client written in rust
