@@ -2,6 +2,8 @@
   home.packages = with pkgs; [
     # fancy alternative to cat(1)
     bat
+    # reverse-engineering gui for rizin, a radare2 fork
+    cutter
     # du, but more interactive
     dust
     # simple, fast and user-friendly alternative to find
