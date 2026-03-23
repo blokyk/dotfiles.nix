@@ -6,13 +6,13 @@ if [[ "${1:-}" = "" ]]; then
   exit 1
 fi
 
-export LINES="$LINES"
+export LINES="${LINES:-$(tput lines)}"
 export FONT="${2:-ANSI Shadow}"
 
 function center_txt() {
 	txt="$(cat /dev/stdin)"
 	line_nb=$(echo "$txt" | wc -l)
-	available_lines=$(((${LINES:-$line_nb} - line_nb) / 2))
+	available_lines=$(((LINES - line_nb) / 2))
 
 	for _ in $(seq $available_lines); do echo; done
 

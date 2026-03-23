@@ -1,5 +1,6 @@
 # shellcheck shell=bash
 
+LINES="${LINES:-$(tput lines)}"
 export FONT=${1:-ANSI Shadow}
 
 function center_txt() {
