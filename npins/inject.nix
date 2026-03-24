@@ -88,6 +88,9 @@ let
   mkResolveSymbol =
     parentPins: allParentFollows:
     nixPath: name:
+      if name == "__pins" then
+        parentPins
+      else
       let
         prefix = toString (rootDir name);
       in {
@@ -325,7 +328,11 @@ let
 
   rootDir = path:
     builtins.head (builtins.split "/" path);
-in
+in {
   # this import will be the one used INSIDE the project,
   # so it should be the one that imports subfiles
-  subfileImport
+  import = subfileImport;
+  __functor = self: self.import;
+
+  pins = currPins;
+}

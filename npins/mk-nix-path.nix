@@ -4,16 +4,14 @@
 # for example:
 #   $ nix eval --raw -f mk-nix-path.nix
 #   nixpkgs=/nix/store/...-source:home-manager=/nix/store/...-source
-
+{ pins ? import ./default.nix {} }:
 let
   inherit (builtins) attrValues concatStringsSep mapAttrs;
 
-  pinInfos = import ./default.nix { };
-
   namedPaths = attrValues (
     mapAttrs
-      (name: pin: "${name}=${pin.outPath}")
-      pinInfos
+      (name: pin: "${name}=${pin.outPath or pin}")
+      pins
   );
 in
   concatStringsSep ":" namedPaths

@@ -7,6 +7,7 @@ in {
 
   # inject 'zpkgs' arg into other modules to easily get zoeee/pkgs
   _module.args.zpkgs = pkgs.callPackage <zoeee/pkgs> {};
+  _module.args.pins  = <__pins>;
 
   imports = [
     ./env.nix

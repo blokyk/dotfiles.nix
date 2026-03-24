@@ -1,7 +1,11 @@
 let
-  injectImport = import ./npins/inject.nix (pins: {
+  injector = import ./npins/inject.nix (pins: {
     zoeee.nixpkgs = pins.nixpkgs;
     home-manager.nixpkgs = pins.nixpkgs;
   });
+
+  hm = injector.pins.home-manager;
 in
-  injectImport ./bootstrap.nix
+  injector.import (hm + "/home-manager/home-manager.nix") {
+    confPath = ./home.nix;
+  }
