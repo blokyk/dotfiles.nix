@@ -2,7 +2,7 @@
 let
 in {
   home.username = "blokyk";
-  home.homeDirectory = "/home/blokyk";
+  home.homeDirectory = "/home/${config.home.username}";
   targets.genericLinux.enable = true; # non-NixOS system
 
   # inject 'zpkgs' arg into other modules to easily get zoeee/pkgs
