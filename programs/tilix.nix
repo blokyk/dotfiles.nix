@@ -18,6 +18,15 @@
 
   home.packages = [ pkgs.tilix ];
 
+  # set tilix as the default terminal in gnome
+  # 1) "modern" but only works if XDG_DATA_DIRS contains ~/.nix-profile/share
+  xdg.configFile."xdg-terminals.list".text = ''
+    com.gexperts.Tilix.desktop
+    org.gnome.Terminal.desktop
+  '';
+  # 2) "deprecated" but still mostly works
+  dconf.settings."org/gnome/desktop/applications/terminal".exec = lib.getExe pkgs.tilix;
+
   xdg.configFile = {
     # modified dracula
     "tilix/schemes/dracula.json".text = builtins.toJSON {
