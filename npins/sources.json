@@ -9,9 +9,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "5c250192890856486be8a85085e7915b1b655f3e",
-      "url": "https://github.com/xero/figlet-fonts/archive/5c250192890856486be8a85085e7915b1b655f3e.tar.gz",
-      "hash": "sha256-wT1DjM+3+UasAm2IHavBXs0R8eNMJn9uLtWSqwS+XU0="
+      "revision": "417429ef36ab039cbf192a4424c60aa23fc32de8",
+      "url": "https://github.com/xero/figlet-fonts/archive/417429ef36ab039cbf192a4424c60aa23fc32de8.tar.gz",
+      "hash": "sha256-QogGNQ772bcYLOzgO0i6ydbzxjn5jnXNav72vW/SXm8="
     },
     "home-manager": {
       "type": "Git",
@@ -22,9 +22,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "ef12a9a2b0f77c8fa3dda1e7e494fca668909056",
-      "url": "https://github.com/nix-community/home-manager/archive/ef12a9a2b0f77c8fa3dda1e7e494fca668909056.tar.gz",
-      "hash": "sha256-MPjR48roW7CUMU6lu0+qQGqj92Kuh3paIulMWFZy+NQ="
+      "revision": "9340f51314713c83360bf72d75c8b404778ab5b1",
+      "url": "https://github.com/nix-community/home-manager/archive/9340f51314713c83360bf72d75c8b404778ab5b1.tar.gz",
+      "hash": "sha256-PzqwM4njoB3aznqwPZUawD4uOcJeu7N6GBTJKg81EQ4="
     },
     "nix-debug": {
       "type": "Git",
@@ -42,8 +42,8 @@
     "nixpkgs": {
       "type": "Channel",
       "name": "nixpkgs-unstable",
-      "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.05pre963414.e80236013dc8/nixexprs.tar.xz",
-      "hash": "sha256-yzDBkI1CpeZrAt4l1nGvTOs3OFtXCS7a7Gi5Y1h878w="
+      "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.05pre971056.b63fe7f000ad/nixexprs.tar.xz",
+      "hash": "sha256-5QVei2IIfVO3GqMkiiXlrZtaniOkXyMWnqbTVkItrco="
     },
     "wrapper-manager": {
       "type": "Git",
@@ -67,9 +67,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "5f80842bb01ff614cd14ebbc9ef8b46da9279bf6",
-      "url": "https://github.com/blokyk/packages.nix/archive/5f80842bb01ff614cd14ebbc9ef8b46da9279bf6.tar.gz",
-      "hash": "sha256-IKSpGQ3WGsDqaSlUAPbwaIKQx+zDFFj9EDOMb7RH0Yg="
+      "revision": "fb247db237fbed7b07bc0d0c56aec9046c78c6ba",
+      "url": "https://github.com/blokyk/packages.nix/archive/fb247db237fbed7b07bc0d0c56aec9046c78c6ba.tar.gz",
+      "hash": "sha256-5MC5sspE0zqMQhDEDM5vfrwc1or6bUy2oW9nWRuiLn4="
     }
   },
   "version": 7
