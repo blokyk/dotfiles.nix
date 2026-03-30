@@ -20,5 +20,5 @@
       in lib.mapAttrs' pinToFlake pins;
   };
 
-  home.sessionVariables.NIX_PATH = import ./npins/mk-nix-path.nix { inherit pins; };
+  home.sessionVariables.NIX_PATH = import ../npins/mk-nix-path.nix { inherit pins; };
 }
