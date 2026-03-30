@@ -1,12 +1,15 @@
 # GNOME Terminal fork with split panes and added functionality
-{ pkgs, ... }: {
+{ config, lib, pkgs, ... }: {
   # fix tilix using weird XDG_DATA_DIRS value that fucks up the fonts :(
   nixpkgs.overlays = [
     (final: prev: {
       tilix = prev.tilix.overrideAttrs (final: prev: {
-        preFixup = ''
+        preFixup =
+          let
+            mkPrefixOpt = dir: "--prefix XDG_DATA_DIRS ':' ${dir}";
+          in ''
           gappsWrapperArgs+=(
-            --unset XDG_DATA_DIRS
+            ${lib.concatMapStringsSep "\n" mkPrefixOpt config.xdg.systemDirs.data}
           )
         '';
       });
