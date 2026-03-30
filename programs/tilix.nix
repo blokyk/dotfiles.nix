@@ -27,6 +27,23 @@
   # 2) "deprecated" but still mostly works
   dconf.settings."org/gnome/desktop/applications/terminal".exec = lib.getExe pkgs.tilix;
 
+  dconf.settings = {
+    "com/gexperts/Tilix" = {
+      # don't show tab bar when there's a single tab
+      terminal-title-show-when-single = false;
+    };
+
+    "com/gexperts/Tilix/keybindings" = {
+      terminal-copy = "<Primary>c";  # ctrl+c
+      terminal-paste = "<Primary>v"; # ctrl+v
+
+      session-add-auto = "<Primary>t";
+
+      app-new-session = "<Primary><Shift>n";
+      app-new-window = "<Primary>n";
+    };
+  };
+
   xdg.configFile = {
     # modified dracula
     "tilix/schemes/dracula.json".text = builtins.toJSON {
