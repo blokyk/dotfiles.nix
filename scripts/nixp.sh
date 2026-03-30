@@ -63,6 +63,10 @@ editPkg() {
     nix edit --impure -E '(import '"$pkgs"' {}).'"$1"''
 }
 
+openPkgShell() {
+    nix shell --impure -E '(import '"$pkgs"' {}).'"$1"''
+}
+
 pkgs='<nixpkgs>'
 if [[ "${1:-}" = "-s" ]] || [[ "${1:-}" = "--source" ]]; then
     pkgs="$2"
@@ -173,15 +177,20 @@ fi
 getPkgInfo "$pkg"
 
 echo
-echo -en "Open definition in \e[1m$(basename "$EDITOR")\e[0m? (Y/n) "
+echo -e 'Select action: '
+echo -e "e) Open in \e[1m$(basename "$EDITOR")\e[0m"
+echo -e "s) Open in \e[1mnix shell\e[0m"
+echo -e '*) Do nothing'
 
 read -r yn_answer
 case "$yn_answer" in
-    [nN][oO]|[nN])
-        exit
-    ;;
-    # default is yes
-    *)
+    [eE])
         editPkg "$pkg"
+    ;;
+    [sS])
+        openPkgShell "$pkg"
+    ;;
+    *)
+        exit
     ;;
 esac
