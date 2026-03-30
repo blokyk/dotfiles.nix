@@ -13,7 +13,7 @@
           value = {
             to = {
               type = "path";
-              inherit path;
+              path = toString path;
             };
           };
         };
