@@ -1,0 +1,58 @@
+diff --git a/egui/Cargo.toml b/egui/Cargo.toml
+index 76cc9d6..793817b 100644
+--- a/egui/Cargo.toml
++++ b/egui/Cargo.toml
+@@ -11,6 +11,7 @@ license.workspace = true
+ 
+ [dependencies]
+ arrayvec = "0.7.6"
++display-info = "0.5.9"
+ eframe = { version = "0.33.3", default-features = false, features = ["glow"] }
+ font-kit = { version = "0.14.3", optional = true }
+ image = "0.25.9"
+diff --git a/egui/src/main.rs b/egui/src/main.rs
+index 8d3d339..f957625 100644
+--- a/egui/src/main.rs
++++ b/egui/src/main.rs
+@@ -22,12 +22,13 @@ use eframe::{
+     egui,
+     egui::{
+         CentralPanel, Event, FontId, Frame, Image, Key, Label, Margin, Modifiers, Popup,
+-        PopupCloseBehavior, Pos2, Response, RichText, ScrollArea, Sense, Stroke, TextEdit,
++        PopupCloseBehavior, Response, RichText, ScrollArea, Sense, Stroke, TextEdit,
+         TextFormat, ThemePreference, TopBottomPanel, Ui, Vec2, ViewportBuilder, ViewportCommand,
+         Widget,
+         text::{LayoutJob, LayoutSection},
+     },
+ };
++use display_info::DisplayInfo;
+ use image::ImageReader;
+ use itoa::Integer;
+ use ringboard_sdk::{
+@@ -50,6 +51,7 @@ use crate::{
+     startup::{maintain_single_instance, maybe_open_existing_instance_and_exit, sleep_file_name},
+ };
+ 
++
+ mod startup;
+ 
+ #[cfg(feature = "trace")]
+@@ -64,6 +66,9 @@ fn main() -> Result<(), eframe::Error> {
+         });
+     }
+ 
++    let displays = DisplayInfo::all().unwrap();
++    let primary = displays.iter().find(|d| d.is_primary).unwrap();
++
+     let stop = Arc::new(AtomicBool::new(false));
+     let result = eframe::run_native(
+         concat!("Ringboard v", env!("CARGO_PKG_VERSION")),
+@@ -72,7 +77,7 @@ fn main() -> Result<(), eframe::Error> {
+                 .with_app_id("ringboard-egui")
+                 .with_min_inner_size(Vec2::splat(100.))
+                 .with_inner_size(Vec2::new(666., 777.))
+-                .with_position(Pos2::ZERO),
++                .with_position([primary.x as f32, primary.y as f32]),
+             ..Default::default()
+         },
+         Box::new(|cc| {

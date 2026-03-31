@@ -6,6 +6,7 @@ in {
   imports = [ (import <zoeee/hm-modules>) ];
 
   services.ringboard = {
+    client.package = pkgs.callPackage ./package.nix { };
     x11.enable = true;
   };
 
