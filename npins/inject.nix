@@ -30,7 +30,10 @@
 # issue with it or wish to provide feedback, please submit an issue on the repo
 # given above.
 #
-# Version: 1.0.0
+# Version: 1.0.0+custom
+# Custom changes:
+#   made `import inject.nix` object a functor, containing a `pins`
+#   attribute to easily access resolved pins
 
 projectFollows:
 let
