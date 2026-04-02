@@ -11,6 +11,7 @@ in {
 
   imports = [
     ./env.nix
+    ./locale.nix
 
     ./programs
     ./scripts
