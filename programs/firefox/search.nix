@@ -16,6 +16,7 @@ in {
         icon = nix-flake-icon;
 
         urls = [{
+          # we don't use search.nix.ee because it doesn't search for programs inside packages
           template = "https://search.nixos.org/packages";
           params = [
             { name = "channel"; value = "unstable"; }
@@ -30,9 +31,8 @@ in {
         icon = nix-flake-icon;
 
         urls = [{
-          template = "https://search.nixos.org/options";
+          template = "https://search.nix.ee/options/nixos/search";
           params = [
-            { name = "channel"; value = "unstable"; }
             { name = "query";   value = "{searchTerms}"; }
           ];
         }];
@@ -44,9 +44,8 @@ in {
         icon = nix-flake-icon;
 
         urls = [{
-          template = "https://home-manager-options.extranix.com/";
+          template = "https://search.nix.ee/options/home-manager/search";
           params = [
-            { name = "release"; value = "master"; }
             { name = "query";   value = "{searchTerms}"; }
           ];
         }];
