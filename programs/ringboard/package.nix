@@ -1,7 +1,7 @@
 { lib, pkgs, ... }:
 let
   # allows us to use nightly rust
-  fenix = import (fetchTarball "https://github.com/nix-community/fenix/archive/main.tar.gz") {};
+  fenix = import <fenix> {};
 in
 pkgs.ringboard.override {
   # incredibly cursed/hacky way to override buildRustPackage args,
