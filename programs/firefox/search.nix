@@ -1,7 +1,10 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 let
   nix-flake-icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
 in {
+  # necessary because firefox overwrites it (with the same content) and then home-manager complains
+  home.file.".mozilla/firefox/default/search.json.mozlz4".force = lib.mkForce true;
+
   programs.firefox.profiles.default.search = {
     default = "google";
     privateDefault = "google";
