@@ -51,6 +51,15 @@ in {
         }];
       };
 
+      gh = {
+        name = "github quick access";
+        definedAliases = [ "gh" ];
+
+        urls = [{
+          template = "https://github.com/{searchTerms}";
+        }];
+      };
+
       # hide other builtin engines
       bing.metaData.hidden = true;
       perplexity.metaData.hidden = true;
