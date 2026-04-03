@@ -13,7 +13,7 @@
     "org/gnome/shell" = {
       favorite-apps = [
         "org.gnome.Nautilus.desktop"
-        "firefox_firefox.desktop"
+        "firefox.desktop"
         "com.gexperts.Tilix.desktop"
       ];
     };
