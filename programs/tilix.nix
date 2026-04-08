@@ -31,6 +31,8 @@
     "com/gexperts/Tilix" = {
       # don't show tab bar when there's a single tab
       terminal-title-show-when-single = false;
+      # editting the title bar requires Ctrl+click, not just click
+      control-click-titlebar = true;
     };
 
     "com/gexperts/Tilix/keybindings" = {
