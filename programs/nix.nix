@@ -1,4 +1,7 @@
-{ lib, pins, ... }: {
+{ lib, pins, ... }:
+let
+  legalPins = lib.filterAttrs (name: _: name != "self") pins;
+in {
   nix = {
     settings.experimental-features = [
       "flakes"
@@ -17,8 +20,8 @@
             };
           };
         };
-      in lib.mapAttrs' pinToFlake pins;
+      in lib.mapAttrs' pinToFlake legalPins;
   };
 
-  home.sessionVariables.NIX_PATH = import ../npins/mk-nix-path.nix { inherit pins; };
+  home.sessionVariables.NIX_PATH = import <self/npins/mk-nix-path.nix> { pins = legalPins; };
 }

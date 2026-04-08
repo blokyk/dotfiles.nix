@@ -3,7 +3,7 @@ let
   inherit (builtins) attrValues;
 
   wrap = pkgs.wrapper-manager.wrap;
-  mkAlias = pkgs.callPackage ../misc/mkAlias.nix {};
+  mkAlias = pkgs.callPackage <self/misc/mkAlias.nix> {};
   HOME = config.home.homeDirectory;
 
   # wrappers REPLACE the original binary (and there's no direct way to get the original)

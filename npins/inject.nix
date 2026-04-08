@@ -34,6 +34,10 @@
 # Custom changes:
 #   made `import inject.nix` object a functor, containing a `pins`
 #   attribute to easily access resolved pins
+#
+#   allow referring to the current project with <self>
+#   note: we could probably do that directly in the follow function no?
+#   note: also doing things this way right now probably pollutes children's pins/follows i think?
 
 projectFollows:
 let
@@ -63,7 +67,7 @@ let
   # if we're importing `project/*.nix`, we have to compute
   # the pins based on the projects we specified in npins/sources.json,
   # while still respecting followsFn and our parent's follows
-  currPins = currPinsAndFollows.pins;
+  currPins = currPinsAndFollows.pins // { self = ../.; }; # note: self is a path and not a project, because otherwise that would end up with weird behavior/implications for imports and pin overriding
   currNixPath =
     pinPathsToNixPath currPins;
 
