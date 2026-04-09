@@ -5,7 +5,7 @@
   ];
 
   programs.zsh = {
-    enable = false;
+    enable = true;
     enableVteIntegration = true;
     dotDir = config.xdg.configHome + "/zsh";
   };

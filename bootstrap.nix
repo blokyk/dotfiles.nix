@@ -3,6 +3,6 @@
 # it should be in `default.nix`, but unfortunately, that is already taken
 # by the frozenpins injector fragment.
 import <home-manager/home-manager/home-manager.nix> {
-  confPath = ./home.nix;
+  confPath = ./home2.nix;
   # check = false;
 }

@@ -1,11 +1,11 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 let
   nix-flake-icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
 in {
-  # necessary because firefox overwrites it (with the same content) and then home-manager complains
-  home.file.".mozilla/firefox/default/search.json.mozlz4".force = lib.mkForce true;
-
   programs.firefox.profiles.default.search = {
+    # necessary because firefox overwrites it (with the same content) and then home-manager complains
+    # force = true;
+
     default = "google";
     privateDefault = "google";
 
@@ -17,10 +17,9 @@ in {
 
         urls = [{
           # we don't use search.nix.ee because it doesn't search for programs inside packages
-          template = "https://search.nixos.org/packages";
+          template = "https://search.nixos.org/packages?channel=unstable";
           params = [
-            { name = "channel"; value = "unstable"; }
-            { name = "query";   value = "{searchTerms}"; }
+            { name = "query"; value = "{searchTerms}"; }
           ];
         }];
       };
@@ -33,7 +32,7 @@ in {
         urls = [{
           template = "https://search.nix.ee/options/nixos/search";
           params = [
-            { name = "query";   value = "{searchTerms}"; }
+            { name = "query"; value = "{searchTerms}"; }
           ];
         }];
       };
@@ -46,19 +45,19 @@ in {
         urls = [{
           template = "https://search.nix.ee/options/home-manager/search";
           params = [
-            { name = "query";   value = "{searchTerms}"; }
+            { name = "query"; value = "{searchTerms}"; }
           ];
         }];
       };
 
-      gh = {
-        name = "github quick access";
-        definedAliases = [ "gh" ];
-
-        urls = [{
-          template = "https://github.com/{searchTerms}";
-        }];
-      };
+      # gh = {
+      #   name = "github quick access";
+      #   definedAliases = [ "gh" ];
+      #
+      #   urls = [{
+      #     template = "https://github.com/{searchTerms}";
+      #   }];
+      # };
 
       # hide other builtin engines
       bing.metaData.hidden = true;
