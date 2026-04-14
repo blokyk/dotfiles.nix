@@ -1,6 +1,14 @@
 { lib, pins, ... }:
 let
-  legalPins = lib.filterAttrs (name: _: name != "self") pins;
+  # we don't want to inject every pin (e.g. figlet-font) into the system's nix path
+  systemWidePins = {
+    inherit (pins)
+      home-manager
+      nixpkgs
+      wrapper-manager
+      zoeee
+      ;
+  };
 in {
   nix = {
     settings = {
@@ -26,8 +34,8 @@ in {
             };
           };
         };
-      in lib.mapAttrs' pinToFlake legalPins;
+      in lib.mapAttrs' pinToFlake systemWidePins;
   };
 
-  home.sessionVariables.NIX_PATH = import <self/npins/mk-nix-path.nix> { pins = legalPins; };
+  home.sessionVariables.NIX_PATH = import <self/npins/mk-nix-path.nix> { pins = systemWidePins; };
 }
