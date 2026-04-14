@@ -3,10 +3,16 @@ let
   legalPins = lib.filterAttrs (name: _: name != "self") pins;
 in {
   nix = {
-    settings.experimental-features = [
-      "flakes"
-      "nix-command"
-    ];
+    settings = {
+      experimental-features = [
+        "flakes"
+        "nix-command"
+      ];
+
+      repl-overlays = [
+        ./add-builtins.nix
+      ];
+    };
 
     # inject all the pins as flakes in the registry
     registry =
