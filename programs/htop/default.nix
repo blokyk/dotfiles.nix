@@ -4,6 +4,8 @@ let
   defaultConfig = import ./default-htoprc.nix;
 in {
   xdg.configFile = {
+    # htop overwrites the config file every time we change the display in an htop session
+    "htop/htoprc".force = true;
     "htop/htoprc".text = rc.generate (defaultConfig // {
       header_layout = "two_50_50";
       column_meters_0 = [ "AllCPUs2" ];
