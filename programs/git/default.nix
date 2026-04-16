@@ -1,4 +1,6 @@
 { lib, pkgs, ... }: {
+  imports = [ ./shell-aliases.nix ];
+
   programs.git = {
     enable = true;
 
