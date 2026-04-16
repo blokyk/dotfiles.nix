@@ -41,6 +41,8 @@ in {
             # python syntax highlighting + language server
             ms-python.python
             ms-python.vscode-pylance
+            # bash script checking
+            timonwong.shellcheck
 
             # highlight trailing spaces at the end of lines
             shardulm94.trailing-spaces
