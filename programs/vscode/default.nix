@@ -37,7 +37,7 @@ in {
             # nixd-compatible extension
             jnoortheen.nix-ide
             # clangd, a c++ lsp
-            llvm-vs-code-extensions.vscode-clangd
+            (pkgs.callPackage ./wrapped-clangd.nix {})
             # python syntax highlighting + language server
             ms-python.python
             ms-python.vscode-pylance
@@ -47,13 +47,10 @@ in {
             # highlight trailing spaces at the end of lines
             shardulm94.trailing-spaces
             # change the window color of each new folder/workspace
-            # todo: not packaged #stuart.unique-window-colors
 
             # one dark pro theme
             zhuangtongfa.material-theme
             # normal vscode icons w/ folder icons instead of '>'
-            # todo: not packaged #sabaken.seti-minimal-folder
-            # todo: not packaged #adam-bender.vscode-oldicons
           ];
 
           marketplaceExtensions = pkgs.vscode-utils.extensionsFromVscodeMarketplace [
