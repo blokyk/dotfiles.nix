@@ -32,12 +32,12 @@ in {
       extensions =
         let
           nixpkgsExtensions = with pkgs.vscode-extensions; [
-            # clangd, a c++ lsp
-            llvm-vs-code-extensions.vscode-clangd
-            # nixd-compatible extension
-            jnoortheen.nix-ide
             # suggestions and go-to for path-like things, mainly files and folders
             christian-kohler.path-intellisense
+            # nixd-compatible extension
+            jnoortheen.nix-ide
+            # clangd, a c++ lsp
+            llvm-vs-code-extensions.vscode-clangd
             # python syntax highlighting + language server
             ms-python.python
             ms-python.vscode-pylance
