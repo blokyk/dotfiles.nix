@@ -13,6 +13,6 @@
     # 'tldr.sh' client written in rust
     tlrc
     # terminal file explorer
-    yazi
+    yazi # todo: can we wrap it so it has correct fonts?
   ];
 }
