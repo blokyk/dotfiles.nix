@@ -3,8 +3,8 @@ let
   nix-flake-icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
 in {
   programs.firefox.profiles.default.search = {
-    # necessary because firefox overwrites it (with the same content) and then home-manager complains
-    # force = true;
+    # necessary because firefox overwrites it (with basically identical content) and then home-manager complains
+    force = true;
 
     default = "google";
     privateDefault = "google";
