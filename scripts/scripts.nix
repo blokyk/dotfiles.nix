@@ -26,7 +26,7 @@
 }:
 let
   read = builtins.readFile;
-in rec {
+in {
   # todo: flutter-docs (get docs + serve)
   # todo: watch_size (support both stat and df depending on path file type)
   # todo: manga-downloader(?)
@@ -60,7 +60,7 @@ in rec {
 
   hm-switch = writeShellApplication {
     name = "hm-switch";
-    runtimeInputs = [ hm-diff nix-output-monitor npins-shell ];
+    runtimeInputs = [ nix-output-monitor ];
     text = read ./hm-switch.sh;
   };
 
