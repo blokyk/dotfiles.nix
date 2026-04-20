@@ -1,5 +1,7 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
+    # a supercharged repl for csharp/dotnet
+    csharprepl
     # github cli
     gh
     # command-line hex viewer
