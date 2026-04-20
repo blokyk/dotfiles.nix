@@ -80,6 +80,10 @@ in {
       # onto a writable json file that is linked with `mkOutOfStoreSymlink`
       keybindings = mkOutOfStoreSymlink ./keybindings.json;
       userSettings = mkOutOfStoreSymlink ./settings.json;
+
+      languageSnippets = {
+        nix = import ./nix-snippets.nix;
+      };
     };
   };
 }
