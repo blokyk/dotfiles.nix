@@ -17,5 +17,10 @@
         "com.gexperts.Tilix.desktop"
       ];
     };
+
+    "org/gnome/desktop/interface" = {
+      # disable that FUCKING middle click paste
+      gtk-enable-primary-paste = false;
+    };
   };
 }
