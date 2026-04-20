@@ -1,5 +1,8 @@
 { config, ... }: {
-  imports = [ ./search.nix ];
+  imports = [
+    ./search.nix
+    ./extensions.nix
+  ];
 
   programs.firefox = {
     enable = true;
