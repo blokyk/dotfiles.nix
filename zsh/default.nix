@@ -28,6 +28,14 @@
       # don't expand !! & co
       "no_bang_hist"
 
+      # do not reread commands from the history file after the
+      # shell session has started
+      "no_share_history"
+
+      # record how much time the command took to finish,
+      # and append it immediately to the history file
+      "inc_append_history_time"
+
       # make globs also match hidden files
       "glob_dots"
 
