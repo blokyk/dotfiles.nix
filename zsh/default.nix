@@ -1,11 +1,7 @@
-{ config, ... }: {
-  imports = [
-    ./env.nix
-    ./p10k.nix
-    ./funcs.nix
-
-    ./hooks-mod.nix
-  ];
+{ config, lib, ... }: {
+  imports = [(
+    lib.modules.importApply ../misc/importNixFilesAndDirs.nix ./.
+  )];
 
   programs.zsh = {
     enable = true;

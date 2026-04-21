@@ -1,10 +1,7 @@
 { ... }: {
   imports = [
+    ./extensions
     ./keybindings.nix
-
-    ./dash-to-dock.nix
-    ./focus-changer.nix
-    ./hide-top-bar.nix
   ];
 
   programs.gnome-shell.enable = true;
