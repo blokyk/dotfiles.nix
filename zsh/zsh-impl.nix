@@ -39,11 +39,14 @@ in {
       let
         sortedNodesRaw = dag.topoSort cfg.initBlocks;
         sortedNodes = sortedNodesRaw.result
-            or throw "Dependency cycle in zsh init config: ${builtins.toJSON sortedNodesRaw}";
+            or (throw "Dependency cycle in zsh init config: ${builtins.toJSON sortedNodesRaw}");
 
         blockToString = block: ''
-          # ${block.name}
+          # --- ${block.name} ---
+
           ${block.data}
+
+
         '';
       in
         concatMapStringsSep "\n" blockToString sortedNodes;
