@@ -9,6 +9,7 @@
     "workbench.colorTheme": "One Dark Pro",
     "workbench.iconTheme": "seti-minimal-folder",
     "workbench.productIconTheme": "old-codicon",
+    "workbench.editor.useModal": "off", // don't open settings in a weird half-editor modal
     "files.insertFinalNewline": true,
     "editor.fontFamily": "'Iosevka Extended', 'Droid Sans Mono', 'monospace', monospace",
     "editor.fontLigatures": false,
