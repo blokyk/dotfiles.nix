@@ -3,7 +3,7 @@
 let
   toTOML = (pkgs.formats.toml { }).generate;
 in {
-  imports = [ (import <zoeee/hm-modules>) ];
+  imports = [ <zoeee/hm-modules>.outPath ];
 
   services.ringboard = {
     client.package = pkgs.callPackage ./package.nix { };

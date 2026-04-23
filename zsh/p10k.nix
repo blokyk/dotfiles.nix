@@ -1,5 +1,5 @@
 { config, ... }: {
-  imports = [ (import <zoeee/hm-modules>) ];
+  imports = [ <zoeee/hm-modules>.outPath ];
 
   programs.zsh-powerlevel10k = {
     enable = true;
