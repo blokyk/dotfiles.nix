@@ -16,6 +16,7 @@ in {
     ./env.nix
     ./aliases.nix
     ./locale.nix
+    ./theme.nix
     ./misc/targets-ubuntu.nix
 
     ./programs
