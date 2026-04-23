@@ -7,7 +7,12 @@
   ];
 
   programs.gnome-shell.extensions = [{
-    package = pkgs.gnomeExtensions.tiling-assistant;
+    # despite being the same exact extension, the system-installed Ubuntu Tiling Assistant
+    # has a different UUID, so on ubuntu distro gnome will see two "different" extensions
+    # and enable them both, creating conflicts
+    package = pkgs.gnomeExtensions.tiling-assistant.override {
+      uuid = "tiling-assistant@ubuntu.com";
+    };
   }];
 
   programs.gnome-shell.tiling-assistant.keybindings = {

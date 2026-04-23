@@ -3,7 +3,10 @@ let
 in {
   home.username = "courvoie";
   home.homeDirectory = "/home/${config.home.username}";
-  targets.genericLinux.enable = true; # non-NixOS system
+  targets.ubuntu = {
+    enable = true;
+    version = "24.04";
+  };
 
   # inject 'zpkgs' arg into other modules to easily get zoeee/pkgs
   _module.args.zpkgs = pkgs.callPackage <zoeee/pkgs> {};
@@ -13,6 +16,7 @@ in {
     ./env.nix
     ./aliases.nix
     ./locale.nix
+    ./misc/targets-ubuntu.nix
 
     ./programs
     ./scripts
@@ -40,6 +44,8 @@ in {
         };
 
       zpkgs = config._module.args.zpkgs;
+
+      gnomeExtensions = prev.${"gnome${toString config.targets.genericLinux.extraInfo.gnome.version}Extensions"};
     }
   )];
 

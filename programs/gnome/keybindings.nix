@@ -13,6 +13,8 @@ let inherit (lib.modules) importApply; in
     })
   ];
 
+  # todo: impl custom keybindings
+
   programs.gnome-shell.keybindings = {
     # this is ctrl+v by default, which we instead want to bind to ringboard
     toggle-message-tray = null;
