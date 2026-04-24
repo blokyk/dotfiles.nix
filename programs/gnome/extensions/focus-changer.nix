@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   programs.gnome-shell.extensions = [{
-    package = pkgs.gnomeExtensions.focus-changer;
+    package = pkgs.gnomeCurrentExtensions."focus-changer@heartmire";
   }];
 
   dconf.settings = {

@@ -46,7 +46,7 @@ in {
 
       zpkgs = config._module.args.zpkgs;
 
-      gnomeExtensions = prev.${"gnome${toString config.targets.genericLinux.extraInfo.gnome.version}Extensions"};
+      gnomeCurrentExtensions = prev.${"gnome${toString config.targets.genericLinux.extraInfo.gnome.version}Extensions"};
     }
   )];
 

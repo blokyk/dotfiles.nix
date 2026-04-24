@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   programs.gnome-shell.extensions = [{
-    package = pkgs.gnomeExtensions.hide-top-bar;
+    package = pkgs.gnomeCurrentExtensions."hidetopbar@mathieu.bidon.ca";
   }];
 
   dconf.settings = {

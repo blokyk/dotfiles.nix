@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   programs.gnome-shell.extensions = [{
-    package = pkgs.gnomeExtensions.dash-to-dock;
+    package = pkgs.gnomeCurrentExtensions."dash-to-dock@micxgx.gmail.com";
   }];
 
   dconf.settings = {
