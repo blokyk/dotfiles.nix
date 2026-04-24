@@ -8,6 +8,8 @@ let
 
   };
 in {
+  imports = [ <self/misc/gnome-shell-impl.nix>.outPath ];
+
   gtk.enable = true;
 
   gtk.gtk4.theme = config.gtk.theme;
