@@ -27,6 +27,10 @@ in {
             "tiling-assistant@leleat-on-github"
             "tiling-assistant@ubuntu.com"
           )
+          (changeExtUUID
+            "appindicatorsupport@rgcjonas.gmail.com"
+            "ubuntu-appindicators@ubuntu.com"
+          )
         ];
     }
   )];
