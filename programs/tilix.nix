@@ -62,10 +62,10 @@
       use-bold-color = false;
       use-cursor-color = false;
       use-highlight-color = false;
-      use-theme-colors = true;
+      use-theme-colors = false;
 
       foreground-color = "#f8f8f2";
-      background-color = "#1e1f29";
+      background-color = "#181818";
       cursor-background-color = "#000000";
       cursor-foreground-color = "#ffffff";
       highlight-background-color = "#000000";
