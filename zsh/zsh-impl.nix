@@ -4,7 +4,6 @@ let
     concatMapStringsSep
     mkOption
     literalExpression
-    literalMD
     types;
 
   inherit (lib.hm) dag;
