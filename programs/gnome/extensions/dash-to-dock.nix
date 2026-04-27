@@ -1,9 +1,23 @@
-{ pkgs, ... }: {
-  programs.gnome-shell.extensions = [{
-    package = pkgs.gnomeCurrentExtensions."dash-to-dock@micxgx.gmail.com";
+{ config, pkgs, ... }: {
+  programs.gnome-shell.extensions = [
+    { package = pkgs.gnomeCurrentExtensions."dash-to-dock@micxgx.gmail.com"; }
+  ];
+
+  assertions = [{
+    assertion = !(builtins.elem
+      "ubuntu-dock@ubuntu.com"
+      config.dconf.settings."org/gnome/shell".enabled-extensions.value);
+    message = ''
+      The ubuntu-dock extension was enabled, but it conflicts with dash-to-dock.
+      Please disable one of these two extensions.
+    '';
   }];
 
   dconf.settings = {
+    "org/gnome/shell" = {
+      disabled-extensions = [ "ubuntu-dock@ubuntu.com" ];
+    };
+
     "org/gnome/shell/extensions/dash-to-dock" = {
       autohide = true; # show dock on mouse-over
       autohide-in-fullscreen = false; # don't show dock on mouse-over in fullscreen mode
