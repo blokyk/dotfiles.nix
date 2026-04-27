@@ -48,9 +48,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "7c0024cf5de83fe2728e24ef56c60989b4842074",
-      "url": "https://github.com/blokyk/nix-debug/archive/7c0024cf5de83fe2728e24ef56c60989b4842074.tar.gz",
-      "hash": "sha256-C1N1RIuWrfIJmz/ymDDX8JypdAaPQN5A8WCUKv8IsQ8="
+      "revision": "3c54c25bfec2244ee1b64d8d43b064e3bb520582",
+      "url": "https://github.com/blokyk/nix-debug/archive/3c54c25bfec2244ee1b64d8d43b064e3bb520582.tar.gz",
+      "hash": "sha256-v7DXBMJqTfncvowFx9uNUAnpBoGubXudwsKEUvQ0Sa8="
     },
     "nixpkgs": {
       "type": "Channel",
