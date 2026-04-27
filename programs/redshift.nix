@@ -7,7 +7,7 @@ in {
     tray = true;
 
     temperature = {
-      # day = 5500;
+      day = 6500;
       night = 2500;
     };
 
@@ -15,6 +15,9 @@ in {
     latitude = valence.lat;
     longitude = valence.long;
 
-    settings.redshift.transition = 1;
+    settings.redshift = {
+      gamma-day = 1.0;
+      transition = 1;
+    };
   };
 }
