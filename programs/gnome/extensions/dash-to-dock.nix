@@ -22,9 +22,11 @@
       autohide = true; # show dock on mouse-over
       autohide-in-fullscreen = false; # don't show dock on mouse-over in fullscreen mode
 
+      # always hide dock
+      intellihide = false;
       # only hide if the currently focused window hides it
       # (can also be one of "ALL_WINDOWS", "MAXIMIZED_WINDOWS", or "ALWAYS_ON_TOP")
-      intellihide-mode = "FOCUS_APPLICATION_WINDOWS";
+      #intellihide-mode = "FOCUS_APPLICATION_WINDOWS";
 
       # minimize open windows when clicking on the app icon
       click-action = "minimize";
