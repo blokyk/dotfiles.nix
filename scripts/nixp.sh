@@ -63,6 +63,21 @@ editPkg() {
     nix edit --impure -E '(import '"$pkgs"' {}).'"$1"''
 }
 
+openDrvResult() {
+    res="$(nix build --impure -E '(import '"$pkgs"' {}).'"$1"'.out' --no-link --print-out-paths)"
+    res="$(realpath -- "$res")"
+    if [[ -d "$res" ]]; then
+      cd "$res"
+      exec "$SHELL"
+    else
+      if [[ "$(file --mime-encoding --brief -- "$res")" = "binary" ]]; then
+          file "$res"
+      else
+          "$EDITOR" "$res"
+      fi
+    fi
+}
+
 openPkgShell() {
     nix shell --impure -E '(import '"$pkgs"' {}).'"$1"''
 }
@@ -179,6 +194,7 @@ getPkgInfo "$pkg"
 echo
 echo -e 'Select action: '
 echo -e "e) Open in \e[1m$(basename "$EDITOR")\e[0m"
+echo -e "o) Open build result"
 echo -e "s) Open in \e[1mnix shell\e[0m"
 echo -e '*) Do nothing'
 
@@ -186,6 +202,9 @@ read -r yn_answer
 case "$yn_answer" in
     [eE])
         editPkg "$pkg"
+    ;;
+    [oO])
+        openDrvResult "$pkg"
     ;;
     [sS])
         openPkgShell "$pkg"
