@@ -251,24 +251,16 @@
             "formatting": {
                 "command": [ "nixfmt" ],
             },
+            "zoeee": {
+                "expr": "import <zoeee> { }"
+            },
+            "zpkgs": {
+                "expr": "import <zoeee/pkgs> { }"
+            },
             "options": {
-                "nixpkgs": {
-                    "expr": "import <nixpkgs> { }"
-                },
-                "home-manager": {
-                    "expr": "import <home-manager> { }"
-                },
-                "zoeee": {
-                    "expr": "import <zoeee> { }"
-                },
-                "zoeee/pkgs": {
-                    "expr": "import <zoeee/pkgs> { }"
-                },
-                "zoeee/modules": {
-                    "expr": "import <zoeee/modules> { }"
-                },
-                "zoeee/hm-modules": {
-                    "expr": "import <zoeee/hm-modules> { }"
+                "nixos": { "expr": "{}" },
+                "workspace": {
+                    "expr": "let v = import ./.; in if (builtins.isFunction v || v ? __functor) then (v {}).options else v.options"
                 }
             }
         }
