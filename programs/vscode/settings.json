@@ -42,6 +42,18 @@
                 "macro": "#C678DD", // keyword.cs
                 "variable": "#ABB2BF", // text
                 "parameter": "#ABB2BF",
+                "property": "#ABB2BF",
+            }
+        },
+        "[One Dark Pro]": {
+            "rules": {
+                "*.deprecated": {
+                    "fontStyle": "strikethrough"
+                },
+                "macro": "#C678DD", // keyword.cs
+                "variable": "#ABB2BF", // text
+                "parameter": "#ABB2BF",
+                "property": "#ABB2BF",
             }
         },
     },
