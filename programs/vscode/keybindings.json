@@ -21,11 +21,6 @@
   },
   {
     "key": "alt+z",
-    "command": "cursorUndo",
-    "when": "textInputFocus"
-  },
-  {
-    "key": "alt+z",
     "command": "-editor.action.toggleWordWrap"
   },
   {
@@ -320,5 +315,9 @@
   {
     "key": "alt+f4",
     "command": "-workbench.action.closeWindow"
+  },
+  {
+    "key": "alt+z",
+    "command": "workbench.action.navigateBackInNavigationLocations"
   }
 ]
