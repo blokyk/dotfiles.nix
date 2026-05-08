@@ -29,7 +29,8 @@
     grba = "git rebase --abort";
     grbc = "git rebase --continue";
 
-    gr = "git reset --soft";
+    gr    = "git reset --soft";
+    gr-   = "git reset --soft HEAD~1";
     "gr!" ="git reset --hard";
 
     gcp = "git cherry-pick";
