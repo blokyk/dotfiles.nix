@@ -55,9 +55,9 @@ in {
     # ".gradle/gradle.properties".text = "..";
   };
 
-  programs.home-manager.report-changes = {
+  programs.home-manager.diff-on-activation = {
     enable = true;
-    askForConfirmation = true;
+    ask-for-confirmation = true;
   };
 
   # Let Home Manager install and manage itself.
