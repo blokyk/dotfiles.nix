@@ -26,6 +26,9 @@
         "*.cs": "$(capture).*.cs",
         "*.csproj": "$(capture).props, $(capture).targets"
     },
+    "search.collapseResults": "auto",
+    "search.sortOrder": "countDescending",
+    "search.smartCase": true,
 
     // git
     "git.blame.editorDecoration.enabled": false,
