@@ -13,6 +13,7 @@ in {
   _module.args.pins  = <__pins>;
 
   imports = [
+    ./fonts.nix
     ./env.nix
     ./aliases.nix
     ./locale.nix
