@@ -8,7 +8,7 @@ let
 
   };
 in {
-  imports = [ <self/misc/gnome-shell-impl.nix>.outPath ];
+  imports = [ (import <self/misc/gnome-shell-impl.nix>) ];
 
   programs.gnome-shell.theme = {
     name = "WhiteSur-Dark";

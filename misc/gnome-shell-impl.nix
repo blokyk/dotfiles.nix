@@ -68,7 +68,7 @@ in
   meta.maintainers = [ lib.maintainers.terlar ];
 
   disabledModules = [
-    <home-manager/modules/programs/gnome-shell.nix>.outPath
+    <home-manager/modules/programs/gnome-shell.nix>.outPath # note: this NEEDS to be a path
   ];
 
   options.programs.gnome-shell = {
