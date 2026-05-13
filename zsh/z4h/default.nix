@@ -1,5 +1,2 @@
 { ... }: {
-  imports = [
-    ./impl.nix
-  ];
 }

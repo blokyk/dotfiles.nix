@@ -20,6 +20,8 @@ in {
     ./theme.nix
     ./misc/targets-ubuntu.nix
 
+    (import <zoeee/hm-modules>)
+
     ./programs
     ./scripts
     ./zsh

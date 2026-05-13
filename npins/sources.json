@@ -93,9 +93,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "92e4a3a69298d44e5849435fa15ee9852f23a3bf",
-      "url": "https://github.com/blokyk/packages.nix/archive/92e4a3a69298d44e5849435fa15ee9852f23a3bf.tar.gz",
-      "hash": "sha256-XA64somAGkk3h5sdIhpi21za14qBz62OGHhmnCoONc0="
+      "revision": "102deca34128f5e6684e113374d5cf0a6e874d94",
+      "url": "https://github.com/blokyk/packages.nix/archive/102deca34128f5e6684e113374d5cf0a6e874d94.tar.gz",
+      "hash": "sha256-GM5IaouG3gLZHQGAkY/cyxcQgVwWXZjJg8I7vvji7/I="
     }
   },
   "version": 7
