@@ -74,7 +74,7 @@ in {
 
         # Use this spelling checker instead of the internal one.
         # This option does not have a default value.
-        speller = "${pkgs.aspell} -x -c";
+        speller = "${lib.getExe' pkgs.aspell "aspell"} -x -c";
 
         # Use this tab size instead of the default; it must be greater than 0.
         tabsize = 4;
