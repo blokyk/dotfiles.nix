@@ -39,6 +39,19 @@
       "url": "https://github.com/nix-community/home-manager/archive/9340f51314713c83360bf72d75c8b404778ab5b1.tar.gz",
       "hash": "sha256-PzqwM4njoB3aznqwPZUawD4uOcJeu7N6GBTJKg81EQ4="
     },
+    "nanonix": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "seitz",
+        "repo": "nanonix"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "5c30e1de6d664d609ff3828a8877fba3e06ca336",
+      "url": "https://github.com/seitz/nanonix/archive/5c30e1de6d664d609ff3828a8877fba3e06ca336.tar.gz",
+      "hash": "sha256-S9p/g8DZhZ1cZdyFI6eaOxxGAbz+dloFEWdamAHo120="
+    },
     "nix-debug": {
       "type": "Git",
       "repository": {
@@ -93,9 +106,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "102deca34128f5e6684e113374d5cf0a6e874d94",
-      "url": "https://github.com/blokyk/packages.nix/archive/102deca34128f5e6684e113374d5cf0a6e874d94.tar.gz",
-      "hash": "sha256-GM5IaouG3gLZHQGAkY/cyxcQgVwWXZjJg8I7vvji7/I="
+      "revision": "39af455c8b580521b430ca2e833cb25426cda013",
+      "url": "https://github.com/blokyk/packages.nix/archive/39af455c8b580521b430ca2e833cb25426cda013.tar.gz",
+      "hash": "sha256-YyAwguFrRfFEqMnDC62jdi+eLq8hV3KBhvVx+aQ5/Dg="
     }
   },
   "version": 7
