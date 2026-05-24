@@ -39,6 +39,19 @@
       "url": "https://github.com/nix-community/home-manager/archive/9340f51314713c83360bf72d75c8b404778ab5b1.tar.gz",
       "hash": "sha256-PzqwM4njoB3aznqwPZUawD4uOcJeu7N6GBTJKg81EQ4="
     },
+    "hotline-suwayomi": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "blokyk",
+        "repo": "hotline-suwayomi"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "0567dffd5c8ead82d4b71e3879d91af43ef071a2",
+      "url": "https://github.com/blokyk/hotline-suwayomi/archive/0567dffd5c8ead82d4b71e3879d91af43ef071a2.tar.gz",
+      "hash": "sha256-URBjMzgZhTAXC0DOqX+8hXAwLghtJ12gp/gOcDx6u5k="
+    },
     "nanonix": {
       "type": "Git",
       "repository": {
