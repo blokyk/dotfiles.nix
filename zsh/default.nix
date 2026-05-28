@@ -28,6 +28,9 @@
       # shell session has started
       "no_share_history"
 
+      # delete old recorded entry if new entry is a duplicate
+      "hist_ignore_all_dups"
+
       # record how much time the command took to finish,
       # and append it immediately to the history file
       "inc_append_history_time"
