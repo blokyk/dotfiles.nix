@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
 in {
   home.username = "courvoie";
@@ -20,7 +20,7 @@ in {
     ./theme.nix
     ./misc/targets-ubuntu.nix
 
-    (import <zoeee/hm-modules>)
+    (lib.setDefaultModuleLocation <zoeee/hm-modules>.outPath (import <zoeee/hm-modules>))
 
     ./programs
     ./scripts
