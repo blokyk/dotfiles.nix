@@ -10,7 +10,10 @@ in {
 
   # inject 'zpkgs' arg into other modules to easily get zoeee/pkgs
   _module.args.zpkgs = pkgs.callPackage <zoeee/pkgs> {};
-  _module.args.pins  = <__pins>;
+  # this is a horrible hack exploiting frozenpins internal details,
+  # but because of home-manager's interface, we can't easily inject
+  # these from default.nix :/
+  _module.args.pins = <self>.parentPins;
 
   imports = [
     ./fonts.nix

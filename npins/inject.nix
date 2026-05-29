@@ -30,14 +30,7 @@
 # issue with it or wish to provide feedback, please submit an issue on the repo
 # given above.
 #
-# Version: 1.0.0+custom
-# Custom changes:
-#   made `import inject.nix` object a functor, containing a `pins`
-#   attribute to easily access resolved pins
-#
-#   allow referring to the current project with <self>
-#   note: we could probably do that directly in the follow function no?
-#   note: also doing things this way right now probably pollutes children's pins/follows i think?
+# Version: 1.1.2
 
 projectFollows:
 let
@@ -67,11 +60,11 @@ let
   # if we're importing `project/*.nix`, we have to compute
   # the pins based on the projects we specified in npins/sources.json,
   # while still respecting followsFn and our parent's follows
-  currPins = currPinsAndFollows.pins // { self = ../.; }; # note: self is a path and not a project, because otherwise that would end up with weird behavior/implications for imports and pin overriding
+  currPins = currPinsAndFollows.pins;
   currNixPath =
     pinPathsToNixPath currPins;
 
-  isProject = fileInfo: builtins.isAttrs fileInfo;
+  isProject = fileInfo: fileInfo ? __isFrozenpin;
 
   # the import used for any subfile of a project (including root/default.nix)
   # it should never be used to import npins/inject.nix
@@ -95,22 +88,24 @@ let
   mkResolveSymbol =
     parentPins: allParentFollows:
     nixPath: name:
-      if name == "__pins" then
-        parentPins
-      else
       let
+        maybePath = builtins.tryEval (builtins.findFile nixPath name);
         prefix = toString (rootDir name);
-      in {
+      in
+      if !maybePath.success then
+        builtins.findFile nixPath name
+      else {
         inherit prefix;
         # we HAVE to name it outPath, so that nix believes this is
         # a derivation, which (because this language is definitely
         # not cursed) will implicitely convert it to a path/string
         # for most operations (+, readFile, etc.)
-        outPath = builtins.findFile nixPath name;
+        outPath = maybePath.value;
         # the follows this project should obey, according to the parent
         parentFollows = allParentFollows.${prefix} or {};
         # the nix path in which this reference was resolved
         parentPins = parentPins;
+        __isFrozenpin = true;
         __toString = self: self.outPath;
       };
 
@@ -339,7 +334,9 @@ in {
   # this import will be the one used INSIDE the project,
   # so it should be the one that imports subfiles
   import = subfileImport;
-  __functor = self: self.import;
-
   pins = currPins;
+
+  # for ease of use & backwards-compatibility (with v1.0):
+  # if called as a function, just act as the custom import
+  __functor = self: self.import;
 }
