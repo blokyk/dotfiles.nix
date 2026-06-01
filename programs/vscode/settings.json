@@ -26,6 +26,9 @@
         "*.cs": "$(capture).*.cs",
         "*.csproj": "$(capture).props, $(capture).targets"
     },
+    "extensions.autoUpdate": false,
+    "extensions.autoCheckUpdates": false,
+    "extensions.ignoreRecommendations": true,
     "search.collapseResults": "auto",
     "search.sortOrder": "countDescending",
     "search.smartCase": true,
