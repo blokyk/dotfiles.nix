@@ -4,5 +4,4 @@
 # by the frozenpins injector fragment.
 import <home-manager/home-manager/home-manager.nix> {
   confPath = ./home2.nix;
-  # check = false;
 }
