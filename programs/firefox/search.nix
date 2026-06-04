@@ -59,6 +59,23 @@ in {
       #   }];
       # };
 
+      y = {
+        name = "youtube";
+        definedAliases = [ "y" ];
+        icon = pkgs.fetchurl {
+          url = "https://upload.wikimedia.org/wikipedia/commons/f/fd/YouTube_full-color_icon_%282024%29.svg";
+          name = "youtube-logo.svg";
+          hash = "sha256-8igmt9medFu9pU3EIcLC8IY3OyAMXn97QExNecPfaOI=";
+        };
+
+        urls = [{
+          template = "https://youtube.com/results";
+          params = [
+            { name = "search_query"; value = "{searchTerms}"; }
+          ];
+        }];
+      };
+
       # hide other builtin engines
       bing.metaData.hidden = true;
       perplexity.metaData.hidden = true;
