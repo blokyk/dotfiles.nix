@@ -36,6 +36,7 @@
     // git
     "git.blame.editorDecoration.enabled": false,
     "gitlens.currentLine.enabled": false,
+    "gitlens.ai.enabled": false,
     "git.blame.editorDecorationForeground": "#f8f8ff3f",
     "git.blame.statusBarItem.enabled": false,
     // semantic highlighting
