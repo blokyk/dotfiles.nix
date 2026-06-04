@@ -46,11 +46,12 @@ in {
 
             # highlight trailing spaces at the end of lines
             shardulm94.trailing-spaces
-            # change the window color of each new folder/workspace
+            # code-spell code and comments
+            streetsidesoftware.code-spell-checker
+            streetsidesoftware.code-spell-checker-french
 
             # one dark pro theme
             zhuangtongfa.material-theme
-            # normal vscode icons w/ folder icons instead of '>'
           ];
 
           marketplaceExtensions = pkgs.vscode-utils.extensionsFromVscodeMarketplace [
@@ -65,7 +66,9 @@ in {
             # add a unique accent color to each window based on workspace path
             { name = "unique-window-colors"; publisher = "stuart"; version = "1.2.9"; sha256 = "0lbjnihxaznm2r6zh6a1mz96h89430ba6cr4k43qhpk2gpk3d2vf";  }
 
+            # old icons from before <=1.105
             { name = "vscode-oldicons"; publisher = "adam-bender";  version = "0.2.0"; sha256 = "0p7k0safirn9bf459d5m77igdx8qd6b3rs8j0ndgjyvjlw54wkhs";  }
+            # normal vscode icons w/ folder icons instead of '>'
             { name = "seti-minimal-folder"; publisher = "sabaken";  version = "1.0.3"; sha256 = "0ip528v3jpbyalpimw4myddmxfvr51bs5104lx5anad9icm37pm4";  }
             { name = "vscode-theme-onelight"; publisher = "akamud"; version = "2.3.0"; sha256 = "sha256-CTD0s2lRMCi/WCGr6dP1Utrvtsdcbg4srRcrZJSFDqU="; }
           ];
