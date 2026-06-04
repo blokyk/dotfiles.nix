@@ -12,7 +12,7 @@ in {
     "ringboard/x11.toml".source = toTOML "ringboard-x11-config.toml" {
       version = "V1";
       auto_paste = false;
-      fast_path_optimzations = false; # allows ringboard to not keep passwords
+      fast_path_optimizations = false; # allows ringboard to not keep passwords
     };
   };
 }
