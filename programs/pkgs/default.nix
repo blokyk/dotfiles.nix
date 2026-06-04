@@ -19,6 +19,8 @@
     systemd-manager-tui
     # markup-based typesetting
     typst
+    # swiss-knife online video downloader
+    yt-dlp
   ];
 
   # todo: add git-point (doesn't work currently because of weird packaging)
