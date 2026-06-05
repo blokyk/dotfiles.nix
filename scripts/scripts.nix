@@ -10,8 +10,10 @@
   gh,
   gnused,
   jq,
+  less,
   lix-diff,
   lld,
+  man,
   nix-impl-cli,
   nix-index,
   nix-output-monitor,
@@ -50,6 +52,12 @@ in {
     name = "full-figlet";
     runtimeInputs = [ coreutils figlet ];
     text = read ./full-figlet.sh;
+  };
+
+  hm = writeShellApplication {
+    name = "hm";
+    runtimeInputs = [ less man ];
+    text = read ./hm.sh;
   };
 
   hm-diff = writeShellApplication {
