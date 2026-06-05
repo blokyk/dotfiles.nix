@@ -8,8 +8,6 @@ let
 
   };
 in {
-  imports = [ (import <self/misc/gnome-shell-impl.nix>) ];
-
   programs.gnome-shell.theme = {
     name = "WhiteSur-Dark";
     package = whitesur-theme;
