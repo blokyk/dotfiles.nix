@@ -1,11 +1,11 @@
 { config, lib, pkgs, ... }:
 let
 in {
-  home.username = "courvoie";
+  home.username = "blokyk";
   home.homeDirectory = "/home/${config.home.username}";
   targets.ubuntu = {
     enable = true;
-    version = "24.04";
+    version = "25.04";
   };
 
   # inject 'zpkgs' arg into other modules to easily get zoeee/pkgs

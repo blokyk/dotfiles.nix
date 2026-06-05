@@ -2,19 +2,19 @@
 let
   cfg = config.programs.z3h;
 in {
-  imports = [
-    ./keybindings.nix
-    # ./fn
-  ];
-
   options = {
-    programs.z3h = {
-      enable = lib.mkEnableOption "z3h, a z4h re-implementation";
+    programs.z3h.keybindings = {
+      
     };
   };
 
   config = {
     programs.zsh = lib.mkIf cfg.enable {
+      initBlocks = {
+        keybindings = ''
+          bindkey
+        '';
+      };
     };
   };
 }

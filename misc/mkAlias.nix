@@ -1,8 +1,12 @@
-{ writeShellApplication, lib, ... }:
+{
+  lib,
+  symlinkJoin,
+  writeShellApplication,
+}:
 
 {
   # name of the new command
-  name,
+  name ? pkg.pname,
   # pkg to base this on; if it has a main program,
   # this will also determine the command to run/alias
   pkg,
@@ -17,8 +21,10 @@
   escapeFlags ? true,
   # a human-readable description/documentation of the alias
   description ? "alias to ${baseCmd} ${lib.concatStringsSep " " flags}",
-  ...
-}@args:
+  # whether this wrapper should have its files merged with the original
+  # derivation's output (e.g. manpages, libraries, etc.)
+  mergeWithBasePkg ? false,
+}:
 let
   formatFlag =
     if escapeFlags
@@ -42,8 +48,30 @@ let
     '';
   };
 
-  passthru = removeAttrs args [ "name" "pkg" "baseCmd" "flags" "escapeFlags" ]; # note: leave `description` in the passthru
-  mergeAttrs = a: b:
-    lib.types.attrs.merge [] [{value=a;} {value=b;}];
+  meta = pkg.meta // {
+    description = description;
+    mainProgram = baseCmd;
+  };
+
+  wrapper = writeShellApplication (baseAttrs // {
+    derivationArgs.preferLocalBuild = true;
+    derivationArgs.meta = meta // { outputsToInstall = [ "out" ]; };
+  });
 in
-  writeShellApplication (mergeAttrs baseAttrs passthru)
+  if mergeWithBasePkg then
+    symlinkJoin {
+      inherit meta;
+      pname = name;
+      version = pkg.version;
+      paths = [
+        # `symlinkJoin` will always take the first one if there's any conflict
+        wrapper
+        pkg
+      ];
+      # outputs = pkg.outputs;
+      # postBuild = lib.concatMapStringsSep "\n" (out: ''
+      #   ln -s ${pkg.${out + "Path"}} $${out}
+      # '') (lib.filter (o: o != "out") pkg.outputs);
+    }
+  else
+    wrapper

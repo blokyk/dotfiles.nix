@@ -8,6 +8,29 @@ let
 
   # wrappers REPLACE the original binary (and there's no direct way to get the original)
   wrappers = {
+    # always display sizes in human formats
+    # fixme: this should be `wrap`, but idk how to set a specific program to wrap
+    df = mkAlias {
+      name = "df";
+      pkg = pkgs.coreutils;
+      baseCmd = "df";
+      flags = [ "--human-readable" ];
+
+      # we don't want this to override/replace coreutils stuff
+      mergeWithBasePkg = false;
+    };
+
+    # always use colors when possible
+    # fixme: same as above
+    ip = mkAlias {
+      name = "ip";
+      pkg = pkgs.iproute2;
+      baseCmd = "ip";
+      flags = [ "--color=auto" ];
+      # don't replace distribution iproute2 stuff
+      mergeWithBasePkg = false;
+    };
+
     # nix-prefetch-github is a very niece piece of software,
     # and thus it lets us override flags later in the invocation.
     # therefore, there's no danger with wrapping it globally instead
@@ -15,6 +38,17 @@ let
     nix-prefetch-github = wrap {
       basePackage = pkgs.nix-prefetch-github;
       prependFlags = [ "--nix" ];
+      # mergeWithBasePkg = true;
+    };
+
+    # display richer trees
+    tree = wrap {
+      basePackage = pkgs.tree;
+      prependFlags = [
+        "-a" # print all files, including hidden ones
+        "-I" ".git" # ignore .git directory
+      ];
+      # mergeWithBasePkg = true;
     };
   };
 
@@ -32,6 +66,28 @@ let
       ];
     };
 
+    clipcopy = {
+      pkg = pkgs.xclip;
+      flags = [ "-selection" "clipboard" "-in" ];
+    };
+
+    clippaste = {
+      pkg = pkgs.xclip;
+      flags = [ "-selection" "clipboard" "-out" ];
+    };
+
+    la = {
+      pkg = pkgs.coreutils;
+      baseCmd = "ls";
+      flags = [ "--almost-all" ];
+    };
+
+    ll = {
+      pkg = pkgs.coreutils;
+      baseCmd = "ls";
+      flags = [ "-lha" ];
+    };
+
     lspci-tree = {
       pkg = pkgs.pciutils;
       flags = [
@@ -46,7 +102,15 @@ let
       baseCmd = "nix";
       flags = [
         "repl"
-        "-f" "<nixpkgs>"
+        "--file" "<nixpkgs>"
+      ];
+    };
+
+    wdf = {
+      pkg = pkgs.unixtools.watch;
+      flags = [
+        "--interval" ".5"
+        (lib.getExe wrappers.df)
       ];
     };
   };
