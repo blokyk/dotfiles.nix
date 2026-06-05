@@ -12,13 +12,17 @@ fi
 
 conf_dir="$HOME/.config/home-manager"
 
-gen_path="$(nom-build --no-out-link "$@" "$conf_dir")"
-ret=$?
-
-# if the build failed, exit immediately
-if [[ $ret != 0 ]]; then
-    exit $ret
+# make sure the session is interactive if --debugger is used
+if [[ "$*" =~ "--debugger" ]]; then
+    front_end=nix
+else
+    front_end=nom
 fi
 
-# otherwise, launch the activation
-"$gen_path"/activate
+res_file="$(mktemp --dry-run "/tmp/hm-result-XXXX")"
+$front_end build -f "$conf_dir" activationPackage --out-link "$res_file" "$@"
+
+# thanks to `errexit`, this will only execute if the build succeeded
+"$res_file"/activate
+
+rm "$res_file"

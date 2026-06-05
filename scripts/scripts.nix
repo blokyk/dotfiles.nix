@@ -60,7 +60,7 @@ in {
 
   hm-switch = writeShellApplication {
     name = "hm-switch";
-    runtimeInputs = [ nix-output-monitor ];
+    runtimeInputs = [ coreutils nix-output-monitor ];
     text = read ./hm-switch.sh;
   };
 
