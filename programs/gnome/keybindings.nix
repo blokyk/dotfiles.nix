@@ -13,11 +13,31 @@ let inherit (lib.modules) importApply; in
     })
   ];
 
-  # todo: impl custom keybindings
-
   programs.gnome-shell.keybindings = {
     # this is ctrl+v by default, which we instead want to bind to ringboard
     toggle-message-tray = null;
+  };
+
+  programs.gnome-shell.custom-actions = {
+    "Clipboard manager" = {
+      binding = ["<Super>" "v"];
+      command = "ringboard-egui toggle";
+    };
+
+    "Firefox" = {
+      binding = ["<Ctrl>" "<Alt>" "g"];
+      command = "firefox";
+    };
+
+    "Firefox (private)" = {
+      binding = ["<Shift>" "<Ctrl>" "<Alt>" "g"];
+      command = "firefox --private-window";
+    };
+
+    "Nix REPL" = {
+      binding = ["<Ctrl>" "<Alt>" "n"];
+      command = ''tilix --title "Nix REPL" -e "nix repl -f <nixpkgs>"'';
+    };
   };
 
   programs.gnome-desktop.keybindings = {

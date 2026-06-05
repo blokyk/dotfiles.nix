@@ -34,13 +34,13 @@
   })];
 
   programs.tilix.keybindings = {
-    terminal-copy =  [ "<Primary>" "c" ];  # ctrl+c
-    terminal-paste = [ "<Primary>" "v" ]; # ctrl+v
+    terminal-copy =  [ "<Ctrl>" "c" ];  # ctrl+c
+    terminal-paste = [ "<Ctrl>" "v" ]; # ctrl+v
 
-    session-add-auto = [ "<Primary>" "t" ];
+    session-add-auto = [ "<Ctrl>" "t" ];
 
-    app-new-session = [ "<Primary>" "<Shift>" "n" ];
-    app-new-window =  [ "<Primary>" "n" ];
+    app-new-session = [ "<Ctrl>" "<Shift>" "n" ];
+    app-new-window =  [ "<Ctrl>" "n" ];
   };
 
   dconf.settings = {
