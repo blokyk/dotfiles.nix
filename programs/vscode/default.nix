@@ -26,7 +26,6 @@ in {
       in
         patched-vscode.fhs;*/
     package = null;
-    pname = "vscode";
 
     profiles.default = {
       extensions =

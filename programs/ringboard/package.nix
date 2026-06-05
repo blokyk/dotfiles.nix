@@ -17,7 +17,7 @@ pkgs.ringboard.override {
             ./on-primary-monitor.lock.patch # patch with lockfile changes
           ];
 
-          cargoHash = "sha256-8LJnnuVUMSUSHLAZxTq8IfTXDLDyOYvQUuoE51JlfGs";
+          cargoHash = "sha256-hO67tlykfPjkc/v7JhJ4yIJMFSL/powWD7UDrBbfkII=";
 
           buildInputs = prev.buildInputs ++ [
             pkgs.libxcb

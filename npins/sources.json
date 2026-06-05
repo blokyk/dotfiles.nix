@@ -9,9 +9,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "45f82ed61800d52e27390b70823426045d982c84",
-      "url": "https://github.com/nix-community/fenix/archive/45f82ed61800d52e27390b70823426045d982c84.tar.gz",
-      "hash": "sha256-XO7jmyFupI82Sr1M2tLfsSxslIJwUOjzhFqeffaWyNw="
+      "revision": "67e07d2f273a0761702abc9cf597ed13fcd2b0cb",
+      "url": "https://github.com/nix-community/fenix/archive/67e07d2f273a0761702abc9cf597ed13fcd2b0cb.tar.gz",
+      "hash": "sha256-gKC2HPrqwR5bso+17y27f0dCxyZM4IPl/ANy3jK5BDk="
     },
     "figlet-fonts": {
       "type": "Git",
@@ -35,9 +35,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "9340f51314713c83360bf72d75c8b404778ab5b1",
-      "url": "https://github.com/nix-community/home-manager/archive/9340f51314713c83360bf72d75c8b404778ab5b1.tar.gz",
-      "hash": "sha256-PzqwM4njoB3aznqwPZUawD4uOcJeu7N6GBTJKg81EQ4="
+      "revision": "447fd9ff62501dae7206dfe180ee89f8de27b7d5",
+      "url": "https://github.com/nix-community/home-manager/archive/447fd9ff62501dae7206dfe180ee89f8de27b7d5.tar.gz",
+      "hash": "sha256-CHo7k65YTL3HY+WQVedDTupji+LMgNlKCdrtRHZFAK4="
     },
     "hotline-suwayomi": {
       "type": "Git",
@@ -48,9 +48,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "0567dffd5c8ead82d4b71e3879d91af43ef071a2",
-      "url": "https://github.com/blokyk/hotline-suwayomi/archive/0567dffd5c8ead82d4b71e3879d91af43ef071a2.tar.gz",
-      "hash": "sha256-URBjMzgZhTAXC0DOqX+8hXAwLghtJ12gp/gOcDx6u5k="
+      "revision": "372759d486d49efb46556ef803b2f266954aab51",
+      "url": "https://github.com/blokyk/hotline-suwayomi/archive/372759d486d49efb46556ef803b2f266954aab51.tar.gz",
+      "hash": "sha256-UNzAIT2opdjiExaZAe3e0vt98m2/EODMwSdMJuG3DiM="
     },
     "nanonix": {
       "type": "Git",
@@ -74,15 +74,15 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "3c54c25bfec2244ee1b64d8d43b064e3bb520582",
-      "url": "https://github.com/blokyk/nix-debug/archive/3c54c25bfec2244ee1b64d8d43b064e3bb520582.tar.gz",
-      "hash": "sha256-v7DXBMJqTfncvowFx9uNUAnpBoGubXudwsKEUvQ0Sa8="
+      "revision": "c2c5c0c204df3c2b131dc529e8de2c9acbd90953",
+      "url": "https://github.com/blokyk/nix-debug/archive/c2c5c0c204df3c2b131dc529e8de2c9acbd90953.tar.gz",
+      "hash": "sha256-pL27Fxmlrh7pGuWL/IPHu/naT6reib2SN4m4M+h2BIE="
     },
     "nixpkgs": {
       "type": "Channel",
       "name": "nixpkgs-unstable",
-      "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.05pre971056.b63fe7f000ad/nixexprs.tar.xz",
-      "hash": "sha256-5QVei2IIfVO3GqMkiiXlrZtaniOkXyMWnqbTVkItrco="
+      "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.11pre1009182.ffa10e26ae11/nixexprs.tar.xz",
+      "hash": "sha256-JX05Ms/dk0c+UoW9IqQriB53HNZFckX9Qd3EJqmcqEw="
     },
     "rycee-nur": {
       "type": "Git",
@@ -93,9 +93,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "986236cd6fad0979233ae5e73456a365f79ff198",
-      "url": "https://gitlab.com/api/v4/projects/rycee%2Fnur-expressions/repository/archive.tar.gz?sha=986236cd6fad0979233ae5e73456a365f79ff198",
-      "hash": "sha256-GgExKCDspgASVM6sRH0VcVyixQznxuR4tjiAA7MfKxs="
+      "revision": "ef4b88dd2caa60399b237a3bfa1205bb1064e7af",
+      "url": "https://gitlab.com/api/v4/projects/rycee%2Fnur-expressions/repository/archive.tar.gz?sha=ef4b88dd2caa60399b237a3bfa1205bb1064e7af",
+      "hash": "sha256-EtBSmqZn3oCmfZbyUbRqMUAclm5AlD4hDo4Qdj5X52s="
     },
     "wrapper-manager": {
       "type": "Git",
@@ -119,9 +119,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "39af455c8b580521b430ca2e833cb25426cda013",
-      "url": "https://github.com/blokyk/packages.nix/archive/39af455c8b580521b430ca2e833cb25426cda013.tar.gz",
-      "hash": "sha256-YyAwguFrRfFEqMnDC62jdi+eLq8hV3KBhvVx+aQ5/Dg="
+      "revision": "e39693e599da0bf61d19401e0731420da9c9cdae",
+      "url": "https://github.com/blokyk/packages.nix/archive/e39693e599da0bf61d19401e0731420da9c9cdae.tar.gz",
+      "hash": "sha256-GXSQmU7VS4VQC6tOmXWUrjYi1apoTwuHQzWS0H5XZTc="
     }
   },
   "version": 7

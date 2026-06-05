@@ -16,12 +16,7 @@
     };
 
     lfs.enable = true;
-    settings.filter.lfs = {
-      process = "git-lfs filter-process";
-      required = true;
-      clean = "git-lfs clean -- %f";
-      smudge = "git-lfs smudge -- %f";
-    };
+    settings.filter.lfs.required = true;
 
     settings = {
       user = {
