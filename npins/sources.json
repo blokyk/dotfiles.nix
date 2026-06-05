@@ -120,9 +120,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "e39693e599da0bf61d19401e0731420da9c9cdae",
-      "url": "https://github.com/blokyk/packages.nix/archive/e39693e599da0bf61d19401e0731420da9c9cdae.tar.gz",
-      "hash": "sha256-GXSQmU7VS4VQC6tOmXWUrjYi1apoTwuHQzWS0H5XZTc="
+      "revision": "d08e2704a93a66beff40e0eed248a299eacc3822",
+      "url": "https://github.com/blokyk/packages.nix/archive/d08e2704a93a66beff40e0eed248a299eacc3822.tar.gz",
+      "hash": "sha256-ty9EIWhhThfajxMHMC5g9+JAMkhoVvGWz01+3nqg8VY="
     }
   },
   "version": 8

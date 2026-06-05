@@ -1,8 +1,8 @@
 { lib, pkgs, ... }: {
   imports = [
-    (lib.modules.importApply <self/misc/mk-keybindings-impl.nix> {
-      attrPath = [ "programs" "gnome-shell" "tiling-assistant" "keybindings" ];
-      dconfPath = "org/gnome/shell/extensions/tilinx-assistant";
+    (lib.modules.importApply <zoeee/hm-modules/mk-keybindings> {
+      optPath = [ "programs" "gnome-shell" "tiling-assistant" "keybindings" ];
+      prefixPath = [ "dconf" "settings" "org/gnome/shell/extensions/tiling-assistant" ];
     })
   ];
 

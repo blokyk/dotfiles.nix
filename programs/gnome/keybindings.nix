@@ -2,14 +2,14 @@
 let inherit (lib.modules) importApply; in
 {
   imports = [
-    (importApply <self/misc/mk-keybindings-impl.nix> {
-      attrPath = [ "programs" "gnome-shell" "keybindings" ];
-      dconfPath = "org/gnome/shell/keybindings";
+    (importApply <zoeee/hm-modules/mk-keybindings> {
+      optPath = [ "programs" "gnome-shell" "keybindings" ];
+      prefixPath = [ "dconf" "settings" "org/gnome/shell/keybindings" ];
     })
 
-    (importApply <self/misc/mk-keybindings-impl.nix> {
-      attrPath = [ "programs" "gnome-desktop" "keybindings" ];
-      dconfPath = "org/gnome/desktop/wm/keybindings";
+    (importApply <zoeee/hm-modules/mk-keybindings> {
+      optPath = [ "programs" "gnome-desktop" "keybindings" ];
+      prefixPath = [ "dconf" "settings" "org/gnome/desktop/wm/keybindings" ];
     })
   ];
 

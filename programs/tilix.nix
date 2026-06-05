@@ -27,9 +27,9 @@
   # 2) "deprecated" but still mostly works
   dconf.settings."org/gnome/desktop/applications/terminal".exec = lib.getExe pkgs.tilix;
 
-  imports = [(lib.modules.importApply <self/misc/mk-keybindings-impl.nix> {
-    attrPath = [ "programs" "tilix" "keybindings" ];
-    dconfPath = "com/gexperts/Tilix/keybindings";
+  imports = [(lib.modules.importApply <zoeee/hm-modules/mk-keybindings> {
+    optPath = [ "programs" "tilix" "keybindings" ];
+    prefixPath = [ "dconf" "settings" "com/gexperts/Tilix/keybindings" ];
     multiKeybindings = false;
   })];
 
