@@ -1,4 +1,4 @@
-{ pkgs, config, ... }: {
+{ config, lib, pkgs, ... }: {
   nix.package =  pkgs.lixPackageSets.latest.lix;
   nixpkgs.overlays = [
     (final: prev: {
@@ -13,16 +13,40 @@
         nix-fast-build
         colmena;
 
-      # we need to use an older version of nix-output-monitor, because
-      # since 2.1.7 it adapts to cppnix's slightly breaking json format,
-      # which lix doesn't use
-      nix-output-monitor = prev.nix-output-monitor.overrideAttrs {
-        version = "2.1.6";
-        src = pkgs.fetchzip {
-          url = "https://code.maralorn.de/maralorn/nix-output-monitor/archive/v2.1.6.tar.gz";
-          sha256 = "sha256-YfxFcGD9U7RzctnTRUQX1Nsz2EtiDIUGpz2nTo0OSWw=";
-        };
-      };
+      # the upstream repo already includes packaging for it in `default.nix`,
+      # but it unfortunately hides a few packaging details in the flake :(
+      nix-output-monitor =
+        let
+          hlib = final.haskell.lib.compose;
+          base-nom = final.haskellPackages.callPackage (final.fetchFromForgejo {
+            domain = "code.maralorn.de";
+            owner = "maralorn";
+            repo = "nix-output-monitor";
+            rev = "388f56120f655a9cf4512e697b2c2afa06fe7434";
+            sha256 = "sha256-3N+PVFpsnBtQ11Vk9OKm1q9dE0d5fxGsEDyfwoxpYaE=";
+          }) {};
+
+        in
+          lib.pipe base-nom [
+            pkgs.haskellPackages.buildFromCabalSdist
+            hlib.justStaticExecutables
+
+            (hlib.overrideCabal {
+              # the original flake packaging does some fiddling around to only run
+              # _some_ of the tests in the test suite, but i don't care enough for
+              # that here, so just disable everything
+              doCheck = false;
+
+              # get correct shell completions
+              buildTools = [ final.installShellFiles ];
+              postInstall = ''
+                ln -s nom "$out/bin/nom-build"
+                ln -s nom "$out/bin/nom-shell"
+                chmod a+x $out/bin/nom-shell
+                installShellCompletion completions/*
+              '';
+            })
+          ];
     })
   ];
 }
