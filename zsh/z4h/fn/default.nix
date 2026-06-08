@@ -1,14 +1,24 @@
 { config, lib, ... }:
 let
-  cfg = config.programs.z3h;
-  files = lib.filter
-    # don't import files that start with '-' (nor default.nix (obviously))
-    (f: !lib.hasPrefix "-" f && f != "default.nix")
-    (lib.attrNames (lib.readDir ./.));
+  files = import ./list.nix;
+  cfg = config.programs.z3h.functions;
+
+  # constructs boolean enable options for each function in `files`
+  opts = lib.mapAttrs
+    (fn: _: lib.mkEnableOption "autoloading the ${fn} function")
+    files;
+
+  # given { z4h-foo = true; }, returns { z4h-foo = readFile ./z4h-foo; }
+  cfgs = lib.mapAttrs
+    (fn: val: lib.mkIf val files.${fn})
+    cfg;
 in {
-  programs.zsh.siteFunctions = lib.mkIf cfg.enable (
-    lib.genAttrs
-      files
-      (f: lib.readFile (./. + ("/" + f)))
-  );
+  # creates options:
+  # programs.z8h.functions.z4h-foo = mkEnable ...
+  #
+  # which, if z4h-foo is set to true, will result in the config:
+  # programs.zsh.siteFunctions.z4h-foo = readFile ./z4h-foo;
+
+  options.programs.z8h.functions = opts;
+  config.programs.zsh.siteFunctions = cfgs;
 }

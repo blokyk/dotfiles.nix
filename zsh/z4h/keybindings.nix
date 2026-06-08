@@ -1,10 +1,12 @@
 { config, lib, ... }:
 let
   cfg = config.programs.z8h;
+
+  fn = import ./fn/list.nix;
 in {
   options = {
     programs.z8h.keybindings = {
-
+      
     };
   };
 
