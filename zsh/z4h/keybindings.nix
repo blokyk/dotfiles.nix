@@ -1,10 +1,10 @@
 { config, lib, ... }:
 let
-  cfg = config.programs.z3h;
+  cfg = config.programs.z8h;
 in {
   options = {
-    programs.z3h.keybindings = {
-      
+    programs.z8h.keybindings = {
+
     };
   };
 

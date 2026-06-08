@@ -1,6 +1,6 @@
 { config, lib, ... }:
 let
-  cfg = config.programs.z3h;
+  cfg = config.programs.z8h;
 in {
   imports = [
     ./keybindings.nix
@@ -8,8 +8,8 @@ in {
   ];
 
   options = {
-    programs.z3h = {
-      enable = lib.mkEnableOption "z3h, a z4h re-implementation";
+    programs.z8h = {
+      enable = lib.mkEnableOption "z8h, a z4h re-implementation";
     };
   };
 
