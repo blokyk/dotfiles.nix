@@ -82,6 +82,12 @@ let
       flags = [ "--almost-all" ];
     };
 
+    # just a bare alias to npins, so that you can use `lix pin`
+    lix-pin = {
+      pkg = pkgs.npins;
+      flags = [];
+    };
+
     ll = {
       pkg = pkgs.coreutils;
       baseCmd = "ls";

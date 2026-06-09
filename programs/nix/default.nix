@@ -15,6 +15,7 @@ in {
       experimental-features = [
         "flakes"
         "nix-command"
+        "lix-custom-sub-commands"
       ];
 
       repl-overlays = [
