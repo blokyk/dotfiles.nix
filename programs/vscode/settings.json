@@ -302,6 +302,7 @@
         "ADHD",
         "alice",
         "Arity",
+        "asciinema",
         "astlib",
         "attaqueurs",
         "attrset",
@@ -437,6 +438,7 @@
         "REUSEPORT",
         "Rgba",
         "RISC",
+        "riscv",
         "RISCV",
         "Rjindael",
         "robbyrussell",
@@ -489,7 +491,8 @@
         "xkcd",
         "zoë",
         "Zoë",
-        "zoeee"
+        "zoeee",
+        "zstyle"
     ],
 
     // ai/agent/chat stuff
