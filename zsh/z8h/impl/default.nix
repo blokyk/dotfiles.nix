@@ -1,24 +1,16 @@
 { config, lib, ... }:
 let
-  cfg = config.programs.zsh.z8h;
+  cfg = config.programs.z8h;
 in {
   imports = [
+    ./autosuggestions.nix
     ./keybindings.nix
+    ./base
   ];
 
   options = {
-    programs.zsh.z8h = {
+    programs.z8h = {
       enable = lib.mkEnableOption "z8h, a z4h re-implementation";
-    };
-  };
-
-  config = {
-    programs.zsh = lib.mkIf cfg.enable {
-      initBlocks.zstyle = ''
-        zstyle ':completion:*' special-dirs false
-      '';
-
-      autosuggestion.enable = true;
     };
   };
 }

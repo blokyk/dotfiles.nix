@@ -1,7 +1,7 @@
 { ... }: {
   imports = [ ./impl ];
 
-  programs.zsh.z8h = {
+  programs.z8h = {
     enable = true;
   };
 }
