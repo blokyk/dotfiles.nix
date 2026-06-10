@@ -88,6 +88,12 @@ let
       flags = [];
     };
 
+    # bare alias to get `lix tree`
+    lix-tree = {
+      pkg = pkgs.nix-tree;
+      flags = [];
+    };
+
     ll = {
       pkg = pkgs.coreutils;
       baseCmd = "ls";
