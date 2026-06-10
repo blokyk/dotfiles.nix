@@ -14,7 +14,11 @@ in {
 
   config = {
     programs.zsh = lib.mkIf cfg.enable {
+      initBlocks.zstyle = ''
+        zstyle ':completion:*' special-dirs false
+      '';
 
+      autosuggestion.enable = true;
     };
   };
 }
