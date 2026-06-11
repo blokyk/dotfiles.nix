@@ -6,8 +6,15 @@
       # that our scripts/aliases don't have to worry about choosing it
       nix-impl-cli = config.nix.package;
 
+      # we can't use lixPackageSets's nixpkgs-review because of https://zulip.lix.systems/#narrow/channel/11-Support/topic/infinite.20recursion.20in.20.22Advanced.20change.22.20with.20nixpkgs-25.2E11.3F
+      nixpkgs-review = prev.nixpkgs-review.override {
+        nix = prev.lix;
+      };
+      nixpkgs-reviewFull = prev.nixpkgs-reviewFull.override {
+        inherit (final) nixpkgs-review;
+      };
+
       inherit (final.lixPackageSets.latest)
-        # nixpkgs-review # fixme: lix bug :/ https://zulip.lix.systems/#narrow/channel/11-Support/topic/infinite.20recursion.20in.20.22Advanced.20change.22.20with.20nixpkgs-25.2E11.3F
         nix-direnv
         nix-eval-jobs
         nix-fast-build
@@ -25,7 +32,6 @@
             rev = "388f56120f655a9cf4512e697b2c2afa06fe7434";
             sha256 = "sha256-3N+PVFpsnBtQ11Vk9OKm1q9dE0d5fxGsEDyfwoxpYaE=";
           }) {};
-
         in
           lib.pipe base-nom [
             pkgs.haskellPackages.buildFromCabalSdist
