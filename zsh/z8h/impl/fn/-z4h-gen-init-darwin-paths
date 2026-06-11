@@ -1,4 +1,3 @@
-#!/usr/bin/env zsh
 
 local -a deps=(
   '/usr/libexec/path_helper'
@@ -16,7 +15,7 @@ script="$(PATH= MANPATH= $deps[1] -s)" || return
 
 (
   eval "$script" || return
-  >$Z4H/cache/init-darwin-paths.tmp.$$ print -r -- '() {
+  >${Z4H_CACHE:-$Z4H/cache}/init-darwin-paths.tmp.$$ print -r -- '() {
   local deps=('${(@q)deps}')
   local -a stat files=($~deps)
   [[ ${(j: :)${(@q)files}} == '${(q)${(j: :)${(@q)files}}}' ]] &&
@@ -28,5 +27,5 @@ script="$(PATH= MANPATH= $deps[1] -s)" || return
     manpath=(${manpath_dirs:|manpath} $manpath)
   }
 }' || return
-  zf_mv -f -- $Z4H/cache/init-darwin-paths.tmp.$$ $Z4H/cache/init-darwin-paths
+  zf_mv -f -- ${Z4H_CACHE:-$Z4H/cache}/init-darwin-paths.tmp.$$ ${Z4H_CACHE:-$Z4H/cache}/init-darwin-paths
 )

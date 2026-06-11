@@ -1,5 +1,3 @@
-#!/usr/bin/env zsh
-#
 # The original __vte_osc7 looks like this:
 #
 #   __vte_osc7 () {

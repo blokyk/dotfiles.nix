@@ -1,4 +1,3 @@
-#!/usr/bin/env zsh
 
 zstyle -T :z4h: check-orphan-rc-zwc || return 0
 

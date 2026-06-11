@@ -1,5 +1,3 @@
-#!/usr/bin/env zsh
-
 if (( ${+_z4h_dir_hist_fd} )); then
   zle -F "$_z4h_dir_hist_fd"
   exec {_z4h_dir_hist_fd}>&-

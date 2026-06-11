@@ -1,4 +1,3 @@
-#!/usr/bin/env zsh
 
 [[ -v _z4h_tty_fd ]] || return
 

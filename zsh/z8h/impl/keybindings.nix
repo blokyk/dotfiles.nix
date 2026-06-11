@@ -142,8 +142,10 @@ in {
       multiKeybindings = true;
       optPath = [ "programs" "z8h" "keybindings" ];
       prefixPath = [ "programs" "zsh" "initBlocks" "keybindings" ];
-      setter = action: keybinds: lib.hm.dag.entryAfter [ "z4h-prelude" "register-zle-widgets" ] (
-        lib.concatMapStringsSep "\n" (keybind: "bindkey '${keybind}' ${action}") keybinds
+      setter = action: keybinds: lib.mkIf cfg.enable (
+        lib.hm.dag.entryAfter [ "z4h-prelude" "register-zle-widgets" ] (
+          lib.concatMapStringsSep "\n" (keybind: "bindkey '${keybind}' ${action}") keybinds
+        )
       );
       keyMapper = key: baseKeyMap.${key} or key;
     })
@@ -162,7 +164,7 @@ in {
     # }) cfg.keybindings;
 
     # reset the keymap completely
-    programs.zsh.initBlocks = {
+    programs.zsh.initBlocks = lib.mkIf cfg.enable {
       reset-bindkey = lib.hm.dag.entryBetween [ "keybindings" ] [ "z4h-prelude" ] ''
         bindkey -d
         bindkey -e

@@ -1,12 +1,16 @@
-{ lib, ... }: {
-  config.programs.zsh = {
-    # fixme: create bugfix in home-manager to add `--` before function names
-    # siteFunctions = import ./list.nix;
+{ config, lib, pkgs, ... }:
+let
+  cfg = config.programs.z8h;
+  fn-list = import ./list.nix { inherit config pkgs; };
+in {
+  programs.zsh = lib.mkIf cfg.enable {
+    # fixme: change this when home-manager#9462
+    # siteFunctions = fn-list;
 
     initBlocks = {
       load-z4h-functions = lib.hm.dag.entryAfter [ "z4h-prelude" ] ''
         fpath+=(${./.})
-        autoload -Uz -- ${lib.concatStringsSep " " (lib.attrNames (import ./list.nix))}
+        autoload -Uz -- ${lib.concatStringsSep " " (lib.attrNames fn-list)}
       '';
 
       register-zle-widgets = lib.hm.dag.entryAfter [ "z4h-prelude" ] ''

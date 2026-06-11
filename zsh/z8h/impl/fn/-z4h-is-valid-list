@@ -1,4 +1,3 @@
-#!/usr/bin/env zsh
 #
 # Succeeds if $1 is a well-formed command.
 

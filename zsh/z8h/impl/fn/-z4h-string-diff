@@ -1,5 +1,3 @@
-#!/usr/bin/env zsh
-#
 # Finds the difference between two strings using Levenshtein distance.
 # Sets array reply to an even number of elements. The concatenation of odd
 # elements (one-based) is equal to the first string; even elements -- second

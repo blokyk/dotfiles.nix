@@ -1,4 +1,3 @@
-#!/usr/bin/env zsh
 
 local home=~
 local zdotdir=${${${(q)ZDOTDIR}/#${(q)home}/'~'}//\%/%%}

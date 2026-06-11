@@ -1,11 +1,10 @@
-#!/usr/bin/env zsh
 
 eval "$_z4h_opt"
 
 local widget=${WIDGET#z4h-}
 
 local -a cmd flags bindings
-zstyle -a :z4h:$widget fzf-command cmd       || cmd=($Z4H/fzf/bin/fzf)
+cmd="@FZF_BIN@"
 zstyle -a :z4h:$widget fzf-flags flags       || flags=()
 zstyle -a :z4h:$widget fzf-bindings bindings || bindings=()
 

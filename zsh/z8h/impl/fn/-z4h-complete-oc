@@ -1,4 +1,3 @@
-#!/usr/bin/env zsh
 
 local oc="${commands[oc]-}"
 local orig_cmd="${_comps[oc]-}"

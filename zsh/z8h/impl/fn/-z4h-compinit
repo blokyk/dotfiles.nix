@@ -1,4 +1,3 @@
-#!/usr/bin/env zsh
 
 eval "$_z4h_opt"
 
@@ -35,7 +34,7 @@ fi
 
 local dump
 zstyle -s ':z4h:compinit' dump-path dump
-: ${dump:=$Z4H/cache/zcompdump-$EUID-$ZSH_VERSION}
+: ${dump:=${Z4H_CACHE:-$Z4H/cache}/zcompdump-$EUID-$ZSH_VERSION}
 
 local -a stat files=(${^fpath}/^([^_]*|*~|*.zwc)(-.N))
 (( ! $#files )) || zstat -A stat +mtime -- $files
@@ -50,7 +49,7 @@ if [[ -r $dump ]] &&
     (( stat[2] == stat[1] + 1 )); then
   -z4h-compinit-impl -C -d $dump
 else
-  local tmp=$Z4H/tmp/zcompdump.$sysparams[pid]
+  local tmp={Z4H_TMP:-$Z4H/tmp}/zcompdump.$sysparams[pid]
   zf_rm -f -- $dump $dump.zwc $tmp $tmp.2
   -z4h-compinit-impl -C -d $tmp
   { print -rn -- $real_sig; <$tmp } >$tmp.2

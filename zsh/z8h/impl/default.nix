@@ -5,6 +5,7 @@ in {
   imports = [
     ./autosuggestions.nix
     ./keybindings.nix
+    ./terminal.nix
     ./base
   ];
 
@@ -15,22 +16,30 @@ in {
   };
 
   config = {
-    programs.zsh.envExtra = lib.mkIf cfg.enable ''
-      typeset -gr _z4h_opt='emulate -L zsh &&
-        setopt typeset_silent pipe_fail extended_glob prompt_percent no_prompt_subst &&
-        setopt no_prompt_bang no_bg_nice no_aliases'
-    '';
+    programs.zsh.hooks = lib.mkIf cfg.enable {
+      preexec = "-z4h-set-term-title-preexec";
+      precmd = "-z4h-set-term-title-precmd";
+    };
 
     # push z4h stuff lower down in the zshrc
     programs.zsh.initBlocksPriority = lib.mkIf cfg.enable 2000;
 
     programs.zsh.initBlocks = lib.mkIf cfg.enable {
+      z4h-prelude = ''
+        typeset -gr _z4h_opt='emulate -L zsh &&
+          setopt typeset_silent pipe_fail extended_glob prompt_percent no_prompt_subst &&
+          setopt no_prompt_bang no_bg_nice no_aliases'
+      '';
+
       zle-prelude = lib.hm.dag.entryAfter [ "z4h-prelude" ] ''
-        PROMPT_EOL_MARK='%K{red} %k'    # mark the missing \n at the end of a comand output with a red block
+        PROMPT_EOL_MARK='%K{red} %k'    # mark the missing \n at the end of a command output with a red block
         WORDCHARS='''                   # only alphanums make up words in word-based zle widgets
         ZLE_REMOVE_SUFFIX_CHARS='''     # don't eat space when typing '|' after a tab completion
         KEYTIMEOUT=20                   # wait for 200ms for the continuation of a key sequence
         zle_highlight=('paste:none')    # disable highlighting of text pasted into the command line
+      '';
+
+      z4h-init = lib.hm.dag.entryAfter [ "z4h-prelude" ] ''
       '';
     };
   };

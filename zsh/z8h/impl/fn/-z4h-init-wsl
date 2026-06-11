@@ -1,4 +1,3 @@
-#!/usr/bin/env zsh
 
 local cmd=${commands[cmd.exe]:-/mnt/c/Windows/System32/cmd.exe}
 [[ -x $cmd ]] || return

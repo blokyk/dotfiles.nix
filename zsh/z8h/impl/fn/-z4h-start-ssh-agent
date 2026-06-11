@@ -1,5 +1,3 @@
-#!/usr/bin/env zsh
-
 [[ -v commands[ssh-agent] ]] || return 0
 
 function -z4h-ssh-agent-running() {

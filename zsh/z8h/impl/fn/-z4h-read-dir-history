@@ -1,4 +1,3 @@
-#!/usr/bin/env zsh
 
 local content
 local file=$Z4H/stickycache/dir-history-$EUID

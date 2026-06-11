@@ -1,4 +1,3 @@
-#!/usr/bin/env zsh
 
 (( $+commands[rustup] && $+commands[rustc] )) || {
   unset '_comps[cargo]'

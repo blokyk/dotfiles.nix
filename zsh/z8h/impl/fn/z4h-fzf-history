@@ -1,4 +1,3 @@
-#!/usr/bin/env zsh
 
 # fzf-history-widget with duplicate removal, preview and syntax highlighting (requires `bat`).
 #

@@ -1,4 +1,3 @@
-#!/usr/bin/env zsh
 
 local hook=${widgets[zle-line-pre-redraw]-}
 if [[ $hook == user:* ]]; then
