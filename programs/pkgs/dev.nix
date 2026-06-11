@@ -25,7 +25,7 @@
     # official nix formatter
     nixfmt
     # dev tool for nixpkgs PR
-    nixpkgs-review
+    nixpkgs-reviewFull
     # graphics debugger
     renderdoc
     # quick code line counter
