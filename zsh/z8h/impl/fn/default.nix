@@ -4,15 +4,9 @@ let
   fn-list = import ./list.nix { inherit config pkgs; };
 in {
   programs.zsh = lib.mkIf cfg.enable {
-    # fixme: change this when home-manager#9462
-    # siteFunctions = fn-list;
+    siteFunctions = fn-list;
 
     initBlocks = {
-      load-z4h-functions = lib.hm.dag.entryAfter [ "z4h-prelude" ] ''
-        fpath+=(${./.})
-        autoload -Uz -- ${lib.concatStringsSep " " (lib.attrNames fn-list)}
-      '';
-
       register-zle-widgets = lib.hm.dag.entryAfter [ "z4h-prelude" ] ''
         functions -M -- _z4h_cursor_max 0 0
 

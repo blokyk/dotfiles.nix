@@ -89,7 +89,8 @@
     z4h-expand = [ "<Ctrl>" "Space" ];
 
     # Generic command completion.
-    z4h-fzf-complete = [ "Tab" ];
+    # fixme: right now, this doesn't work, preventing completions
+    # z4h-fzf-complete = [ "Tab" ];
 
     # Show help for the command at cursor.
     run-help = (lib.mkMerge [
@@ -130,13 +131,14 @@
     #   bindkey '^[^L'    z4h-clear-screen-hard-top      # ctrl+alt+l
     # fi
 
+    # fixme: fzf-related stuff is broken
     # Command history.
-    z4h-fzf-history =  [ "<Ctrl>" "R" ];
+    # z4h-fzf-history =  [ "<Ctrl>" "R" ];
     # Directory history.
-    z4h-fzf-dir-history = (lib.mkMerge [
-      [ "<Alt>" "r" ]
-      [ "<Alt>" "R" ]
-    ]);
+    # z4h-fzf-dir-history = (lib.mkMerge [
+    #   [ "<Alt>" "r" ]
+    #   [ "<Alt>" "R" ]
+    # ]);
 
     # Move cursor one line up or fetch the previous command from GLOBAL history.
     z4h-up-prefix-global = [ "<Control>" "Up" ];

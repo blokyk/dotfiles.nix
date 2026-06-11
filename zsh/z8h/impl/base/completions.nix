@@ -2,6 +2,11 @@
 let
   cfg = config.programs.z8h;
 in {
+  programs.zsh.completionInit = lib.mkIf cfg.enable ''
+    autoload -U compinit && compinit
+    autoload -Uz bashcompinit && bashcompinit
+  '';
+
   # todo: create a zstyle option instead
   programs.zsh.initBlocks = lib.mkIf cfg.enable {
     completion-styles = lib.hm.dag.entryAfter [ "z4h-prelude" ] ''

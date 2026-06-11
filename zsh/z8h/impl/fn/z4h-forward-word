@@ -1,4 +1,3 @@
-
 emulate -L zsh -o extended_glob
 local buf w=${WORDCHARS//[[:space:][:alnum:]]}
 repeat ${NUMERIC:-1}; do

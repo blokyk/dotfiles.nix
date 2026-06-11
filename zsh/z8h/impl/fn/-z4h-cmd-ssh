@@ -185,7 +185,7 @@ if (( must_passthrough || !z4h_ssh_enable )); then
 fi
 
 if (( $#z4h_retrieve_history )); then
-  local local_hist_tmp={Z4H_TMP:-$Z4H/tmp}/ssh-history.tmp.$sysparams[pid]
+  local local_hist_tmp=${TMPDIR:-${TMP:-/tmp}}/z4h/ssh-history.tmp.$sysparams[pid]
   z4h_ssh_retrieve_files[\$HISTFILE]=$local_hist_tmp
   zf_rm -f -- $local_hist_tmp || return
 else
@@ -244,9 +244,9 @@ fi
 
 local tmpdir
 if (( $+commands[mktemp] )); then
-  tmpdir=$(command mktemp -d -- {Z4H_TMP:-$Z4H/tmp}/ssh.XXXXXXXXXX) || return
+  tmpdir=$(command mktemp -d -- ${TMPDIR:-${TMP:-/tmp}}/z4h/ssh.XXXXXXXXXX) || return
 else
-  tmpdir={Z4H_TMP:-$Z4H/tmp}/ssh.tmp.$sysparams[pid]
+  tmpdir=${TMPDIR:-${TMP:-/tmp}}/z4h/ssh.tmp.$sysparams[pid]
   zf_rm -rf -- $tmpdir || return
   zf_mkdir -- $tmpdir || return
 fi
@@ -367,9 +367,9 @@ local -i pid=$sysparams[pid]
    return $pipestatus[1]
 } 3>&1 | {
   if (( $+commands[mktemp] )); then
-    tmpdir=$(command mktemp -d -- {Z4H_TMP:-$Z4H/tmp}/ssh.XXXXXXXXXX) || return
+    tmpdir=$(command mktemp -d -- ${TMPDIR:-${TMP:-/tmp}}/z4h/ssh.XXXXXXXXXX) || return
   else
-    tmpdir={Z4H_TMP:-$Z4H/tmp}/ssh.tmp.$sysparams[pid]
+    tmpdir=${TMPDIR:-${TMP:-/tmp}}/z4h/ssh.tmp.$sysparams[pid]
     zf_rm -rf -- $tmpdir || return
     zf_mkdir -- $tmpdir || return
   fi

@@ -7,6 +7,9 @@
     enable = true;
     dotDir = config.xdg.configHome + "/zsh";
 
+    # fixme: completion strategy doesn't work :(
+    # autosuggestion.strategy = [ "history" "completion" ];
+
     enableVteIntegration = true;
 
     hooks = {

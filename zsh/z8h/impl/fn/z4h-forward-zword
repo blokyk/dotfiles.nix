@@ -1,4 +1,3 @@
-
 eval "$_z4h_opt"
 local word buf
 repeat ${NUMERIC:-1}; do

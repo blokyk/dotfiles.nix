@@ -35,9 +35,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "447fd9ff62501dae7206dfe180ee89f8de27b7d5",
-      "url": "https://github.com/nix-community/home-manager/archive/447fd9ff62501dae7206dfe180ee89f8de27b7d5.tar.gz",
-      "hash": "sha256-CHo7k65YTL3HY+WQVedDTupji+LMgNlKCdrtRHZFAK4="
+      "revision": "486595d2cf49cfcd649b58a284fa11ac0e34da22",
+      "url": "https://github.com/nix-community/home-manager/archive/486595d2cf49cfcd649b58a284fa11ac0e34da22.tar.gz",
+      "hash": "sha256-5inaamLgUMWy+MOBE9ChF9QAF1o/74LFuHkI0W/9rqc="
     },
     "hotline-suwayomi": {
       "type": "Git",

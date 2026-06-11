@@ -8,7 +8,7 @@ function -z4h-ssh-agent-running() {
   -z4h-ssh-agent-running && return
   unset SSH_AGENT_PID SSH_AUTH_SOCK
 
-  local env_file=$Z4H/stickycache/ssh-agent-$EUID
+  local env_file=$XDG_DATA_HOME/z4h/stickycache/ssh-agent-$EUID
   [[ -r $env_file ]] && builtin source $env_file >/dev/null && -z4h-ssh-agent-running && return
 
   local tmp=$env_file.tmp.$$

@@ -1,75 +1,81 @@
-# fixme: replace zstyle checks with config options
-
-{ config, lib, ... }:
+{ config, lib, options, pkgs, ... }:
 let
-  cfg = config.programs.zsh.autosuggestion;
+  cfg = config.programs.z8h;
+  oldcfg = config.programs.zsh.zsh4humans.settings;
 in {
-  options = {
-    programs.zsh.autosuggestion = {
+  imports = [ ./autosuggestions-impl.nix ];
 
-    };
+  programs.zsh.autosuggestion = lib.mkIf cfg.enable {
+    enable = true;
+    manual-rebind = true;
+    widgets = lib.mkMerge [
+      {
+        accept = [
+          "z4h-end-of-buffer"
+        ];
+
+        clear = options.programs.zsh.autosuggestion.widgets.clear.default ++ [
+          "z4h-fzf-history"
+          "z4h-down-prefix-global"
+          "z4h-down-prefix-local"
+          "z4h-up-prefix-global"
+          "z4h-up-prefix-local"
+          # todo: zsh-history-substring-search
+          # if (( _z4h_use[zsh-history-substring-search] )); then
+          #   ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(
+          #     z4h-down-substring-global
+          #     z4h-down-substring-local
+          #     z4h-up-substring-global
+          #     z4h-up-substring-local
+          #   )
+          # fi
+        ];
+
+        ignore = [
+          # fixme: this breaks zsh-autosuggest because seemingly every widget is ignored
+          # local suggest_special=(
+          #   $ZSH_AUTOSUGGEST_EXECUTE_WIDGETS
+          #   $ZSH_AUTOSUGGEST_CLEAR_WIDGETS
+          #   $ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS
+          #   $ZSH_AUTOSUGGEST_ACCEPT_WIDGETS)
+          # typeset -g ZSH_AUTOSUGGEST_IGNORE_WIDGETS=(''${''${(k)widgets}:|suggest_special})
+        ];
+
+        # cf comment on accept
+        partial-accept = options.programs.zsh.autosuggestion.widgets.partial-accept.default ++ [
+          "z4h-forward-word"
+          "z4h-forward-zword"
+        ];
+      }
+      {
+        ${oldcfg.autosuggestions.forward-char} = [
+          "forward-char" "vi-forward-char"
+        ];
+      }
+      {
+        ${oldcfg.autosuggestions.end-of-line} = [
+          "end-of-line" "vi-add-eol" "vi-end-of-line"
+        ];
+      }
+    ];
   };
 
-  config = {
-    programs.zsh.autosuggestion.enable = config.programs.z8h.enable;
+  programs.zsh.initBlocks = lib.mkIf cfg.enable {
+    # this is necessary because the z4h functions get autoloaded *after*
+    # zsh-autosuggestion is sourced, which breaks its widget detection somehow
+    #
+    # (also there's random z4h stuff i don't understand)
+    reload-autosuggestion = lib.hm.dag.entryAfter [ "z4h-prelude" ] ''
+      precmd_functions=(''${precmd_functions:#_zsh_autosuggest_start})
 
-    programs.zsh.initBlocks = lib.mkIf cfg.enable {
-      configure-autosuggestion-widgets = lib.hm.dag.entryAfter [ "z4h-prelude" "autosuggestion" ] ''
-        typeset -g ZSH_AUTOSUGGEST_EXECUTE_WIDGETS=()
-        typeset -g ZSH_AUTOSUGGEST_CLEAR_WIDGETS=(
-          z4h-fzf-history
-          z4h-down-prefix-global
-          z4h-down-prefix-local
-          z4h-up-prefix-global
-          z4h-up-prefix-local
-        )
-        if (( _z4h_use[zsh-history-substring-search] )); then
-          ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(
-            z4h-down-substring-global
-            z4h-down-substring-local
-            z4h-up-substring-global
-            z4h-up-substring-local
-          )
-        fi
-        typeset -g ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS=(
-          emacs-forward-word
-          forward-word
-          vi-find-next-char
-          vi-find-next-char-skip
-          vi-forward-blank-word
-          vi-forward-blank-word-end
-          vi-forward-word
-          vi-forward-word-end
-          z4h-forward-word
-          z4h-forward-zword
-        )
-        typeset -g ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(
-          z4h-end-of-buffer
-        )
+      # fixme: programs.zsh.autosuggestion.package doesn't exist :(
+      source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-        if zstyle -T :z4h:autosuggestions forward-char accept; then
-          ZSH_AUTOSUGGEST_ACCEPT_WIDGETS+=(forward-char vi-forward-char)
-        else
-          ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=(forward-char vi-forward-char)
-        fi
+      # fixme: idk why this would try to disable async?
+      # unset ZSH_AUTOSUGGEST_USE_ASYNC
 
-        if zstyle -T :z4h:autosuggestions end-of-line accept; then
-          ZSH_AUTOSUGGEST_ACCEPT_WIDGETS+=(end-of-line vi-add-eol vi-end-of-line)
-        else
-          ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=(end-of-line vi-add-eol vi-end-of-line)
-        fi
-
-        precmd_functions=(''${precmd_functions:#_zsh_autosuggest_start})
-
-        local suggest_special=(
-          $ZSH_AUTOSUGGEST_EXECUTE_WIDGETS
-          $ZSH_AUTOSUGGEST_CLEAR_WIDGETS
-          $ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS
-          $ZSH_AUTOSUGGEST_ACCEPT_WIDGETS)
-        typeset -g ZSH_AUTOSUGGEST_IGNORE_WIDGETS=(''${''${(k)widgets}:|suggest_special})
-        unset ZSH_AUTOSUGGEST_USE_ASYNC
-        _zsh_autosuggest_start
-      '';
-    };
+      # rebind things
+      _zsh_autosuggest_start
+    '';
   };
 }

@@ -85,9 +85,9 @@ local success
   fi
 
   if (( $+commands[mktemp] )); then
-    success="$(command mktemp -- {Z4H_TMP:-$Z4H/tmp}/install-many.XXXXXXXXXX)" || return
+    success="$(command mktemp -- ${TMPDIR:-${TMP:-/tmp}}/z4h/install-many.XXXXXXXXXX)" || return
   else
-    success={Z4H_TMP:-$Z4H/tmp}/install-many.$$
+    success=${TMPDIR:-${TMP:-/tmp}}/z4h/install-many.$$
     zf_rm -rf -- $success   || return
     print -n >$success      || return
   fi

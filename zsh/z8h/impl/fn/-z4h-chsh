@@ -78,10 +78,10 @@ print -Pr -- ""
       }
       if [[ $choice == (n|N) ]]; then
         print
-        print -rn >$Z4H/stickycache/no-chsh || return '_z4h_err()'
+        print -rn >$XDG_DATA_HOME/z4h/stickycache/no-chsh || return '_z4h_err()'
         local home=~
         local zdotdir=${${${(q)ZDOTDIR}/#${(q)home}/'~'}//\%/%%}
-        print -Pr -- "Won't ask again unless %U\$Z4H/stickycache/no-chsh%u is deleted."
+        print -Pr -- "Won't ask again unless %U\$XDG_DATA_HOME/z4h/stickycache/no-chsh%u is deleted."
         return 1
       fi
       [[ $choice == $'\n' ]] && continue
