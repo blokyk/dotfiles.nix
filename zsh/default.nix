@@ -1,8 +1,7 @@
 { config, lib, ... }: {
-  imports = [
-    (lib.modules.importApply ../misc/importNixFilesAndDirs.nix ./.)
-    ./z8h
-  ];
+  imports = [(
+    lib.modules.importApply ../misc/importNixFilesAndDirs.nix ./.
+  )];
 
   programs.zsh = {
     enable = true;

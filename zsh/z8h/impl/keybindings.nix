@@ -4,8 +4,8 @@ let
   cfg = config.programs.z8h;
 
   baseKeyMap = {
-    "<Control>"   = "^";
-    "<Alt>"       = "^[";
+    "<Ctrl>"  = "^";
+    "<Alt>"   = "^[";
     Tab       = "^I";
     Space     = " ";
     Enter     = "^M";
@@ -23,110 +23,150 @@ let
     Backspace = "^?";
   };
 
-  # there's a few non unique translations:
-  #   - ^_
-  #     - Ctrl+/
-  #     - Ctrl+_
-  #   - ^?
-  #     - Backspace
-  #     - Shift+Backspace
-  #     - Ctrl+Shift+Backspace
-  #     - Ctrl+Alt+Shift+Backspace
-  #   - ^[^H
-  #     - Alt+Shift+Backspace
-  #     - Ctrl+Alt+Backspace
-  combinationReverseMap = {
-    "^[[Z" = [ "<Shift>" "Tab" ];
-    "^[[1;2A" = [ "<Shift>" "Up" ];
-    "^[[1;2B" = [ "<Shift>" "Down" ];
-    "^[[1;2C" = [ "<Shift>" "Right" ];
-    "^[[1;2D" = [ "<Shift>" "Left" ];
-    "^[[1;2H" = [ "<Shift>" "Home" ];
-    "^[[1;2F" = [ "<Shift>" "End" ];
-    "^[[2;2~" = [ "<Shift>" "Insert" ];
-    "^[[3;2~" = [ "<Shift>" "Delete" ];
-    "^[[5;2~" = [ "<Shift>" "PageUp" ];
-    "^[[6;2~" = [ "<Shift>" "PageDown" ];
+  combinationReverseMap = [
+    { mapTo = [ "^_" ];      from = [ "/" "<Ctrl>" ]; } # inverted because '/' sorts before '<'
+    { mapTo = [ "^_" ];      from = [ "<Ctrl>" "_" ]; }
 
-    "^[[1;3A" = [ "<Alt>" "Up" ];
-    "^[[1;3B" = [ "<Alt>" "Down" ];
-    "^[[1;3C" = [ "<Alt>" "Right" ];
-    "^[[1;3D" = [ "<Alt>" "Left" ];
-    "^[[1;3H" = [ "<Alt>" "Home" ];
-    "^[[1;3F" = [ "<Alt>" "End" ];
-    "^[[2;3~" = [ "<Alt>" "Insert" ];
-    "^[[3;3~" = [ "<Alt>" "Delete" ];
-    "^[[5;3~" = [ "<Alt>" "PageUp" ];
-    "^[[6;3~" = [ "<Alt>" "PageDown" ];
+    { mapTo = [ "^[[Z" ];    from = [ "<Shift>" "Tab" ]; }
+    { mapTo = [ "^[[1;2A" ]; from = [ "<Shift>" "Up" ]; }
+    { mapTo = [ "^[[1;2B" ]; from = [ "<Shift>" "Down" ]; }
+    { mapTo = [ "^[[1;2C" ]; from = [ "<Shift>" "Right" ]; }
+    { mapTo = [ "^[[1;2D" ]; from = [ "<Shift>" "Left" ]; }
+    { mapTo = [ "^[[1;2H" ]; from = [ "<Shift>" "Home" ]; }
+    { mapTo = [ "^[[1;2F" ]; from = [ "<Shift>" "End" ]; }
+    { mapTo = [ "^[[2;2~" ]; from = [ "<Shift>" "Insert" ]; }
+    { mapTo = [ "^[[3;2~" ]; from = [ "<Shift>" "Delete" ]; }
+    { mapTo = [ "^[[5;2~" ]; from = [ "<Shift>" "PageUp" ]; }
+    { mapTo = [ "^[[6;2~" ]; from = [ "<Shift>" "PageDown" ]; }
+    { mapTo = [ "^?" ];      from = [ "<Shift>" "Backspace" ]; }
 
-    "^[[1;4A" = [ "<Alt>" "<Shift>" "Up" ];
-    "^[[1;4B" = [ "<Alt>" "<Shift>" "Down" ];
-    "^[[1;4C" = [ "<Alt>" "<Shift>" "Right" ];
-    "^[[1;4D" = [ "<Alt>" "<Shift>" "Left" ];
-    "^[[1;4H" = [ "<Alt>" "<Shift>" "Home" ];
-    "^[[1;4F" = [ "<Alt>" "<Shift>" "End" ];
-    "^[[2;4~" = [ "<Alt>" "<Shift>" "Insert" ];
-    "^[[3;4~" = [ "<Alt>" "<Shift>" "Delete" ];
-    "^[[5;4~" = [ "<Alt>" "<Shift>" "PageUp" ];
-    "^[[6;4~" = [ "<Alt>" "<Shift>" "PageDown" ];
+    { mapTo = [ "^[[1;3A" ]; from = [ "<Alt>" "Up" ]; }
+    { mapTo = [ "^[[1;3B" ]; from = [ "<Alt>" "Down" ]; }
+    { mapTo = [ "^[[1;3C" ]; from = [ "<Alt>" "Right" ]; }
+    { mapTo = [ "^[[1;3D" ]; from = [ "<Alt>" "Left" ]; }
+    { mapTo = [ "^[[1;3H" ]; from = [ "<Alt>" "Home" ]; }
+    { mapTo = [ "^[[1;3F" ]; from = [ "<Alt>" "End" ]; }
+    { mapTo = [ "^[[2;3~" ]; from = [ "<Alt>" "Insert" ]; }
+    { mapTo = [ "^[[3;3~" ]; from = [ "<Alt>" "Delete" ]; }
+    { mapTo = [ "^[[5;3~" ]; from = [ "<Alt>" "PageUp" ]; }
+    { mapTo = [ "^[[6;3~" ]; from = [ "<Alt>" "PageDown" ]; }
 
-    "^[[1;5A" = [ "<Ctrl>" "Up" ];
-    "^[[1;5B" = [ "<Ctrl>" "Down" ];
-    "^[[1;5C" = [ "<Ctrl>" "Right" ];
-    "^[[1;5D" = [ "<Ctrl>" "Left" ];
-    "^[[1;5H" = [ "<Ctrl>" "Home" ];
-    "^[[1;5F" = [ "<Ctrl>" "End" ];
-    "^[[2;5~" = [ "<Ctrl>" "Insert" ];
-    "^[[3;5~" = [ "<Ctrl>" "Delete" ];
-    "^[[5;5~" = [ "<Ctrl>" "PageUp" ];
-    "^[[6;5~" = [ "<Ctrl>" "PageDown" ];
-    "^H"      = [ "<Ctrl>" "Backspace" ];
+    { mapTo = [ "^[[1;4A" ]; from = [ "<Alt>" "<Shift>" "Up" ]; }
+    { mapTo = [ "^[[1;4B" ]; from = [ "<Alt>" "<Shift>" "Down" ]; }
+    { mapTo = [ "^[[1;4C" ]; from = [ "<Alt>" "<Shift>" "Right" ]; }
+    { mapTo = [ "^[[1;4D" ]; from = [ "<Alt>" "<Shift>" "Left" ]; }
+    { mapTo = [ "^[[1;4H" ]; from = [ "<Alt>" "<Shift>" "Home" ]; }
+    { mapTo = [ "^[[1;4F" ]; from = [ "<Alt>" "<Shift>" "End" ]; }
+    { mapTo = [ "^[[2;4~" ]; from = [ "<Alt>" "<Shift>" "Insert" ]; }
+    { mapTo = [ "^[[3;4~" ]; from = [ "<Alt>" "<Shift>" "Delete" ]; }
+    { mapTo = [ "^[[5;4~" ]; from = [ "<Alt>" "<Shift>" "PageUp" ]; }
+    { mapTo = [ "^[[6;4~" ]; from = [ "<Alt>" "<Shift>" "PageDown" ]; }
+    { mapTo = [ "^[^H" ];    from = [ "<Alt>" "<Shift>" "Backspace" ]; }
 
-    "^[[1;6A" = [ "<Ctrl>" "<Shift>" "Up" ];
-    "^[[1;6B" = [ "<Ctrl>" "<Shift>" "Down" ];
-    "^[[1;6C" = [ "<Ctrl>" "<Shift>" "Right" ];
-    "^[[1;6D" = [ "<Ctrl>" "<Shift>" "Left" ];
-    "^[[1;6H" = [ "<Ctrl>" "<Shift>" "Home" ];
-    "^[[1;6F" = [ "<Ctrl>" "<Shift>" "End" ];
-    "^[[2;6~" = [ "<Ctrl>" "<Shift>" "Insert" ];
-    "^[[3;6~" = [ "<Ctrl>" "<Shift>" "Delete" ];
-    "^[[5;6~" = [ "<Ctrl>" "<Shift>" "PageUp" ];
-    "^[[6;6~" = [ "<Ctrl>" "<Shift>" "PageDown" ];
+    { mapTo = [ "^[[1;5A" ]; from = [ "<Ctrl>" "Up" ]; }
+    { mapTo = [ "^[[1;5B" ]; from = [ "<Ctrl>" "Down" ]; }
+    { mapTo = [ "^[[1;5C" ]; from = [ "<Ctrl>" "Right" ]; }
+    { mapTo = [ "^[[1;5D" ]; from = [ "<Ctrl>" "Left" ]; }
+    { mapTo = [ "^[[1;5H" ]; from = [ "<Ctrl>" "Home" ]; }
+    { mapTo = [ "^[[1;5F" ]; from = [ "<Ctrl>" "End" ]; }
+    { mapTo = [ "^[[2;5~" ]; from = [ "<Ctrl>" "Insert" ]; }
+    { mapTo = [ "^[[3;5~" ]; from = [ "<Ctrl>" "Delete" ]; }
+    { mapTo = [ "^[[5;5~" ]; from = [ "<Ctrl>" "PageUp" ]; }
+    { mapTo = [ "^[[6;5~" ]; from = [ "<Ctrl>" "PageDown" ]; }
+    { mapTo = [ "^H"      ]; from = [ "<Ctrl>" "Backspace" ]; }
 
-    "^[[1;7A" = [ "<Ctrl>" "<Alt>" "Up" ];
-    "^[[1;7B" = [ "<Ctrl>" "<Alt>" "Down" ];
-    "^[[1;7C" = [ "<Ctrl>" "<Alt>" "Right" ];
-    "^[[1;7D" = [ "<Ctrl>" "<Alt>" "Left" ];
-    "^[[1;7H" = [ "<Ctrl>" "<Alt>" "Home" ];
-    "^[[1;7F" = [ "<Ctrl>" "<Alt>" "End" ];
-    "^[[2;7~" = [ "<Ctrl>" "<Alt>" "Insert" ];
-    "^[[3;7~" = [ "<Ctrl>" "<Alt>" "Delete" ];
-    "^[[5;7~" = [ "<Ctrl>" "<Alt>" "PageUp" ];
-    "^[[6;7~" = [ "<Ctrl>" "<Alt>" "PageDown" ];
-  };
+    { mapTo = [ "^[[1;6A" ]; from = [ "<Ctrl>" "<Shift>" "Up" ]; }
+    { mapTo = [ "^[[1;6B" ]; from = [ "<Ctrl>" "<Shift>" "Down" ]; }
+    { mapTo = [ "^[[1;6C" ]; from = [ "<Ctrl>" "<Shift>" "Right" ]; }
+    { mapTo = [ "^[[1;6D" ]; from = [ "<Ctrl>" "<Shift>" "Left" ]; }
+    { mapTo = [ "^[[1;6H" ]; from = [ "<Ctrl>" "<Shift>" "Home" ]; }
+    { mapTo = [ "^[[1;6F" ]; from = [ "<Ctrl>" "<Shift>" "End" ]; }
+    { mapTo = [ "^[[2;6~" ]; from = [ "<Ctrl>" "<Shift>" "Insert" ]; }
+    { mapTo = [ "^[[3;6~" ]; from = [ "<Ctrl>" "<Shift>" "Delete" ]; }
+    { mapTo = [ "^[[5;6~" ]; from = [ "<Ctrl>" "<Shift>" "PageUp" ]; }
+    { mapTo = [ "^[[6;6~" ]; from = [ "<Ctrl>" "<Shift>" "PageDown" ]; }
+    { mapTo = [ "^?" ];      from = [ "<Ctrl>" "<Shift>" "Backspace" ]; }
 
-  mapKeyCombinations = str: str; # fixme: fixmeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    { mapTo = [ "^[[1;7A" ]; from = [ "<Ctrl>" "<Alt>" "Up" ]; }
+    { mapTo = [ "^[[1;7B" ]; from = [ "<Ctrl>" "<Alt>" "Down" ]; }
+    { mapTo = [ "^[[1;7C" ]; from = [ "<Ctrl>" "<Alt>" "Right" ]; }
+    { mapTo = [ "^[[1;7D" ]; from = [ "<Ctrl>" "<Alt>" "Left" ]; }
+    { mapTo = [ "^[[1;7H" ]; from = [ "<Ctrl>" "<Alt>" "Home" ]; }
+    { mapTo = [ "^[[1;7F" ]; from = [ "<Ctrl>" "<Alt>" "End" ]; }
+    { mapTo = [ "^[[2;7~" ]; from = [ "<Ctrl>" "<Alt>" "Insert" ]; }
+    { mapTo = [ "^[[3;7~" ]; from = [ "<Ctrl>" "<Alt>" "Delete" ]; }
+    { mapTo = [ "^[[5;7~" ]; from = [ "<Ctrl>" "<Alt>" "PageUp" ]; }
+    { mapTo = [ "^[[6;7~" ]; from = [ "<Ctrl>" "<Alt>" "PageDown" ]; }
+    { mapTo = [ "^[^H" ];    from = [ "<Ctrl>" "<Alt>" "Backspace" ]; }
+
+    { mapTo = [ "^[[1;8A" ]; from = [ "<Alt>" "<Ctrl>" "<Shift>" "Up" ]; }
+    { mapTo = [ "^[[1;8B" ]; from = [ "<Alt>" "<Ctrl>" "<Shift>" "Down" ]; }
+    { mapTo = [ "^[[1;8C" ]; from = [ "<Alt>" "<Ctrl>" "<Shift>" "Right" ]; }
+    { mapTo = [ "^[[1;8D" ]; from = [ "<Alt>" "<Ctrl>" "<Shift>" "Left" ]; }
+    { mapTo = [ "^[[1;8H" ]; from = [ "<Alt>" "<Ctrl>" "<Shift>" "Home" ]; }
+    { mapTo = [ "^[[1;8F" ]; from = [ "<Alt>" "<Ctrl>" "<Shift>" "End" ]; }
+    { mapTo = [ "^[[2;8~" ]; from = [ "<Alt>" "<Ctrl>" "<Shift>" "Insert" ]; }
+    { mapTo = [ "^[[3;8~" ]; from = [ "<Alt>" "<Ctrl>" "<Shift>" "Delete" ]; }
+    { mapTo = [ "^[[5;8~" ]; from = [ "<Alt>" "<Ctrl>" "<Shift>" "PageUp" ]; }
+    { mapTo = [ "^[[6;8~" ]; from = [ "<Alt>" "<Ctrl>" "<Shift>" "PageDown" ]; }
+    { mapTo = [ "^?" ];      from = [ "<Alt>" "<Ctrl>" "<Shift>" "Backspace" ]; }
+  ];
+
+  normalizeKey = key: {
+    "<Primary>" = "<Ctrl>";
+    "<Control>" = "<Ctrl>";
+    "<Ctl>"     = "<Ctrl>";
+    "<Shft>"    = "<Shift>";
+    "space"     = "Space";
+  }.${key} or key;
+
+  sortKeys =
+    let
+      f = a: b: lib.elemAt (lib.attrNames { ${a} = null; ${b} = null; }) 0 == a;
+    in
+      lib.sort f;
+
+  mapKeyCombinations = _keys:
+    let
+      keys = sortKeys _keys;
+    in
+      (lib.findFirst
+        (mapping: mapping.from == keys)
+        { mapTo = keys; } # by default, just return the original keys
+        combinationReverseMap).mapTo;
 in {
   imports = [
     ./fn
 
     (lib.modules.importApply <zoeee/hm-modules/mk-keybindings> {
-      multiKeybindings = false;
+      multiKeybindings = true;
       optPath = [ "programs" "z8h" "keybindings" ];
       prefixPath = [ "programs" "zsh" "initBlocks" "keybindings" ];
-      setter = action: keybind: ''
-        bindkey ${mapKeyCombinations keybind} ${action}
-      '';
-      keyMapper = key: baseKeyMap.${key};
+      setter = action: keybinds: lib.hm.dag.entryAfter [ "z4h-prelude" "register-zle-widgets" ] (
+        lib.concatMapStringsSep "\n" (keybind: "bindkey '${keybind}' ${action}") keybinds
+      );
+      keyMapper = key: baseKeyMap.${key} or key;
     })
   ];
 
-  config = lib.mkMerge [
-    {
-      assertions = lib.mapAttrsToList (action: binding: {
-        assertion = config.programs.zsh.siteFunctions ? action;
-        message = "programs.z8h.keybindings: action '${action}' is not a known function from programs.zsh.siteFunctions";
-      }) cfg.keybindings;
-    }
-  ];
+  options = {
+    programs.z8h.keybindings = lib.mkOption {
+      apply = lib.mapAttrs (_: keys: map (keybind: mapKeyCombinations (map normalizeKey keybind)) keys);
+    };
+  };
+
+  config = {
+    # assertions = lib.mapAttrsToList (action: binding: {
+    #   assertion = config.programs.zsh.siteFunctions ? ${action};
+    #   message = "programs.z8h.keybindings: action '${action}' is not a known function from programs.zsh.siteFunctions";
+    # }) cfg.keybindings;
+
+    # reset the keymap completely
+    programs.zsh.initBlocks = {
+      reset-bindkey = lib.hm.dag.entryBetween [ "keybindings" ] [ "z4h-prelude" ] ''
+        bindkey -d
+        bindkey -e
+      '';
+    };
+  };
 }

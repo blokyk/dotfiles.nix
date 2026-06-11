@@ -12,7 +12,7 @@ in {
 
   config = {
     programs.zsh.initBlocks = lib.mkIf cfg.enable {
-      configure-autosuggestion-widgets = lib.hm.dag.entryAfter [ "autosuggestion" ] ''
+      configure-autosuggestion-widgets = lib.hm.dag.entryAfter [ "z4h-prelude" "autosuggestion" ] ''
         # typeset -g ZSH_AUTOSUGGEST_EXECUTE_WIDGETS=()
         # typeset -g ZSH_AUTOSUGGEST_CLEAR_WIDGETS=(
         #   z4h-fzf-history

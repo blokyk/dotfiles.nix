@@ -4,7 +4,7 @@ let
 in {
   # todo: create a zstyle option instead
   programs.zsh.initBlocks = lib.mkIf cfg.enable {
-    completion-styles = ''
+    completion-styles = lib.hm.dag.entryAfter [ "z4h-prelude" ] ''
       zstyle ':completion:*'               matcher-list      "m:{a-z}={A-Z}"
       zstyle ':completion:*'               menu              "false"
       zstyle ':completion:*'               verbose           "true"
@@ -38,7 +38,7 @@ in {
       zstyle ':completion:*:git-*:argument-rest:recent-branches' ignored-patterns '*'
     '';
 
-    bashcompinit = ''
+    bashcompinit = lib.hm.dag.entryAfter [ "completion-styles" ] ''
       # Make it possible to use completion specifications and functions written for bash.
       autoload -Uz bashcompinit
       bashcompinit

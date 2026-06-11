@@ -7,7 +7,7 @@ let
   files =
     filter
       # don't import files that start with '-' (nor default.nix (obviously))
-      (f: !hasPrefix "-" f && f != "default.nix")
+      (f: f != "default.nix" && f != "list.nix")
       (attrNames (readDir ./.));
 in
 genAttrs'
