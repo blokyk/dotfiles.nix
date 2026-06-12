@@ -1,10 +1,3 @@
-
-# fzf-history-widget with duplicate removal, preview and syntax highlighting (requires `bat`).
-#
-# Disable preview:
-#
-#   zstyle :z4h:fzf-history fzf-flags --no-preview
-
 eval "$_z4h_opt"
 
 [[ -v _z4h_tty_fd ]] || return
@@ -44,8 +37,6 @@ local preview='printf "%s" {} | command cut -f2- -d'$'\1'
     local _z4h_saved_screen
     -z4h-save-screen || return
   else
-    # A big chunk of this branch is dead code because _z4h_can_save_restore_screen is false.
-    # I'm keeping it for a while in case I decide to change this logic.
     local -i pct=80
     (( _z4h_can_save_restore_screen )) && pct=100
 
@@ -129,10 +120,6 @@ local preview='printf "%s" {} | command cut -f2- -d'$'\1'
     choice=$(
       unsetopt pipe_fail
       {
-        # This `noglob` is a workaround for a bug in zsh that can be
-        # triggered by certain corrupted history files.
-        #
-        # https://github.com/romkatv/zsh4humans/issues/313
         (( $#history )) && noglob printf '%s\000' "${history[@]}"
       } | {
         {

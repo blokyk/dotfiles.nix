@@ -118,8 +118,6 @@ local -i list_colors=$((!$?))
                 local dir
                 for dir in $_z4h_dir_history; do
                   {
-                    # There is a bug in zsh that triggers if these two
-                    # expansions are combined: ${(g:oce:)${~dir}}.
                     dir=${~dir}
                     if [[ -d ${dir::=${(g:oce:)dir}} && $dir != *$'\n'* ]]; then
                       print -r -- $dir
@@ -150,7 +148,6 @@ local -i list_colors=$((!$?))
           [[ -n $choice ]] || return
           choice=("${(@f)choice}")
           [[ -n $choice[1] ]] && again=1
-          # Weird chars don't roundtrip, so the directory may not exist.
           cd -- ${choice[2]%%$'\0'*} 2>/dev/null || return
           redraw=1
         } always {

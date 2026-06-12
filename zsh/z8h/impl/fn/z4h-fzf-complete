@@ -21,11 +21,7 @@ for f in $_z4h_shadow_funcs; do
   fi
 done
 
-# exec 3>&2 2>/tmp/log
-
 {
-  # setopt xtrace
-
   function zstyle() {
     # zstyle -T ":completion:${curcontext}:$_type" list-grouped
     if [[ $# == 3 && $3 == list-grouped && $1 == -(t|T) && $2 == :completion:* ]]; then
@@ -264,8 +260,6 @@ done
     }
   done
 } always {
-  # unsetopt xtrace
-  # exec 2>&3 3>&-
   local f=
   for f in $_z4h_shadow_funcs; do
     if (( ${+functions[-z4h-orig-$f]} )); then

@@ -1,6 +1,5 @@
 { config, lib, ... }:
 let
-  inherit (lib) mkOptionDefault;
   cfg = config.programs.z8h;
 
   baseKeyMap = {
@@ -153,6 +152,7 @@ in {
 
   options = {
     programs.z8h.keybindings = lib.mkOption {
+      # remap whole key combinations instead of individual keys
       apply = lib.mapAttrs (_: keys: map (keybind: mapKeyCombinations (map normalizeKey keybind)) keys);
     };
   };
