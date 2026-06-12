@@ -27,15 +27,8 @@ in {
 
     programs.zsh.initBlocks = lib.mkIf cfg.enable {
       z4h-prelude = ''
-        mkdir -p $XDG_DATA_HOME/z4h/stickycache
-        mkdir -p $XDG_CACHE_HOME/z4h
-
-        typeset -gr _z4h_opt='emulate -L zsh &&
-          setopt typeset_silent pipe_fail extended_glob prompt_percent no_prompt_subst &&
-          setopt no_prompt_bang no_bg_nice no_aliases'
-
-        autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
-        autoload -Uz run-help ''${^fpath}/run-help-^*.zwc(N:t)
+        mkdir -p ''${XDG_STATE_HOME:=$HOME/.local/state}/z4h/stickycache
+        mkdir -p ''${XDG_CACHE_HOME:=$HOME/.cache}/z4h
       '';
 
       zle-prelude = lib.hm.dag.entryAfter [ "z4h-prelude" ] ''
@@ -47,6 +40,9 @@ in {
       '';
 
       z4h-init = lib.hm.dag.entryAfter [ "z4h-prelude" ] ''
+        typeset -gr _z4h_opt='emulate -L zsh &&
+          setopt typeset_silent pipe_fail extended_glob prompt_percent no_prompt_subst &&
+          setopt no_prompt_bang no_bg_nice no_aliases'
       '';
     };
   };
