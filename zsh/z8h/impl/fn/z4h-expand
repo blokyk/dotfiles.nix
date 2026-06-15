@@ -1,1 +1,0 @@
-zle _expand_alias || zle .expand-word || true
