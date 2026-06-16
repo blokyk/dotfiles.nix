@@ -11,7 +11,8 @@
 
   programs.zsh.initBlocks.disable-termios-ctrl-s = ''
     # disable Ctrl+S handling from the terminal driver (termios)
-    # (this is particularly because we bind Ctrl+S to z4h-stash-buffer)
+    # (this is particularly useful because we bind Ctrl+S to z4h-stash-buffer,
+    # but also because i've personally never done)
     stty -ixon
   '';
 }
