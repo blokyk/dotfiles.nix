@@ -37,6 +37,9 @@
       # allow cd-ing into a directory by just typing its name as a command
       "auto_cd"
 
+      # if the argument to `cd` is a variable, try to expand it and cd there
+      "cdable_vars"
+
       # don't expand !! & co
       "no_bang_hist"
 
