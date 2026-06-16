@@ -53,5 +53,11 @@
       # if a glob doesn't match any files, just leave it verbatim
       "no_nomatch"
     ];
+
+    initBlocks.completion-ls-colors = lib.hm.dag.entryAfter [ "z4h-end" ] ''
+      # use the same colors as ls in the completion menu
+      # (by splitting the LS_COLORS variable on every ':')
+      zstyle ':completion:*' list-colors ''${(s(:))LS_COLORS}
+    '';
   };
 }
