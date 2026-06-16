@@ -3,7 +3,9 @@
     enable = true;
     keybindings = {
       z4h-stash-buffer = [ "<Ctrl>" "S" ];
-      z4h-backward-kill-word = [ "<Ctrl>" "<Backspace>" ];
+      z4h-backward-kill-word = [ "<Ctrl>" "Backspace" ];
+      undo = [ "<Ctrl>" "Z" ];
+      redo = [ "<Ctrl>" "Y" ];
     };
   };
 
