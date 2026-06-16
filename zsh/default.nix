@@ -7,6 +7,12 @@
     enable = true;
     dotDir = config.xdg.configHome + "/zsh";
 
+    dirHashes = {
+      "hm" = toString <self>;
+      "hm-src" = toString <home-manager>;
+      "z" = config.programs.zsh.dotDir;
+    };
+
     # fixme: completion strategy doesn't work :(
     # autosuggestion.strategy = [ "history" "completion" ];
 
