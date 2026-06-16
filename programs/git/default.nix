@@ -28,6 +28,17 @@
         autocrlf = false;
         # pager = less -FRX # overridden by delta git integration
         filemode = false;
+        # note: this should contain stuff that is completely personal,
+        #       and that is unlikely to show up in other user's setup.
+        #       since these settings won't be replicated in the repo's
+        #       gitignore, this should NOT include common things like `.vscode`
+        excludesFile = builtins.toFile "global-gitignore" ''
+          # nano swap/lock files
+          *.swp
+
+          *.old
+          *.bkp
+        '';
       };
 
       init.defaultBranch = "main";
