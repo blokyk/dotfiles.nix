@@ -54,6 +54,19 @@
       "no_nomatch"
     ];
 
+    # For completions, try to:
+    #   1. match directly
+    #   2. match w/out case + treat '-' as '_' (and vice-versa)
+    #   3. match a partial-word
+    #   4. match a substring
+    initBlocks.completion-matcher = lib.hm.dag.entryAfter [ "z4h-end" ] ''
+      zstyle ':completion:*' matcher-list \
+        ''' \
+        'm:{a-zA-Z-_}={A-Za-z_-}' \
+        'r:|=*' \
+        'l:|=* r:|=*'
+    '';
+
     initBlocks.completion-ls-colors = lib.hm.dag.entryAfter [ "z4h-end" ] ''
       # use the same colors as ls in the completion menu
       # (by splitting the LS_COLORS variable on every ':')
