@@ -5,6 +5,7 @@ in {
   home.sessionVariables = {
     TERM = "xterm-256color";
     ANDROID_HOME = config.home.homeDirectory + "/Android/Sdk";
+    DOTNET_CLI_TELEMETRY_OPTOUT = true;
   };
 
   xdg.systemDirs.data = lib.mkAfter [
