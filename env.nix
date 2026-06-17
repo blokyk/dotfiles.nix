@@ -8,6 +8,13 @@ in {
     DOTNET_CLI_TELEMETRY_OPTOUT = true;
   };
 
+  xdg.enable = true;
+  xdg.cacheHome  = "${HOME}/.cache";
+  xdg.dataHome   = "${HOME}/.local/share";
+  xdg.stateHome  = "${HOME}/.local/state";
+  xdg.binHome    = "${HOME}/.local/bin";
+  xdg.configHome = "${HOME}/.config";
+
   xdg.systemDirs.data = lib.mkAfter [
     "/usr/share/ubuntu"
     "/usr/share/gnome"
