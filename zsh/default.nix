@@ -22,13 +22,15 @@
       chpwd = "__ls_after_cd";
     };
 
-    # todo: move to a module, because this thing has a buuuunch of config knobs
-    plugins = [{
-      name = "autopair";
-      file = "share/zsh/zsh-autopair/autopair.zsh";
-      src = pkgs.zsh-autopair;
-    }];
-    initBlocks.init-autopair = "autopair-init";
+    # fixme: this breaks some paste for tilix :/
+    # (bc it doesn't support bracketed paste and thus autopair doesn't turn off)
+    ## todo: move to a module, because this thing has a buuuunch of config knobs
+    #plugins = [{
+    #  name = "autopair";
+    #  file = "share/zsh/zsh-autopair/autopair.zsh";
+    #  src = pkgs.zsh-autopair;
+    #}];
+    #initBlocks.init-autopair = "autopair-init";
 
     history = {
       # add the timestamp in front of the command in the history file
