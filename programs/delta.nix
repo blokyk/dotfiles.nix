@@ -1,5 +1,10 @@
 # colorful diff viewer
-{ ... }: {
+{ config, lib, pkgs, ... }:
+let
+  completions = pkgs.runCommand "delta-completions" {} ''
+    ${lib.getExe config.programs.delta.package} --generate-completion zsh > "$out"
+  '';
+in {
   programs.delta = {
     enable = true;
     enableGitIntegration = true;
@@ -16,4 +21,8 @@
       whitespace-error-style = "22 reverse";
     };
   };
+
+  programs.zsh.initBlocks.delta-completions = lib.hm.dag.entryAfter [ "compinit" ] ''
+    source ${completions}
+  '';
 }
