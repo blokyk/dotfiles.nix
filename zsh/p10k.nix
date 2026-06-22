@@ -24,7 +24,7 @@
           my_git_format+=''${''${VCS_STATUS_LOCAL_BRANCH:-''${VCS_STATUS_COMMIT[1,8]}}//\%/%%}
 
           # if there are things in the stash, add a pink star after the branch name
-          if (( VCS_STATUS_STASHES >= 0 )); then
+          if (( VCS_STATUS_STASHES > 0 )); then
             my_git_format+="''${1+%13F}*"
           fi
           my_git_format+="''${1+%4F})"
