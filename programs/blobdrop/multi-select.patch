@@ -1,0 +1,940 @@
+diff --git a/.github/workflows/ci.yml b/.github/workflows/ci.yml
+index 572d249..cf10e66 100644
+--- a/.github/workflows/ci.yml
++++ b/.github/workflows/ci.yml
+@@ -14,5 +14,4 @@ jobs:
+     - uses: cachix/install-nix-action@v20
+       with:
+         nix_path: nixpkgs=channel:nixos-unstable
+-    - uses: DeterminateSystems/magic-nix-cache-action@main
+     - run: nix flake check --print-build-logs
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index f83e33b..043e88c 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -9,7 +9,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
+ set(CMAKE_CXX_EXTENSIONS OFF)
+ 
+ list(APPEND QT_MODULES Core Qml Quick QuickControls2 DBus Svg)
+-find_package(Qt6 6.6 COMPONENTS ${QT_MODULES} REQUIRED)
++find_package(Qt6 6.8 COMPONENTS ${QT_MODULES} REQUIRED)
+ qt_standard_project_setup()
+ list(TRANSFORM QT_MODULES PREPEND "Qt6::")
+ 
+@@ -38,7 +38,7 @@ qt6_add_resources(RESOURCES ${RSRC})
+ 
+ qt_add_executable(${PROJECT_NAME} ${SRCS} ${RESOURCES})
+ 
+-qt_add_qml_module(${PROJECT_NAME} URI "Backend" VERSION 1.0 NO_RESOURCE_TARGET_PATH QML_FILES ${QMLS} SOURCES "src/Models/path_model.cpp")
++qt_add_qml_module(${PROJECT_NAME} URI "Backend" VERSION "${PROJECT_VERSION}" NO_RESOURCE_TARGET_PATH QML_FILES ${QMLS} SOURCES "src/Models/path_model.cpp")
+ set_target_properties(${PROJECT_NAME} PROPERTIES QT_QMLCACHEGEN_ARGUMENTS "--only-bytecode")
+ 
+ target_link_libraries(${PROJECT_NAME} PRIVATE ${LINK_LIBS})
+diff --git a/README.md b/README.md
+index 6539c3f..06da5d3 100644
+--- a/README.md
++++ b/README.md
+@@ -10,6 +10,7 @@ https://github.com/vimpostor/blobdrop/assets/21310755/1957b6a7-475c-4930-80b9-18
+ # Installation
+ 
+ Note: For Arch Linux users there is an [AUR package](https://aur.archlinux.org/packages/blobdrop-git), for Nix users there is a [flake](flake.nix) available.
++You can also download an AppImage from the [latest release](https://github.com/vimpostor/blobdrop/releases/latest).
+ 
+ ## Building from source
+ 
+@@ -59,5 +60,7 @@ Blobdrop implements multiple frontends to drag the files from:
+ # Alternatives
+ 
+ - [dragon](https://github.com/mwh/dragon) - A GTK implementation of the same concept
+-- [clidrag](https://github.com/rkevin-arch/CLIdrag) - A CLI-only implementation (similar to `blobdrop -f immediate`)
++- [clidrag](https://github.com/rkevin-arch/CLIdrag) - A CLI-only implementation
+ - [ripdrag](https://github.com/nik012003/ripdrag) - Like dragon with GTK, but rewritten in Rust
++
++Note that none of these alternatives provide a workflow similar to blobdrop's immediate frontend (except clidrag, but it lacks many UX improvements).
+diff --git a/assets/completions/bash-completion/completions/blobdrop b/assets/completions/bash-completion/completions/blobdrop
+index 3a61502..754ac10 100644
+--- a/assets/completions/bash-completion/completions/blobdrop
++++ b/assets/completions/bash-completion/completions/blobdrop
+@@ -4,7 +4,9 @@ _blobdrop() {
+ 		-h --help
+ 		-v --version
+ 		-b --frameless
++		-c --cursor
+ 		-f --frontend
++		-i --intercept
+ 		-k --keep
+ 		-p --persistent
+ 		-t --ontop
+diff --git a/assets/completions/fish/vendor_completions.d/blobdrop.fish b/assets/completions/fish/vendor_completions.d/blobdrop.fish
+index 58edc64..824fc31 100644
+--- a/assets/completions/fish/vendor_completions.d/blobdrop.fish
++++ b/assets/completions/fish/vendor_completions.d/blobdrop.fish
+@@ -1,7 +1,9 @@
+ complete -c blobdrop -s '-h' -l 'help' -d 'show help'
+ complete -c blobdrop -s '-v' -l 'version' -d 'show version'
+ complete -c blobdrop -s '-b' -l 'frameless' -d 'show frameless window'
++complete -c blobdrop -s '-c' -l 'cursor' -d 'spawn window at mouse cursor'
+ complete -c blobdrop -s '-f' -l 'frontend' -d 'selects frontend' -x -a "auto\t'automatic' gui\t'show window' immediate\t'drag immediately' notify\t'drag from notification' stdout\t'print OSC8 link'"
++complete -c blobdrop -s '-i' -l 'intercept' -d 'intercept another DnD'
+ complete -c blobdrop -s '-k' -l 'keep' -d 'keep dropped files'
+ complete -c blobdrop -s '-p' -l 'persistent' -d 'disable autohiding during drag'
+ complete -c blobdrop -s '-t' -l 'ontop' -d 'keep window on top'
+diff --git a/assets/completions/zsh/site-functions/_blobdrop b/assets/completions/zsh/site-functions/_blobdrop
+index 061029e..498550e 100644
+--- a/assets/completions/zsh/site-functions/_blobdrop
++++ b/assets/completions/zsh/site-functions/_blobdrop
+@@ -1,7 +1,7 @@
+ #compdef blobdrop
+ 
+ _blobdrop() {
+-	_arguments {-h,--help}'[show help]' {-v,--version}'[show version]' {-b,--frameless}'[show frameless window]' {-f,--frontend}'[selects frontend]:arg:((auto\:"Automatic" gui\:"show window" immediate\:"drag immediately" notify\:"drag from notification" stdout\:"print OSC8 link"))' {-k,--keep}'[keep dropped files]' {-p,--persistent}'[disable autohiding during drag]' {-t,--ontop}'[keep window on top]' {-x,--auto-quit}'[autoquit behaviour]:num:((never\:"do not autoquit" first\:"after first drag" all\:"after all items have been dragged"))' '*: arg:_files'
++	_arguments {-h,--help}'[show help]' {-v,--version}'[show version]' {-b,--frameless}'[show frameless window]' {-c,--cursor}'[spawn window at mouse cursor]' {-f,--frontend}'[selects frontend]:arg:((auto\:"Automatic" gui\:"show window" immediate\:"drag immediately" notify\:"drag from notification" stdout\:"print OSC8 link"))' {-i,--intercept}'[intercept another DnD]' {-k,--keep}'[keep dropped files]' {-p,--persistent}'[disable autohiding during drag]' {-t,--ontop}'[keep window on top]' {-x,--auto-quit}'[autoquit behaviour]:num:((never\:"do not autoquit" first\:"after first drag" all\:"after all items have been dragged"))' '*: arg:_files'
+ 	return 0
+ }
+ 
+diff --git a/doc/man/man1/blobdrop.1 b/doc/man/man1/blobdrop.1
+index fd09457..3c76cff 100644
+--- a/doc/man/man1/blobdrop.1
++++ b/doc/man/man1/blobdrop.1
+@@ -33,16 +33,24 @@ Show version information.
+ .B \-b, \-\-frameless
+ Show a frameless window.
+ .TP
++.B \-c, \-\-cursor
++Spawn the window at the location of the mouse cursor.
++.TP
+ .B \-f, \-\-frontend \fIOPT\fP
+ Selects the frontend. Must be one of {"auto" (default), "gui", "immediate", "notify", "stdout"}. For a more detailed explanation of the frontend options see
+ .B FRONTENDS
+ below.
+ .TP
++.B \-i, \-\-intercept
++Intercept another drag and drop operation. This option is useful to convert other external drag and drop events into drag and drop events that use any of the available frontends. Using this option will unconditionally start the
++.B gui
++frontend. The \-\-frontend option in this case determines the frontend of outgoing intercepted drag and drop events.
++.TP
+ .B \-k, \-\-keep
+ When using sink mode, keep dropped files around by default.
+ .TP
+ .B \-p, \-\-persistent
+-Do not auto-hide the main window while dragging.
++Do not auto-hide the window while dragging.
+ .TP
+ .B \-t, \-\-ontop
+ Keep the window on top of other windows.
+@@ -59,7 +67,7 @@ Returns zero on success.
+ Blobdrop has multiple frontends available that change the behaviour how the drag and drop operation starts. The frontend can be chosen with the
+ .B \-\-frontend
+ option.
+-.SS "automatic"
++.SS "auto"
+ This is the default frontend and chooses one of the following frontends automatically based on some conditions. On X11, the
+ .B immediate
+ frontend is used unless no file is passed, in which case the
+@@ -151,6 +159,15 @@ $ \fBgrep\fP \-R \-\-files\-with\-matches uploadable | \fBblobdrop\fP
+ .in
+ .PP
+ 
++The example below spawns a window under the cursor that intercepts any existing drag and drop operation and converts it into an outgoing immediate drag and drop operation. This can be helpful for touchpad users.
++.PP
++.in +2n
++.EX
++$ \fBblobdrop\fP \-ic \-f \fIimmediate\fP \-x \fIfirst\fP
++.EE
++.in
++.PP
++
+ It is also possible to integrate blobdrop in other external programs. For example if you use the ranger commandline file manager, you can use blobdrop to drag any file with a simple keybinding in your ~/.config/ranger/rc.conf:
+ .PP
+ .in +2n
+@@ -160,6 +177,15 @@ map <C\-d> shell blobdrop %p
+ .in
+ .PP
+ 
++In tmux it is possible to setup a keybinding to drag the file under the cursor on double click:
++.PP
++.in +2n
++.EX
++bind \-n DoubleClick1Pane run\-shell "blobdrop '#{pane_current_path}/#{mouse_word}'"
++.EE
++.in
++.PP
++
+ .SH HOMEPAGE
+ https://github.com/vimpostor/blobdrop
+ 
+diff --git a/flake.lock b/flake.lock
+index a1c0820..5fd0b0d 100644
+--- a/flake.lock
++++ b/flake.lock
+@@ -5,11 +5,11 @@
+         "systems": "systems"
+       },
+       "locked": {
+-        "lastModified": 1694529238,
+-        "narHash": "sha256-zsNZZGTGnMOf9YpHKJqMSsa0dXbfmxeoJ7xHlrt+xmY=",
++        "lastModified": 1731533236,
++        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
+         "owner": "numtide",
+         "repo": "flake-utils",
+-        "rev": "ff7b65b44d01cf9ba6a71320833626af21126384",
++        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
+         "type": "github"
+       },
+       "original": {
+@@ -20,11 +20,11 @@
+     },
+     "nixpkgs": {
+       "locked": {
+-        "lastModified": 1698924604,
+-        "narHash": "sha256-GCFbkl2tj8fEZBZCw3Tc0AkGo0v+YrQlohhEGJ/X4s0=",
++        "lastModified": 1731139594,
++        "narHash": "sha256-IigrKK3vYRpUu+HEjPL/phrfh7Ox881er1UEsZvw9Q4=",
+         "owner": "NixOS",
+         "repo": "nixpkgs",
+-        "rev": "fa804edfb7869c9fb230e174182a8a1a7e512c40",
++        "rev": "76612b17c0ce71689921ca12d9ffdc9c23ce40b2",
+         "type": "github"
+       },
+       "original": {
+diff --git a/flake.nix b/flake.nix
+index 29062bf..955099c 100644
+--- a/flake.nix
++++ b/flake.nix
+@@ -16,6 +16,8 @@
+ 
+ 				src = ./.;
+ 
++                env.LANG = "C.UTF-8";
++
+ 				nativeBuildInputs = with pkgs; [
+ 					cmake
+ 					pkg-config
+diff --git a/src/Models/path_model.cpp b/src/Models/path_model.cpp
+index 92aa49d..d574751 100644
+--- a/src/Models/path_model.cpp
++++ b/src/Models/path_model.cpp
+@@ -1,5 +1,7 @@
+ #include "path_model.hpp"
+ 
++#include <ranges>
++
+ #include "backend.hpp"
+ #include "path_registry.hpp"
+ #include "settings.hpp"
+@@ -25,6 +27,8 @@ QVariant PathModel::data(const QModelIndex &index, int role) const {
+ 		return QString::fromStdString(p.pretty_print());
+ 	case UsedRole:
+ 		return p.used;
++	case MultiselectRole:
++		return p.multiselect;
+ 	case IconRole:
+ 		return QString::fromStdString(p.iconName);
+ 	case ThumbnailRole:
+@@ -52,9 +56,23 @@ void PathModel::taint_all_used() {
+ 	check_should_quit();
+ }
+ 
++void PathModel::multiselect(int i) {
++	paths[i].multiselect = !paths[i].multiselect;
++	multiselected += (2 * paths[i].multiselect) - 1;
++	emit dataChanged(index(i, 0), index(i, 0));
++	refresh_folded_paths();
++}
++
+ void PathModel::refresh_folded_paths() {
+-	folded_uri_list = std::accumulate(paths.cbegin(), paths.cend(), QString(), [&](QString s, const auto p) { return s.append(QString::fromStdString(p.get_uri()) + "\n"); });
+-	emit foldedUriListChanged(folded_uri_list);
++	// only add multiselected items in multiselect mode
++	auto v = paths | std::views::filter([&](const auto &i) { return !multiselected || i.multiselect; });
++//<<<<<<< HEAD
++//	folded_uri_list = std::accumulate(v.cbegin(), v.cend(), QString(), [](QString s, const auto p) { return s.append(QString::fromStdString(p.get_uri()) + "\n"); });
++//	emit foldedUriListChanged(folded_uri_list);
++//=======
++	folded_uri_list = std::accumulate(v.cbegin(), v.cend(), QString(), [](QString s, const auto p) { return s.append(QString::fromStdString(p.get_uri()) + "\r\n"); });
++	emit foldedUriListChanged();
++//>>>>>>> 901046f (Fix build with Qt 6.9)
+ }
+ 
+ void PathModel::open(int i) const {
+@@ -64,18 +82,15 @@ void PathModel::open(int i) const {
+ }
+ 
+ void PathModel::finish_init() {
+-	// frontends that have an immediate effect, can do their work now
+-	const auto f = Settings::get()->effective_frontend();
+-	if (f == Settings::Frontend::Immediate) {
+-		Backend::get()->drag_paths(paths);
+-	} else if (f == Settings::Frontend::Stdout) {
+-		Backend::get()->print_hyperlinks(paths);
+-	} else if (f == Settings::Frontend::Notification) {
+-		refresh_folded_paths();
+-		const auto uri_list = folded_uri_list.split(QChar::LineFeed, Qt::SkipEmptyParts);
+-		Backend::get()->send_drag_notification(uri_list);
++	if (paths.empty()) {
++		// nothing to do for now
++		return;
+ 	}
+ 
++	// frontends that have an immediate effect, can do their work now
++	Backend::get()->exec_frontend(paths);
++
++	const auto f = Settings::get()->effective_frontend();
+ 	if (f == Settings::Frontend::Stdout || f == Settings::Frontend::Notification) {
+ 		taint_all_used();
+ 	}
+diff --git a/src/Models/path_model.hpp b/src/Models/path_model.hpp
+index b86e503..918cd1c 100644
+--- a/src/Models/path_model.hpp
++++ b/src/Models/path_model.hpp
+@@ -12,8 +12,9 @@ class PathModel : public QAbstractListModel {
+ 	QML_SINGLETON
+ 
+ 	Q_PROPERTY(QString foldedUriList MEMBER folded_uri_list NOTIFY foldedUriListChanged)
++	Q_PROPERTY(int multiSelected MEMBER multiselected NOTIFY foldedUriListChanged)
+ public:
+-	PathModel(QObject *parent = nullptr);
++	explicit PathModel(QObject *parent = nullptr);
+ 
+ 	virtual int rowCount(const QModelIndex &) const override;
+ 	virtual QVariant data(const QModelIndex &index, int role) const override;
+@@ -21,24 +22,27 @@ public:
+ 
+ 	Q_INVOKABLE void taint_used(int i);
+ 	Q_INVOKABLE void taint_all_used();
++	Q_INVOKABLE void multiselect(int i);
+ 	Q_INVOKABLE void refresh_folded_paths();
+ 	Q_INVOKABLE void open(int i) const;
+ 	Q_INVOKABLE void finish_init();
+ 	void add_path(Path p);
+ signals:
+-	void foldedUriListChanged(QString foldedUriList);
++	void foldedUriListChanged();
+ private:
+ 	enum RoleNames {
+ 		PathRole = Qt::UserRole,
+ 		UriRole,
+ 		PrettyRole,
+ 		UsedRole,
++		MultiselectRole,
+ 		IconRole,
+ 		ThumbnailRole,
+ 		ExistsRole,
+ 	};
+-	QHash<int, QByteArray> role_names {{PathRole, "path"}, {UriRole, "uri"}, {PrettyRole, "pretty"}, {UsedRole, "used"}, {IconRole, "iconName"}, {ThumbnailRole, "thumbnail"}, {ExistsRole, "exists"}};
++	QHash<int, QByteArray> role_names {{PathRole, "path"}, {UriRole, "uri"}, {PrettyRole, "pretty"}, {UsedRole, "used"}, {MultiselectRole, "multiselect"}, {IconRole, "iconName"}, {ThumbnailRole, "thumbnail"}, {ExistsRole, "exists"}};
+ 	std::vector<Path> paths;
+ 	QString folded_uri_list;
++	int multiselected = 0;
+ 	void check_should_quit();
+ };
+diff --git a/src/Util/util.cpp b/src/Util/util.cpp
+index 9843f5c..669bb45 100644
+--- a/src/Util/util.cpp
++++ b/src/Util/util.cpp
+@@ -2,7 +2,6 @@
+ 
+ #include <QGuiApplication>
+ #include <cstdlib>
+-#include <format>
+ #include <iostream>
+ #include <unistd.h>
+ 
+@@ -34,10 +33,6 @@ std::string pwd() {
+ 	return result;
+ }
+ 
+-std::string print_osc8_link(const std::string &url, const std::string &text) {
+-	return std::format("\e]8;;{}\e\\{}\e]8;;\e\\", url, text);
+-}
+-
+ bool is_wayland() {
+ 	return QGuiApplication::platformName() == "wayland";
+ }
+diff --git a/src/Util/util.hpp b/src/Util/util.hpp
+index ea27fc3..be60c85 100644
+--- a/src/Util/util.hpp
++++ b/src/Util/util.hpp
+@@ -1,7 +1,9 @@
+ #pragma once
+ 
++#include <QJSEngine>
+ #include <filesystem>
+ #include <qglobal.h>
++#include <qqml.h>
+ #include <string>
+ 
+ using namespace std::chrono_literals;
+@@ -12,18 +14,22 @@ using namespace std::chrono_literals;
+ 		return &s; \
+ 	}
+ 
+-#define STRICT_SINGLETON(TYPE) \
++#define QML_CPP_SINGLETON(TYPE) \
+ 	TYPE() = delete; \
+-	explicit TYPE(bool singleton_constructor) {}; \
++	explicit TYPE(bool) {}; \
+ 	static TYPE *get() { \
+ 		static TYPE s {true}; \
+ 		return &s; \
++	} \
++	static TYPE *create(QQmlEngine *qmlEngine, QJSEngine *jsEngine) { \
++		auto res = get(); \
++		QJSEngine::setObjectOwnership(res, QJSEngine::CppOwnership); \
++		return res; \
+ 	}
+ 
+ namespace Util {
+ 
+ const char *home_dir();
+ std::string pwd();
+-std::string print_osc8_link(const std::string &url, const std::string &text);
+ bool is_wayland();
+ }
+diff --git a/src/backend.cpp b/src/backend.cpp
+index 20fdc31..024fd00 100644
+--- a/src/backend.cpp
++++ b/src/backend.cpp
+@@ -1,12 +1,16 @@
+ #include "backend.hpp"
+ 
++#include <QCursor>
+ #include <QDBusInterface>
+ #include <QGuiApplication>
+ #include <QIcon>
+ #include <QMimeData>
+ #include <QPixmap>
+ 
++#include "path_registry.hpp"
+ #include "settings.hpp"
++#include "stdin.hpp"
++#include "stdout.hpp"
+ 
+ void Backend::quit_delayed(const std::chrono::milliseconds delay) {
+ 	// cancel any pending drags
+@@ -16,12 +20,14 @@ void Backend::quit_delayed(const std::chrono::milliseconds delay) {
+ 	// remove the possibly set keep-below hint, as we want to quit now
+ 	Backend::get()->restore_terminal();
+ 
+-	Settings::get()->disable_always_on_bottom();
++	Settings::get()->suppress_always_on_bottom = true;
+ 	QTimer::singleShot(delay, qGuiApp, QGuiApplication::quit);
+ }
+ 
+ void Backend::drag_paths(const std::vector<Path> &paths) {
+ 	hide_terminal();
++	// needed for intercept mode
++	Settings::get()->setHideGui(true);
+ 
+ 	/**
+ 	 * Qt takes ownership both over the QDrag as well as the QMimeData
+@@ -74,11 +80,11 @@ void Backend::drag_paths(const std::vector<Path> &paths) {
+ 
+ void Backend::print_hyperlinks(const std::vector<Path> &paths) {
+ 	for (auto &i : paths) {
+-		std::cout << Util::print_osc8_link(i.get_uri(), i.pretty_print()) << std::endl;
++		Stdout::print_osc8_link(i.get_uri(), i.pretty_print());
+ 	}
+ }
+ 
+-void Backend::send_drag_notification(const QList<QString> &uris) {
++void Backend::send_drag_notification(const std::vector<Path> &uris) {
+ #if !defined(Q_OS_WIN) && !defined(Q_OS_DARWIN)
+ 	if (uris.empty()) {
+ 		return;
+@@ -86,8 +92,14 @@ void Backend::send_drag_notification(const QList<QString> &uris) {
+ 
+ 	auto session = QDBusConnection::sessionBus();
+ 	auto msg = QDBusMessage::createMethodCall("org.freedesktop.Notifications", "/org/freedesktop/Notifications", "org.freedesktop.Notifications", "Notify");
++
++	QList<QString> urls;
++	for (const auto &u : uris) {
++		urls.push_back(QString::fromStdString(u.get_uri()));
++	}
++
+ 	QVariantMap hints;
+-	hints["x-kde-urls"] = uris;
++	hints["x-kde-urls"] = urls;
+ 	QString title = "Drag file";
+ 	if (uris.size() > 1) {
+ 		title += "s";
+@@ -99,7 +111,7 @@ void Backend::send_drag_notification(const QList<QString> &uris) {
+ 
+ void Backend::hide_terminal() {
+ #if !defined(Q_OS_WIN) && !defined(Q_OS_DARWIN)
+-	if (Settings::get()->suppress_always_on_bottom || !xcb.init()) {
++	if (Settings::get()->suppress_always_on_bottom || Settings::get()->intercept || !Stdin::get()->is_tty || !xcb.init()) {
+ 		return;
+ 	}
+ 
+@@ -120,3 +132,45 @@ void Backend::restore_terminal() {
+ 	last_window = 0;
+ #endif
+ }
++
++void Backend::exec_frontend(const std::vector<Path> &paths) {
++	const auto f = Settings::get()->effective_frontend(true);
++	if (f == Settings::Frontend::Immediate) {
++		Backend::get()->drag_paths(paths);
++	} else if (f == Settings::Frontend::Stdout) {
++		Backend::get()->print_hyperlinks(paths);
++	} else if (f == Settings::Frontend::Notification) {
++		Backend::get()->send_drag_notification(paths);
++	}
++}
++
++QPoint Backend::get_mouse_pos() const {
++	return QCursor::pos();
++}
++
++void Backend::handle_dropped_urls(const QList<QUrl> &urls) {
++	std::vector<Path> paths;
++	for (auto &u : urls) {
++		auto url = u.toString().toStdString();
++		if (url.starts_with("file://")) {
++			url = url.substr(7);
++		}
++		paths.push_back(url);
++	}
++
++	if (Settings::get()->keep_dropped_files) {
++		for (auto &i : paths) {
++			PathRegistry::get()->add_path(i);
++		}
++	}
++
++	if (Settings::get()->intercept) {
++		QTimer::singleShot(0, qGuiApp, [this, paths]() { exec_frontend(paths); });
++	} else {
++		Backend::get()->print_hyperlinks(paths);
++	}
++
++	if (Settings::get()->auto_quit_behavior == Settings::AutoQuitBehavior::First && Settings::get()->effective_frontend(true) != Settings::Frontend::Immediate) {
++		Backend::get()->quit_delayed();
++	}
++}
+diff --git a/src/backend.hpp b/src/backend.hpp
+index 3d4ec66..3c2e44b 100644
+--- a/src/backend.hpp
++++ b/src/backend.hpp
+@@ -2,6 +2,7 @@
+ 
+ #include <QCoreApplication>
+ #include <QDrag>
++#include <QPoint>
+ #include <QTimer>
+ #include <chrono>
+ 
+@@ -14,16 +15,22 @@
+ 
+ class Backend : public QObject {
+ 	Q_OBJECT
++	QML_ELEMENT
++	QML_SINGLETON
+ public:
+-	SINGLETON(Backend)
++	QML_CPP_SINGLETON(Backend)
+ 
+ 	void quit_delayed(const std::chrono::milliseconds delay = 100ms);
+ 	void drag_paths(const std::vector<Path> &paths);
+ 	void print_hyperlinks(const std::vector<Path> &paths);
+-	void send_drag_notification(const QList<QString> &uris);
++	void send_drag_notification(const std::vector<Path> &uris);
+ 
+ 	void hide_terminal();
+ 	void restore_terminal();
++
++	void exec_frontend(const std::vector<Path> &paths);
++	Q_INVOKABLE QPoint get_mouse_pos() const;
++	Q_INVOKABLE void handle_dropped_urls(const QList<QUrl> &urls);
+ signals:
+ 	void drag_finished();
+ private:
+diff --git a/src/getopts.cpp b/src/getopts.cpp
+index 4963414..91d9ce0 100644
+--- a/src/getopts.cpp
++++ b/src/getopts.cpp
+@@ -17,16 +17,22 @@ bool parse(QCoreApplication &app) {
+ 	QCommandLineOption frameless_opt(QStringList() << "b"
+ 												   << "frameless",
+ 		"Show a frameless window.");
++	QCommandLineOption cursor_opt(QStringList() << "c"
++												<< "cursor",
++		"Spawn window at the mouse cursor.");
+ 	QCommandLineOption frontend_opt(QStringList() << "f"
+ 												  << "frontend",
+ 		"Selects the frontend. Must be one of:" + QString::fromStdString(frontends_descr) + " (auto is default)",
+ 		"frontend");
++	QCommandLineOption intercept_opt(QStringList() << "i"
++												   << "intercept",
++		"Intercept another drag and drop.");
+ 	QCommandLineOption keep_opt(QStringList() << "k"
+ 											  << "keep",
+ 		"Keep dropped files around in sink mode.");
+ 	QCommandLineOption persistent_opt(QStringList() << "p"
+ 													<< "persistent",
+-		"Do not auto-hide the main window while dragging.");
++		"Do not auto-hide the window while dragging.");
+ 	QCommandLineOption ontop_opt(QStringList() << "t"
+ 											   << "ontop",
+ 		"Keep the window on top of other windows.");
+@@ -35,7 +41,7 @@ bool parse(QCoreApplication &app) {
+ 		"The amount of drags after which the program should automatically close. Must be one of {never, first, all (default)}",
+ 		"behaviour");
+ 
+-	p.addOptions({frameless_opt, frontend_opt, keep_opt, persistent_opt, ontop_opt, auto_quit_opt});
++	p.addOptions({frameless_opt, cursor_opt, frontend_opt, intercept_opt, keep_opt, persistent_opt, ontop_opt, auto_quit_opt});
+ 	p.process(app);
+ 
+ 	if (p.isSet(auto_quit_opt)) {
+@@ -48,12 +54,8 @@ bool parse(QCoreApplication &app) {
+ 		}
+ 		Settings::get()->auto_quit_behavior = static_cast<Settings::AutoQuitBehavior>(choice);
+ 	}
+-	if (p.isSet(ontop_opt)) {
+-		Settings::get()->always_on_top = true;
+-	}
+-	if (p.isSet(keep_opt)) {
+-		Settings::get()->keep_dropped_files = true;
+-	}
++	Settings::get()->always_on_top = p.isSet(ontop_opt);
++	Settings::get()->keep_dropped_files = p.isSet(keep_opt);
+ 
+ 	if (p.isSet(frontend_opt)) {
+ 		int choice = std::ranges::find(frontend_opts, p.value(frontend_opt).toStdString()) - frontend_opts.cbegin();
+@@ -70,12 +72,10 @@ bool parse(QCoreApplication &app) {
+ 		Settings::get()->frontend = c;
+ 	}
+ 
+-	if (p.isSet(persistent_opt)) {
+-		Settings::get()->disable_always_on_bottom();
+-	}
+-	if (p.isSet(frameless_opt)) {
+-		Settings::get()->frameless = true;
+-	}
++	Settings::get()->suppress_always_on_bottom = p.isSet(persistent_opt);
++	Settings::get()->frameless = p.isSet(frameless_opt);
++	Settings::get()->spawn_on_cursor = p.isSet(cursor_opt);
++	Settings::get()->intercept = p.isSet(intercept_opt);
+ 
+ 	// add all trailing arguments to the path list
+ 	std::ranges::for_each(p.positionalArguments(), [](auto i) { PathRegistry::get()->add_path(i.toStdString()); });
+diff --git a/src/path.hpp b/src/path.hpp
+index 168133f..a9009f0 100644
+--- a/src/path.hpp
++++ b/src/path.hpp
+@@ -12,6 +12,7 @@ public:
+ 	QUrl thumbnail;
+ 	bool exists = false;
+ 	std::string iconName;
++	bool multiselect = false;
+ 
+ 	std::string get_uri() const;
+ 	QUrl get_url() const;
+diff --git a/src/qml/DragArea.qml b/src/qml/DragArea.qml
+index 8e9041d..ea85a91 100644
+--- a/src/qml/DragArea.qml
++++ b/src/qml/DragArea.qml
+@@ -3,6 +3,7 @@ import QtQuick
+ MouseArea {
+ 	property var target
+ 	property string dragUri: ""
++	property bool active: draggable.Drag.active
+ 	signal dragStarted()
+ 	signal dragFinished(var dropAction)
+ 	signal preDragStarted()
+diff --git a/src/qml/Main.qml b/src/qml/Main.qml
+index 6530994..00befd6 100644
+--- a/src/qml/Main.qml
++++ b/src/qml/Main.qml
+@@ -13,6 +13,12 @@ ApplicationWindow {
+ 	Material.theme: Material.System
+ 	Material.primary: Material.Green
+ 	Material.accent: Material.Pink
++	Component.onCompleted: {
++		if (Settings.spawnOnCursor) {
++			root.x = Backend.get_mouse_pos().x - width / 2;
++			root.y = Backend.get_mouse_pos().y - height / 2;
++		}
++	}
+ 	Shortcut {
+ 		sequences: [StandardKey.Quit, StandardKey.Cancel, "Q"]
+ 		onActivated: Qt.quit();
+@@ -22,7 +28,7 @@ ApplicationWindow {
+ 		property int mouseY: 0
+ 		anchors.fill: parent
+ 		onDropped: (drop) => {
+-			Stdout.print_urls(drop.urls);
++			Backend.handle_dropped_urls(drop.urls);
+ 		}
+ 		onPositionChanged: (drag) => {
+ 			mouseX = drag.x;
+diff --git a/src/qml/PathView.qml b/src/qml/PathView.qml
+index bed119b..b52ba18 100644
+--- a/src/qml/PathView.qml
++++ b/src/qml/PathView.qml
+@@ -16,7 +16,7 @@ ListView {
+ 		highlighted: true
+ 		Label {
+ 			anchors.centerIn: parent
+-			text: "Drag all " + pathView.count + " items"
++			text: "Drag all " + (PathModel.multiSelected ? PathModel.multiSelected : pathView.count) + " items"
+ 			Button {
+ 				id: dragallDummy
+ 				visible: false
+@@ -88,8 +88,9 @@ ListView {
+ 			Rectangle {
+ 				id: usedIndicator
+ 				anchors { right: parent.right; top: parent.top; bottom: parent.bottom }
+-				width: 8
++				width: 8 + multiselect * 40
+ 				color: used ? Material.primary : exists ? Material.color(Material.Grey) : Material.color(Material.Red)
++				Behavior on width { NumberAnimation { duration: 200; easing.type: Easing.InOutSine }}
+ 				Behavior on color { ColorAnimation { duration: 200; easing.type: Easing.InOutSine }}
+ 			}
+ 		}
+@@ -100,8 +101,17 @@ ListView {
+ 			dragUri: uri
+ 			hoverEnabled: true
+ 			acceptedButtons: Qt.LeftButton | Qt.RightButton
+-			onClicked: PathModel.open(index);
+-			onDragStarted: Settings.alwaysOnBottom = true
++			onClicked: (ev) => {
++				if (ev.modifiers & Qt.ControlModifier) {
++					PathModel.multiselect(index);
++				} else {
++					PathModel.open(index);
++				}
++			}
++			onDragStarted: {
++				Settings.alwaysOnBottom = true;
++				pathView.dragActive = true;
++			}
+ 			onDragFinished: (dropAction) => {
+ 				PathModel.taint_used(index)
+ 				Settings.alwaysOnBottom = false;
+diff --git a/src/qml/Wave.qml b/src/qml/Wave.qml
+index f9ae264..338f2ba 100644
+--- a/src/qml/Wave.qml
++++ b/src/qml/Wave.qml
+@@ -12,7 +12,7 @@ Rectangle {
+ 	Behavior on size {
+ 		NumberAnimation { duration: 300; easing.type: Easing.OutCirc; }
+ 	}
+-	layer.enabled: true
++	layer.enabled: visible
+ 	layer.effect: MultiEffect {
+ 		maskEnabled: true
+ 		maskSource: ShaderEffectSource {
+diff --git a/src/settings.cpp b/src/settings.cpp
+index d5ba2c3..777a943 100644
+--- a/src/settings.cpp
++++ b/src/settings.cpp
+@@ -1,17 +1,5 @@
+ #include "settings.hpp"
+ 
+-#include <QJSEngine>
+-
+-Settings *Settings::create(QQmlEngine *qmlEngine, QJSEngine *jsEngine) {
+-	auto res = Settings::get();
+-	QJSEngine::setObjectOwnership(res, QJSEngine::CppOwnership);
+-	return res;
+-}
+-
+-void Settings::disable_always_on_bottom() {
+-	suppress_always_on_bottom = true;
+-}
+-
+ void Settings::setAlwaysOnBottom(const bool v) {
+ 	if (!suppress_always_on_bottom) {
+ 		always_on_bottom = v;
+@@ -19,9 +7,17 @@ void Settings::setAlwaysOnBottom(const bool v) {
+ 	}
+ }
+ 
+-Settings::Frontend Settings::effective_frontend() const {
+-	if (frontend == Settings::Frontend::Auto) {
+-		return can_drag_immediately ? Settings::Frontend::Immediate : Settings::Frontend::Gui;
++Settings::Frontend Settings::effective_frontend(bool outgoing) const {
++	if (intercept && !outgoing) {
++		return Settings::Frontend::Gui;
++	} else if (frontend == Settings::Frontend::Auto) {
++		if (intercept) {
++			// for intercept and outgoing prefer Immediate as default frontend
++			return Util::is_wayland() ? Settings::Frontend::Stdout : Settings::Frontend::Immediate;
++		} else {
++			// in general (not outgoing), prefer immediate and fallback to GUI
++			return can_drag_immediately ? Settings::Frontend::Immediate : Settings::Frontend::Gui;
++		}
+ 	}
+ 	return frontend;
+ }
+@@ -37,5 +33,10 @@ bool Settings::needs_gui() const {
+ 	// so this boolean would change to false for the Auto frontend,
+ 	// meaning the GUI could hide again.
+ 	// Of course in that case the GUI should stay visible if it was visible once.
+-	return effective_frontend() == Settings::Frontend::Gui;
++	return effective_frontend() == Settings::Frontend::Gui && !hide_gui;
++}
++
++void Settings::setHideGui(const bool h) {
++	hide_gui = h;
++	emit hideGuiChanged(h);
+ }
+diff --git a/src/settings.hpp b/src/settings.hpp
+index fc27fd0..2d24a8b 100644
+--- a/src/settings.hpp
++++ b/src/settings.hpp
+@@ -1,7 +1,5 @@
+ #pragma once
+ 
+-#include <qqml.h>
+-
+ #include "Util/util.hpp"
+ 
+ class Settings : public QObject {
+@@ -13,7 +11,8 @@ class Settings : public QObject {
+ 	Q_PROPERTY(bool alwaysOnBottom MEMBER always_on_bottom WRITE setAlwaysOnBottom NOTIFY alwaysOnBottomChanged)
+ 	Q_PROPERTY(bool keepDroppedFiles MEMBER keep_dropped_files NOTIFY keepDroppedFilesChanged)
+ 	Q_PROPERTY(bool frameless MEMBER frameless CONSTANT)
+-	Q_PROPERTY(bool needsGui READ needs_gui CONSTANT)
++	Q_PROPERTY(bool needsGui READ needs_gui NOTIFY hideGuiChanged)
++	Q_PROPERTY(bool spawnOnCursor MEMBER spawn_on_cursor CONSTANT)
+ public:
+ 	enum class AutoQuitBehavior {
+ 		Never,
+@@ -28,14 +27,13 @@ public:
+ 		Stdout, // print a link in the terminal using OSC8
+ 	};
+ 
+-	STRICT_SINGLETON(Settings)
++	QML_CPP_SINGLETON(Settings)
+ 
+-	static Settings *create(QQmlEngine *qmlEngine, QJSEngine *jsEngine);
+ 	AutoQuitBehavior auto_quit_behavior = Settings::AutoQuitBehavior::All;
+ 	Frontend frontend = Settings::Frontend::Auto;
+-	void disable_always_on_bottom();
+ 	void setAlwaysOnBottom(const bool v);
+-	Frontend effective_frontend() const;
++	Frontend effective_frontend(bool outgoing = false) const;
++	void setHideGui(const bool h);
+ 
+ 	bool always_on_top = false;
+ 	bool always_on_bottom = false;
+@@ -43,9 +41,13 @@ public:
+ 	bool frameless = false;
+ 	bool can_drag_immediately = false;
+ 	bool suppress_always_on_bottom = false;
++	bool spawn_on_cursor = false;
++	bool intercept = false;
+ signals:
+ 	void alwaysOnBottomChanged(bool alwaysOnBottom);
+ 	void keepDroppedFilesChanged(bool keepDroppedFiles);
++	void hideGuiChanged(bool hide);
+ private:
+ 	bool needs_gui() const;
++	bool hide_gui = false;
+ };
+diff --git a/src/stdin.cpp b/src/stdin.cpp
+index ede58fa..b8c44bc 100644
+--- a/src/stdin.cpp
++++ b/src/stdin.cpp
+@@ -2,7 +2,7 @@
+ 
+ #include "backend.hpp"
+ 
+-Stdin::Stdin(QObject *parent) {
++Stdin::Stdin(bool) {
+ 	stdin_nb = fileno(stdin);
+ 	// do not buffer stdin line-wise
+ 	disable_canonical_mode();
+@@ -15,11 +15,26 @@ Stdin::~Stdin() {
+ 	reset_terminal_mode();
+ }
+ 
++Stdin *Stdin::get() {
++	static Stdin s {true};
++	return &s;
++}
++
++Stdin *Stdin::create(QQmlEngine *qmlEngine, QJSEngine *jsEngine) {
++	auto res = get();
++	QJSEngine::setObjectOwnership(res, QJSEngine::CppOwnership);
++	return res;
++}
++
+ void Stdin::disable_canonical_mode() {
+ #ifdef Q_OS_UNIX
+ 	struct termios term;
+ 
+ 	if (tcgetattr(stdin_nb, &orig_term)) {
++		// Failed, this likely means that no tty is attached
++		// Also suppress hiding the parent terminal automatically,
++		// as we were likely not started from a terminal
++		is_tty = false;
+ 		return;
+ 	}
+ 	term = orig_term;
+diff --git a/src/stdin.hpp b/src/stdin.hpp
+index 2ee9b3a..f5a9b71 100644
+--- a/src/stdin.hpp
++++ b/src/stdin.hpp
+@@ -16,8 +16,13 @@ class Stdin : public QObject {
+ 	QML_SINGLETON
+ 	Q_PROPERTY(bool closed MEMBER m_closed NOTIFY closedChanged)
+ public:
+-	Stdin(QObject *parent = nullptr);
++	explicit Stdin(bool);
+ 	~Stdin();
++
++	static Stdin *get();
++	static Stdin *create(QQmlEngine *qmlEngine, QJSEngine *jsEngine);
++
++	bool is_tty = true;
+ signals:
+ 	void closedChanged();
+ private:
+diff --git a/src/stdout.cpp b/src/stdout.cpp
+index 20c29e9..0ee78d6 100644
+--- a/src/stdout.cpp
++++ b/src/stdout.cpp
+@@ -1,14 +1,5 @@
+ #include "stdout.hpp"
+ 
+-void Stdout::print_urls(const QList<QUrl> &urls) {
+-	for (const auto &u : urls) {
+-		auto url = u.toString().toStdString();
+-		if (url.starts_with("file://")) {
+-			url = url.substr(7);
+-		}
+-		std::cout << url << std::endl;
+-		if (Settings::get()->keep_dropped_files) {
+-			PathRegistry::get()->add_path(url);
+-		}
+-	}
++void Stdout::print_osc8_link(const std::string &url, const std::string &text) {
++	std::cout << std::format("\e]8;;{}\e\\{}\e]8;;\e\\", url, text) << std::endl;
+ }
+diff --git a/src/stdout.hpp b/src/stdout.hpp
+index e61176f..0140bb0 100644
+--- a/src/stdout.hpp
++++ b/src/stdout.hpp
+@@ -1,15 +1,8 @@
+ #pragma once
+ 
++#include <format>
+ #include <iostream>
+-#include <qqml.h>
+ 
+-#include "path_registry.hpp"
+-#include "settings.hpp"
+-
+-class Stdout : public QObject {
+-	Q_OBJECT
+-	QML_ELEMENT
+-	QML_SINGLETON
+-public:
+-	Q_INVOKABLE void print_urls(const QList<QUrl> &urls);
++namespace Stdout {
++void print_osc8_link(const std::string &url, const std::string &text);
+ };
