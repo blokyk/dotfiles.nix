@@ -38,6 +38,7 @@
     terminal-paste = [ "<Ctrl>" "v" ]; # ctrl+v
 
     session-add-auto = [ "<Ctrl>" "t" ];
+    session-switch-to-next-terminal = [ "<Alt>" "twosuperior" ];
 
     app-new-session = [ "<Ctrl>" "<Shift>" "n" ];
     app-new-window =  [ "<Ctrl>" "n" ];
