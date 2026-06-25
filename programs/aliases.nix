@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }:
 let
   inherit (builtins) attrValues;
+  nix = config.nix.package;
 
   wrap = pkgs.wrapper-manager.wrap;
   mkAlias = pkgs.callPackage <self/misc/mkAlias.nix> {};
@@ -110,11 +111,28 @@ let
 
     # nix repl -f <nixpkgs>
     nrp = {
-      pkg = pkgs.nix-impl-cli;
+      pkg = nix;
       baseCmd = "nix";
       flags = [
         "repl"
         "--file" "<nixpkgs>"
+      ];
+    };
+
+    nz = {
+      pkg = pkgs.nix-output-monitor;
+      baseCmd = "nom-shell";
+      flags = [
+        "--command" "${lib.getExe pkgs.zsh}"
+      ];
+    };
+
+    nz3 = {
+      pkg = pkgs.nix-output-monitor;
+      baseCmd = "nom";
+      flags = [
+        "develop"
+        "-c" "${lib.getExe pkgs.zsh}"
       ];
     };
 
