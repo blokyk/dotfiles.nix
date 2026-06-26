@@ -1,18 +1,5 @@
 {
   "pins": {
-    "fenix": {
-      "type": "Git",
-      "repository": {
-        "type": "GitHub",
-        "owner": "nix-community",
-        "repo": "fenix"
-      },
-      "branch": "main",
-      "submodules": false,
-      "revision": "67e07d2f273a0761702abc9cf597ed13fcd2b0cb",
-      "url": "https://github.com/nix-community/fenix/archive/67e07d2f273a0761702abc9cf597ed13fcd2b0cb.tar.gz",
-      "hash": "sha256-gKC2HPrqwR5bso+17y27f0dCxyZM4IPl/ANy3jK5BDk="
-    },
     "figlet-fonts": {
       "type": "Git",
       "repository": {
