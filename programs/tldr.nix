@@ -7,4 +7,9 @@
     package = pkgs.tlrc;
     period = "daily";
   };
+
+  systemd.user.services.tldr-update.Service = {
+    Restart = "on-failure";
+    RestartSec = "1h";
+  };
 }
