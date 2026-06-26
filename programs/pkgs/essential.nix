@@ -2,6 +2,8 @@
   home.packages = with pkgs; [
     # fancy alternative to cat(1)
     bat
+    # C-style terminal calculator
+    calc
     # simple, fast and user-friendly alternative to find
     fd
     # general-purpose command-line fuzzy finder
