@@ -1,10 +1,17 @@
 let
-  injector = import ./npins/inject.nix (pins: {
+  injector = import ./npins/inject.nix (pins: basePins: {
     # note: these are workaround for the weird nesting inherent to those module systems
     # (basically, home-manager will import <nixpkgs/lib/modules>, which will then import
     # our code, so the actual dependency chain looks like hm->nixpkgs->this to frozenpins)
     home-manager = pins;
     nixpkgs = pins;
+    # home-manager = pins // {
+    #   outPath = (import pins.nixpkgs {}).applyPatches {
+    #     name = "home-manager";
+    #     src = basePins.home-manager.outPath;
+    #     patches = [];
+    #   };
+    # };
 
     zoeee.nixpkgs = pins.nixpkgs;
 

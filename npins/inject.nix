@@ -30,7 +30,8 @@
 # issue with it or wish to provide feedback, please submit an issue on the repo
 # given above.
 #
-# Version: 1.2.0
+# Version: 1.2.0+custom
+#   - make pin override function take both the final pins as well as the base ones
 
 projectFollows:
 let
@@ -262,7 +263,15 @@ let
         #       for example:
         #           { b.c = pins.c; a.b = pins.b; }
         #         = { b.c = <c>; a.b = <b>; a.b.c = <c>; })
-        ourFollows = followsFn allPinsAndFollows;
+        ourFollows =
+          # CUSTOM: if the result of `followsFn` is still a function, then
+          #         that means it's awaiting the previous pins; otherwise,
+          #         it's (presumably) just the resulting attrset for overrides
+          let followsRes = followsFn allPinsAndFollows; in
+          if builtins.isFunction followsRes then
+            followsRes basePinsAsFollows
+          else
+            followsRes;
 
         # if a pin is of the form "foo.bar = ./vendored-bar", transform it to
         # the "correct" form, which is `foo.bar.outPath = ./vendored-bar`
