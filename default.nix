@@ -13,6 +13,7 @@ let
     #   };
     # };
 
+    zoeee.outPath = /home/blokyk/dev/packages.nix;
     zoeee.nixpkgs = pins.nixpkgs;
 
     # note: in theory, this would override any subproject that

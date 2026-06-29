@@ -22,9 +22,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "486595d2cf49cfcd649b58a284fa11ac0e34da22",
-      "url": "https://github.com/nix-community/home-manager/archive/486595d2cf49cfcd649b58a284fa11ac0e34da22.tar.gz",
-      "hash": "sha256-5inaamLgUMWy+MOBE9ChF9QAF1o/74LFuHkI0W/9rqc="
+      "revision": "5d72a29fc36ac21adae6ae35568fe5ee6700850f",
+      "url": "https://github.com/nix-community/home-manager/archive/5d72a29fc36ac21adae6ae35568fe5ee6700850f.tar.gz",
+      "hash": "sha256-slFTUgDy0KTPA4LBAmC/9SngDq8GCPdX+ZR0yQHHN1E="
     },
     "hotline-suwayomi": {
       "type": "Git",
@@ -69,8 +69,8 @@
       "type": "Channel",
       "name": "nixpkgs-unstable",
       "artifact": "nixexprs.tar.xz",
-      "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.11pre1009182.ffa10e26ae11/nixexprs.tar.xz",
-      "hash": "sha256-JX05Ms/dk0c+UoW9IqQriB53HNZFckX9Qd3EJqmcqEw="
+      "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.11pre1023977.534ee3d8beb1/nixexprs.tar.xz",
+      "hash": "sha256-FyWKrhnTe6Ytw/zzYTB52Wboe5a7UqikUG+lV5puCMY="
     },
     "rycee-nur": {
       "type": "Git",
@@ -81,9 +81,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "ef4b88dd2caa60399b237a3bfa1205bb1064e7af",
-      "url": "https://gitlab.com/api/v4/projects/rycee%2Fnur-expressions/repository/archive.tar.gz?sha=ef4b88dd2caa60399b237a3bfa1205bb1064e7af",
-      "hash": "sha256-EtBSmqZn3oCmfZbyUbRqMUAclm5AlD4hDo4Qdj5X52s="
+      "revision": "9ad2019bb522c7eeecd9e3e2d18dd681f697f4d0",
+      "url": "https://gitlab.com/api/v4/projects/rycee%2Fnur-expressions/repository/archive.tar.gz?sha=9ad2019bb522c7eeecd9e3e2d18dd681f697f4d0",
+      "hash": "sha256-sde3f0uM5mEUwl6Bxom69P+9KOdpJ9YnSj0umSB2qdQ="
     },
     "wrapper-manager": {
       "type": "Git",
