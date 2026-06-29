@@ -30,8 +30,8 @@
             domain = "code.maralorn.de";
             owner = "maralorn";
             repo = "nix-output-monitor";
-            rev = "3e6592850fdda133135ccd759bbf8bec5b7b412e";
-            sha256 = "sha256-KlJnug3cpSb5jUIbsg95mX1w+tI5bAwBUJb4nJxCjxQ=";
+            rev = "71963f8de25875a4c03f2a0b61c658fa4eb2ce07";
+            sha256 = "sha256-5TZiccmY/UmKVunO6x9AhBUKltDheXtCWmpY/OUaArQ=";
           }) {};
         in
           lib.pipe base-nom [
