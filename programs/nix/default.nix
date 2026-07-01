@@ -1,11 +1,10 @@
-{ lib, pins, ... }:
+{ config, lib, pins, ... }:
 let
   # we don't want to inject every pin (e.g. figlet-font) into the system's nix path
   systemWidePins = {
     inherit (pins)
       home-manager
       nixpkgs
-      wrapper-manager
       zoeee
       ;
   };
@@ -38,5 +37,9 @@ in {
       in lib.mapAttrs' pinToFlake systemWidePins;
   };
 
+  # make sure the nix used by the user is nix.package and not the system-wide one
+  home.packages = [ config.nix.package ];
+
+  # nix.settings.channels doesn't work for some reason :(
   home.sessionVariables.NIX_PATH = import <self/npins/mk-nix-path.nix> { pins = systemWidePins; };
 }
