@@ -43,6 +43,8 @@ in {
             # bash script checking
             timonwong.shellcheck
 
+            # finds 'todo:' and 'fixme:' comments and displays them by-file
+            gruntfuggly.todo-tree
             # highlight trailing spaces at the end of lines
             shardulm94.trailing-spaces
             # code-spell code and comments
@@ -54,13 +56,10 @@ in {
           ];
 
           marketplaceExtensions = pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-            # find 'todo:' and 'fixme:' comments and displays them by-file
-            { name = "todo-tree"; publisher = "gruntfuggly"; version = "0.0.226"; sha256 = "0yrc9qbdk7zznd823bqs1g6n2i5xrda0f9a7349kknj9wp1mqgqn";  }
-
             # remote ssh stuff
-            { name = "remote-ssh"; publisher = "ms-vscode-remote"; version = "0.122.0"; sha256 = "162hln17fkpnacw98l6igfzsg95azsmaw41kbnv282bcg0xq353a";  }
+            { name = "remote-ssh"; publisher = "ms-vscode-remote"; version = "0.125.2026062315"; sha256 = "hiqvNbcVQBOJ/x4mjQHlKp76s/B3GGvxuy6LGi1OKKs=";  }
             { name = "remote-ssh-edit"; publisher = "ms-vscode-remote"; version = "0.87.0"; sha256 = "1qqsnzn9z11jr72n7cl0ab6i9mv49c0ijcp699zbglv5092gmrf9";  }
-            { name = "remote-explorer"; publisher = "ms-vscode"; version = "0.5.0"; sha256 = "1gws544frhss2x2i7s50ipaalcz6ai2688ykcgvinxsxv9x2gnq4";  }
+            { name = "remote-explorer"; publisher = "ms-vscode"; version = "0.6.2026031809"; sha256 = "WRg8ObPVQMluuCW/dBM2ibBDW/zc8cQQS5QQMfcpw2c=";  }
 
             # add a unique accent color to each window based on workspace path
             { name = "unique-window-colors"; publisher = "stuart"; version = "1.2.9"; sha256 = "0lbjnihxaznm2r6zh6a1mz96h89430ba6cr4k43qhpk2gpk3d2vf";  }
