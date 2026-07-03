@@ -11,6 +11,7 @@ in {
       french-dictionary
       hotline-suwayomi
       # mpris-integration
+      redirector
       tab-session-manager
       ublock-origin
     ];
