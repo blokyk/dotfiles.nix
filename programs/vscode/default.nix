@@ -1,13 +1,12 @@
-{ config, lib, ... }:
+{ config, ... }:
 let
   inherit (config.lib.file) mkOutOfStoreSymlink;
 in {
   imports = [ ./extensions.nix ];
 
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+  nixpkgs.config.allowUnfreePackages = [
     "code"
     "vscode"
-    "vscode-extension-MS-python-vscode-pylance"
   ];
 
   programs.vscode = {

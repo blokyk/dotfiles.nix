@@ -198,6 +198,7 @@
     "[cpp]": {
         "editor.inlayHints.enabled": "offUnlessPressed"
     },
+    "mesonbuild.downloadLanguageServer": true,
 
     // dart
     "dart.flutterRunAdditionalArgs": ["--no-pub"],
@@ -282,6 +283,9 @@
 
     // python
     "python.analysis.typeCheckingMode": "standard",
+
+    // rust
+    "rust-analyzer.inlayHints.typeHints.enable": false,
 
     // typst
     "[typst]": {
