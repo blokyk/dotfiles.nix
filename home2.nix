@@ -40,6 +40,9 @@ in {
           then removeAttrs raw [ "override" "overrideAttrs" "overrideDerivation" ]
           else raw;
 
+      fast-nix-gc = pkgs.callPackage <fast-nix-gc> {};
+      nix-diff-rs = pkgs.callPackage <nix-diff-rs/package.nix> {};
+
       # allow packages to be based on the home-manager config
       hm-config = config;
 

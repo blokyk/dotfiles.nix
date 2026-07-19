@@ -1,5 +1,18 @@
 {
   "pins": {
+    "fast-nix-gc": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "Mic92",
+        "repo": "fast-nix-gc"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "aba1902a691f538d7655a8cb1f6c88adc8ced241",
+      "url": "https://github.com/Mic92/fast-nix-gc/archive/aba1902a691f538d7655a8cb1f6c88adc8ced241.tar.gz",
+      "hash": "sha256-8bSrhuD0kGw0HlJqQsDDYidr9QG2aujOqS+46yNhW5Y="
+    },
     "figlet-fonts": {
       "type": "Git",
       "repository": {
@@ -78,6 +91,19 @@
       "revision": "c2c5c0c204df3c2b131dc529e8de2c9acbd90953",
       "url": "https://github.com/blokyk/nix-debug/archive/c2c5c0c204df3c2b131dc529e8de2c9acbd90953.tar.gz",
       "hash": "sha256-pL27Fxmlrh7pGuWL/IPHu/naT6reib2SN4m4M+h2BIE="
+    },
+    "nix-diff-rs": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "Mic92",
+        "repo": "nix-diff-rs"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "280709058fdd7bed28e95fb910518fb70df70b70",
+      "url": "https://github.com/Mic92/nix-diff-rs/archive/280709058fdd7bed28e95fb910518fb70df70b70.tar.gz",
+      "hash": "sha256-OCFG4MqKosdOSfT+FqtS9Tt/8jI2iKXWOqZgHY7DeIc="
     },
     "nixpkgs": {
       "type": "Channel",

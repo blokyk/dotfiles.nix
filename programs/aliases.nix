@@ -83,16 +83,37 @@ let
       flags = [ "--almost-all" ];
     };
 
+    lix-diff-drv = {
+      pkg = pkgs.nix-diff-rs;
+      flags = [];
+      mergeWithBasePkg = true;
+    };
+
+    lix-gc = {
+      pkg = pkgs.fast-nix-gc;
+      flags = [];
+      mergeWithBasePkg = true;
+    };
+
+    lix-optimize = {
+      pkg = pkgs.fast-nix-gc;
+      baseCmd = "fast-nix-optimize";
+      flags = [];
+      mergeWithBasePkg = true;
+    };
+
     # just a bare alias to npins, so that you can use `lix pin`
     lix-pin = {
       pkg = pkgs.npins;
       flags = [];
+      mergeWithBasePkg = true;
     };
 
     # bare alias to get `lix tree`
     lix-tree = {
       pkg = pkgs.nix-tree;
       flags = [];
+      mergeWithBasePkg = true;
     };
 
     ll = {
