@@ -39,6 +39,20 @@
       "url": "https://github.com/blokyk/hotline-suwayomi/archive/372759d486d49efb46556ef803b2f266954aab51.tar.gz",
       "hash": "sha256-UNzAIT2opdjiExaZAe3e0vt98m2/EODMwSdMJuG3DiM="
     },
+    "lix": {
+      "type": "Git",
+      "repository": {
+        "type": "Forgejo",
+        "server": "https://git.lix.systems/",
+        "owner": "lix-project",
+        "repo": "lix"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "ea31dbe5011f4495a40e8daadd2d0eb5c3607eef",
+      "url": "https://git.lix.systems/lix-project/lix/archive/ea31dbe5011f4495a40e8daadd2d0eb5c3607eef.tar.gz",
+      "hash": "sha256-/+g5XLMa9Fz2pJex4iRbcN1QXsA+DAxbmKM/3Bzou/c="
+    },
     "nanonix": {
       "type": "Git",
       "repository": {

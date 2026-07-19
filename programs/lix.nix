@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: {
+{ config, pkgs, ... }: {
   nix.package =  pkgs.lixPackageSets.git.lix;
   nixpkgs.overlays = [
     (final: prev: {
@@ -7,24 +7,24 @@
           attrName = "git";
 
           lix-args = rec {
-            version = "2.96.0-pre-20260701_${builtins.substring 0 12 src.rev}";
+            version = "2.96.0-git";
 
-            src = pkgs.fetchFromGitea {
-              domain = "git.lix.systems";
-              owner = "lix-project";
-              repo = "lix";
-              rev = "cf1e565a0a955bc40a66da82e6cdae481371b8cd";
-              hash = "sha256-PI+pn+CYqcKxiZq0gVxGmnBKD+UA1VMRQNr9vyAK4/A=";
-            };
+            src = builtins.storePath <lix>;
 
             cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
               name = "lix-${version}";
               inherit src;
-              hash = "sha256-8Z4bV7K4f3lAdKu0h4DYgWHKJ9DmRArHZAKhHpUbkuY=";
+              hash = "sha256-WbSHmK8d8SLF1WqB9NZTBa18/pQSXtnZzygIIc8AEEM=";
             };
           };
         }).overrideScope (finalScope: prevScope: {
-          lix = prevScope.lix.overrideAttrs { doCheck = false; doInstallCheck = false; };
+          lix = prevScope.lix.overrideAttrs (prev: {
+            nativeBuildInputs = prev.nativeBuildInputs ++ [ final.mdbook-linkcheck2 final.cacert ];
+            buildInputs = prev.buildInputs ++ [ final.mimalloc ];
+
+            doCheck = false;
+            doInstallCheck = false;
+          });
         });
       });
 
@@ -35,7 +35,7 @@
       # we can't use lixPackageSets's nixpkgs-review because of https://zulip.lix.systems/#narrow/channel/11-Support/topic/infinite.20recursion.20in.20.22Advanced.20change.22.20with.20nixpkgs-25.2E11.3F
       nixpkgs-review = prev.nixpkgs-review.override {
         nix = prev.lix;
-        inherit (prev) nix-eval-jobs; # use non-lix one because it doesn't support --apply
+        inherit (final) nix-eval-jobs; # use non-lix one because it doesn't support --apply
       };
       nixpkgs-reviewFull = prev.nixpkgs-reviewFull.override {
         inherit (final) nixpkgs-review;
