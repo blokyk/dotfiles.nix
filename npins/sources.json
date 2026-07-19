@@ -35,9 +35,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "5d72a29fc36ac21adae6ae35568fe5ee6700850f",
-      "url": "https://github.com/nix-community/home-manager/archive/5d72a29fc36ac21adae6ae35568fe5ee6700850f.tar.gz",
-      "hash": "sha256-slFTUgDy0KTPA4LBAmC/9SngDq8GCPdX+ZR0yQHHN1E="
+      "revision": "3139deb8cafbe73b39b24451255b2fdd3426077e",
+      "url": "https://github.com/nix-community/home-manager/archive/3139deb8cafbe73b39b24451255b2fdd3426077e.tar.gz",
+      "hash": "sha256-j9maqjx1T8+ljAVntAdSI5hSGCm77QNZz64JF1rJNu0="
     },
     "hotline-suwayomi": {
       "type": "Git",
@@ -62,9 +62,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "ea31dbe5011f4495a40e8daadd2d0eb5c3607eef",
-      "url": "https://git.lix.systems/lix-project/lix/archive/ea31dbe5011f4495a40e8daadd2d0eb5c3607eef.tar.gz",
-      "hash": "sha256-/+g5XLMa9Fz2pJex4iRbcN1QXsA+DAxbmKM/3Bzou/c="
+      "revision": "e780cc6c9ac9889aafa226f9dbd4f8cbe35860ac",
+      "url": "https://git.lix.systems/lix-project/lix/archive/e780cc6c9ac9889aafa226f9dbd4f8cbe35860ac.tar.gz",
+      "hash": "sha256-Mnjl2vgu8jgVfMRQC+G0jU4sizw1wHDf9d1Lpjx+7ns="
     },
     "nanonix": {
       "type": "Git",
@@ -135,9 +135,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "9ad2019bb522c7eeecd9e3e2d18dd681f697f4d0",
-      "url": "https://gitlab.com/api/v4/projects/rycee%2Fnur-expressions/repository/archive.tar.gz?sha=9ad2019bb522c7eeecd9e3e2d18dd681f697f4d0",
-      "hash": "sha256-sde3f0uM5mEUwl6Bxom69P+9KOdpJ9YnSj0umSB2qdQ="
+      "revision": "775bd8e526823ab58efe5d1fc269f2a60c3de2c1",
+      "url": "https://gitlab.com/api/v4/projects/rycee%2Fnur-expressions/repository/archive.tar.gz?sha=775bd8e526823ab58efe5d1fc269f2a60c3de2c1",
+      "hash": "sha256-NKjHErNuyO2x+YBUNOJy/8uKXfuMX60SLFuvZiMYdA8="
     },
     "wrapper-manager": {
       "type": "Git",
@@ -148,9 +148,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "51ad0422b925d830bf4af36979fed51209f79c0a",
-      "url": "https://github.com/viperML/wrapper-manager/archive/51ad0422b925d830bf4af36979fed51209f79c0a.tar.gz",
-      "hash": "sha256-fCm4sOeTDf3kBtYMmU4OHsviI/oF8rMbPkUMcQf6lw4="
+      "revision": "531d7752716f5097f05c709d6727299d70c69b62",
+      "url": "https://github.com/viperML/wrapper-manager/archive/531d7752716f5097f05c709d6727299d70c69b62.tar.gz",
+      "hash": "sha256-LqqlRrZVLdCr/fmfXj/j7bUpvv02Ct3TVInWRxs20a8="
     },
     "zoeee": {
       "type": "Git",
@@ -161,9 +161,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "e41c99fb8c069dcc6ff5678f1793a5e0cf58c8ba",
-      "url": "https://github.com/blokyk/packages.nix/archive/e41c99fb8c069dcc6ff5678f1793a5e0cf58c8ba.tar.gz",
-      "hash": "sha256-7wvDPc9hjYoVSfne7yMlVNIF57yRMoW1fb79NhX5pg0="
+      "revision": "302b1ae5dae5890ead998958505e6231c1cb58e4",
+      "url": "https://github.com/blokyk/packages.nix/archive/302b1ae5dae5890ead998958505e6231c1cb58e4.tar.gz",
+      "hash": "sha256-ayGCWTcYbJMAJWGPGMFgj+a40X5WE3ZaPE+d9vGSsZc="
     }
   },
   "version": 8
