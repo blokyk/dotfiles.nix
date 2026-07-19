@@ -72,6 +72,20 @@
       "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.11pre1023977.534ee3d8beb1/nixexprs.tar.xz",
       "hash": "sha256-FyWKrhnTe6Ytw/zzYTB52Wboe5a7UqikUG+lV5puCMY="
     },
+    "nom": {
+      "type": "Git",
+      "repository": {
+        "type": "Forgejo",
+        "server": "https://code.maralorn.de/",
+        "owner": "maralorn",
+        "repo": "nix-output-monitor"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "9accf60d67c850295f31ec061d8cfc664491c714",
+      "url": "https://code.maralorn.de/maralorn/nix-output-monitor/archive/9accf60d67c850295f31ec061d8cfc664491c714.tar.gz",
+      "hash": "sha256-+cpDCtca6Dzhusd8XhBnJ0nrlRJbgYYdRgzXq2x1XpQ="
+    },
     "rycee-nur": {
       "type": "Git",
       "repository": {

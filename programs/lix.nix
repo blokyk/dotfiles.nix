@@ -46,40 +46,6 @@
         nix-eval-jobs
         nix-fast-build
         colmena;
-
-      # the upstream repo already includes packaging for it in `default.nix`,
-      # but it unfortunately hides a few packaging details in the flake :(
-      nix-output-monitor =
-        let
-          hlib = final.haskell.lib.compose;
-          base-nom = final.haskellPackages.callPackage (final.fetchFromForgejo {
-            domain = "code.maralorn.de";
-            owner = "maralorn";
-            repo = "nix-output-monitor";
-            rev = "71963f8de25875a4c03f2a0b61c658fa4eb2ce07";
-            sha256 = "sha256-5TZiccmY/UmKVunO6x9AhBUKltDheXtCWmpY/OUaArQ=";
-          }) {};
-        in
-          lib.pipe base-nom [
-            pkgs.haskellPackages.buildFromCabalSdist
-            hlib.justStaticExecutables
-
-            (hlib.overrideCabal {
-              # the original flake packaging does some fiddling around to only run
-              # _some_ of the tests in the test suite, but i don't care enough for
-              # that here, so just disable everything
-              doCheck = false;
-
-              # get correct shell completions
-              buildTools = [ final.installShellFiles ];
-              postInstall = ''
-                ln -s nom "$out/bin/nom-build"
-                ln -s nom "$out/bin/nom-shell"
-                chmod a+x $out/bin/nom-shell
-                installShellCompletion completions/*
-              '';
-            })
-          ];
     })
   ];
 }
