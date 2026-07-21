@@ -110,6 +110,13 @@ in {
     text = read ./pr-fzf.sh;
   };
 
+  realise-symlink = writeShellApplication {
+    name = "realise-symlink";
+    runtimeInputs = [ coreutils ];
+    excludeShellChecks = [ ];
+    text = read ./realise-symlink.sh;
+  };
+
   syno = callPackage ./syno {};
 
   frg = writeShellApplication {
