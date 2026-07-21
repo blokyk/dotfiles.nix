@@ -50,6 +50,9 @@
       # if the argument to `cd` is a variable, try to expand it and cd there
       "cdable_vars"
 
+      # try to correct mistyped commands (e.g. `cdoe` instead of `code`)
+      "correct"
+
       # don't expand !! & co
       "no_bang_hist"
 
