@@ -1,19 +1,13 @@
-{ config, lib, pkgs, ... }:
-let
-in {
+{ config, lib, pkgs, ... }: {
+  # inject 'zpkgs' arg into other modules to easily get zoeee/pkgs
+  _module.args.zpkgs = pkgs.callPackage <zoeee/pkgs> {};
+
   home.username = "blokyk";
   home.homeDirectory = "/home/${config.home.username}";
   targets.ubuntu = {
     enable = true;
     version = "25.04";
   };
-
-  # inject 'zpkgs' arg into other modules to easily get zoeee/pkgs
-  _module.args.zpkgs = pkgs.callPackage <zoeee/pkgs> {};
-  # this is a horrible hack exploiting frozenpins internal details,
-  # but because of home-manager's interface, we can't easily inject
-  # these from default.nix :/
-  _module.args.pins = <self>.parentPins;
 
   imports = [
     ./fonts.nix
