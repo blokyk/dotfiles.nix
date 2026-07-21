@@ -1,7 +1,7 @@
 let
   pins = import ./npins {};
   pkgs = import pins.nixpkgs {};
-  vscode-ext-hook = pkgs.callPackage vscode-ext-hook.outPath {};
+  vscode-ext-hook = pkgs.callPackage pins.vscode-ext-hook.outPath {};
 in
 with pkgs;
 mkShell {

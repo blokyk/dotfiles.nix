@@ -3,7 +3,7 @@ let
   pkgs = import pins.nixpkgs {
     overlays = [ (import pins.press) ];
   };
-  vscode-ext-hook = pkgs.callPackage vscode-ext-hook.outPath {};
+  vscode-ext-hook = pkgs.callPackage pins.vscode-ext-hook.outPath {};
 
   document = pkgs.buildTypstDocument {
     name = "myDoc";
