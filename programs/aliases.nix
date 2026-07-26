@@ -1,10 +1,10 @@
 { config, lib, pkgs, ... }:
 let
   inherit (builtins) attrValues;
+  inherit (pkgs) mkAlias;
   nix = config.nix.package;
 
   wrap = pkgs.wrapper-manager.wrap;
-  mkAlias = pkgs.callPackage <self/misc/mkAlias.nix> {};
   HOME = config.home.homeDirectory;
 
   # wrappers REPLACE the original binary (and there's no direct way to get the original)

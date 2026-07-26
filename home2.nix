@@ -42,6 +42,8 @@
 
       nix-debug = pkgs.callPackage <nix-debug> {};
 
+      mkAlias = pkgs.callPackage <self/misc/mkAlias.nix> {};
+
       wrapper-manager =
         (import <wrapper-manager>) // {
           wrap = final.wrapper-manager.lib.wrapWith final;
