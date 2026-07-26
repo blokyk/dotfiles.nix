@@ -6,12 +6,12 @@
 
 {
   # name of the new command
-  name ? pkg.pname,
+  name ? baseCmd,
   # pkg to base this on; if it has a main program,
   # this will also determine the command to run/alias
   pkg,
   # the command that will be aliased; by default, this is getExe(pkg)
-  baseCmd ? (lib.getExe pkg),
+  baseCmd ? baseNameOf (lib.getExe pkg),
   # flags to append to the start of the command
   flags,
   # whether the flags should be shell-escaped or not.
@@ -56,6 +56,7 @@ let
   wrapper = writeShellApplication (baseAttrs // {
     derivationArgs.preferLocalBuild = true;
     derivationArgs.meta = meta // { outputsToInstall = [ "out" ]; };
+    derivationArgs.passthru.basePkg = pkg;
   });
 in
   if mergeWithBasePkg then
