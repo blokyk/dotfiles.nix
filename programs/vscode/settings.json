@@ -266,10 +266,7 @@
                 "expr": "import <zoeee/pkgs> { }"
             },
             "options": {
-                "nixos": { "expr": "{}" },
-                "workspace": {
-                    "expr": "let v = import ./.; in if (builtins.isFunction v || v ? __functor) then (v {}).options else v.options"
-                }
+                // "nixos": { "expr": "(import <nixpkgs/nixos> { configuration = {}; }).options" },
             }
         }
     },

@@ -1,0 +1,23 @@
+{
+    "cSpell.words": [
+        "bindkey",
+        "clipcopy",
+        "clippaste",
+        "compinit",
+        "gnused",
+        "MANPAGER",
+        "manpages",
+        "pciutils",
+        "specialisation",
+        "xclip"
+    ],
+    "nix.serverSettings": {
+        "nixd": {
+            "options": {
+                "workspace": {
+                    "expr": "let v = import ./.; in if (builtins.isFunction v || v ? __functor) then (v {}).options else v.options"
+                }
+            }
+        }
+    }
+}
