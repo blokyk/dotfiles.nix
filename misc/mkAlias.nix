@@ -24,6 +24,10 @@
   # whether this wrapper should have its files merged with the original
   # derivation's output (e.g. manpages, libraries, etc.)
   mergeWithBasePkg ? false,
+  # a string to add before the rest of the command line
+  # (this could be used to, e.g., prepend sudo before the command,
+  # or wrap the program with systemd-run or bubblewrap)
+  preexec ? "",
 }:
 let
   formatFlag =
@@ -33,7 +37,7 @@ let
       else (f: "\"${toString f}\"");
   flagsText =
     lib.concatMapStringsSep
-      "\\\n  "
+      " \\\n    "
       formatFlag
       flags;
 
@@ -42,9 +46,9 @@ let
     runtimeInputs = [ pkg ];
 
     text = ''
-      ${baseCmd} \
-        ${flagsText} \
-        "''${@}"
+      ${preexec} ${baseCmd} \
+          ${flagsText} \
+          "''${@}"
     '';
   };
 
