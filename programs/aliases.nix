@@ -93,6 +93,7 @@ let
       pkg = pkgs.fast-nix-gc;
       flags = [];
       mergeWithBasePkg = true;
+      preexec = "sudo";
     };
 
     lix-optimize = {
@@ -100,6 +101,7 @@ let
       baseCmd = "fast-nix-optimize";
       flags = [];
       mergeWithBasePkg = true;
+      preexec = "sudo";
     };
 
     # just a bare alias to npins, so that you can use `lix pin`
