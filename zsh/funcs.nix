@@ -26,6 +26,15 @@ in {
       fi
     '';
 
+    bitch = ''
+      if ! [[ -v 1 ]]; then
+        echo "Usage: bitch [command]"
+        return 1
+      else
+        "''${EDITOR:-nano}" "$(which "$1")"
+      fi
+    '';
+
     cdmk = ''
       if [[ "$1" = "" ]]; then
           echo "Usage : cdmk [dirname]"

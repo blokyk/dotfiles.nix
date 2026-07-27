@@ -11,7 +11,7 @@
   # this will also determine the command to run/alias
   pkg,
   # the command that will be aliased; by default, this is getExe(pkg)
-  baseCmd ? baseNameOf (lib.getExe pkg),
+  baseCmd ? pkg.meta.mainProgram or (lib.getName pkg),
   # flags to append to the start of the command
   flags,
   # whether the flags should be shell-escaped or not.
