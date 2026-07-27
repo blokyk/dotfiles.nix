@@ -43,10 +43,9 @@ let
 
   baseAttrs = {
     inherit name;
-    runtimeInputs = [ pkg ];
 
     text = ''
-      ${preexec} ${baseCmd} \
+      ${preexec} ${lib.getExe' pkg baseCmd} \
           ${flagsText} \
           "''${@}"
     '';
