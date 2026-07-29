@@ -106,11 +106,17 @@
       "hash": "sha256-OCFG4MqKosdOSfT+FqtS9Tt/8jI2iKXWOqZgHY7DeIc="
     },
     "nixpkgs": {
-      "type": "Channel",
-      "name": "nixpkgs-unstable",
-      "artifact": "nixexprs.tar.xz",
-      "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.11pre1037466.b471514bed69/nixexprs.tar.xz",
-      "hash": "sha256-pMp70Dx62xa8XFOLvrcCLSyw22HCEoYyYd5W+bUfqsc="
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nixos",
+        "repo": "nixpkgs"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "534ee3d8beb1737b5342995f8837e2b2705ce0d8",
+      "url": "https://github.com/nixos/nixpkgs/archive/534ee3d8beb1737b5342995f8837e2b2705ce0d8.tar.gz",
+      "hash": "sha256-2CYuaRDT7hcYnGW+3TTTy+fNnY4jQ6/mGk6ew035XP4="
     },
     "nom": {
       "type": "Git",
