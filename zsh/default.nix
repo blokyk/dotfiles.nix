@@ -1,7 +1,9 @@
-{ config, lib, pkgs, ... }: {
+{ config, lib, ... }: {
   imports = [(
     lib.modules.importApply ../misc/importNixFilesAndDirs.nix ./.
   )];
+
+  home.sessionVariables.SHELL = lib.getExe config.programs.zsh.package;
 
   programs.zsh = {
     enable = true;
