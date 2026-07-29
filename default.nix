@@ -13,7 +13,6 @@ let
     #   };
     # };
 
-    zoeee.outPath = /home/blokyk/dev/packages.nix;
     zoeee.nixpkgs = pins.nixpkgs;
 
     self.outPath = ./.;
