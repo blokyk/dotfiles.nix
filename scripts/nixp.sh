@@ -30,7 +30,7 @@ getPkgInfo() {
     # shellcheck disable=SC2016 # nope, those aren't bash variable substitution
     nix eval --raw --impure -E '
 let
-  inherit (builtins) concatStringsSep isList;
+  inherit (builtins) concatStringsSep replaceStrings isList;
   pkg = (import '"$pkgs"' {}).'"$1"';
   listify = val: if (isList val) then val else [ val ];
   getLicenseName = l: l.spdxId or l.shortName or l.fullName or "unknown license";
@@ -40,7 +40,7 @@ in
 '\'\''
 ${pkg.pname or pkg.name or "???"}
 ${pkg.version or "unknown"}
-${pkg.meta.description or "<no description provided>"}
+${replaceStrings ["\n"] [" "] (pkg.meta.description or "<no description provided>")}
 ${concatStringsSep " / " allLicenseNames}
 ${pkg.meta.homepage or ""}
 '\'\''
