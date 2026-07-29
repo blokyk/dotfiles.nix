@@ -7,8 +7,9 @@
 }:
 lix.overrideAttrs (prev: {
   patches = (prev.patches or []) ++ [
-    ./revert-unpack-tarfile.patch # first, undo the new boring 'unpack tarfile' message
-    ./unpack-progress.patch       # then, add back the old-new 'unpack %s' progress bar
+    # undo the new boring 'unpack tarfile' message and
+    # add back the old-new 'unpack %s' progress bar
+    ./unpack-progress.patch
   ];
 
   nativeBuildInputs = prev.nativeBuildInputs ++ [ mdbook-linkcheck2 cacert ];

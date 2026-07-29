@@ -1,248 +1,136 @@
-commit 51ca8fcd6339eef29010c70bbcb5f9c00f29375a
-Author: blokyk <courvoisier.zoe@gmail.com>
-Date:   Mon May 18 17:02:58 2026 +0200
-
-    fetchTarball: report progress of tarball unpacking
-    
-    this logs unpackTarball calls as `actFileTransfer` activity, and reports
-    the amount of extracted bytes. i didn't make a new ActivityType because,
-    from what i understand, that would be a breaking change for the daemon
-    protocol.
-    
-    note that since computing the amount of uncompressed data is non-trivial,
-    this CL doesn't attempt to contrast the in-progress amount vs the
-    expected amount; this is still better than nothing, which is what we do
-    right now.
-    
-    also ArchiveDecompressionSource apparently does its own custom
-    decompression without using unpackTarball, but i'm honestly not sure
-    where and how that class is actually used, so i didn't touch it.
-    
-    Fixes #1213
-    
-    Change-Id: I68f3be520681d8889292353dd41ab19a60c5eeea
-
-diff --git a/lix/libfetchers/git.cc b/lix/libfetchers/git.cc
-index 97a134af6..504348011 100644
---- a/lix/libfetchers/git.cc
-+++ b/lix/libfetchers/git.cc
-@@ -974,7 +974,7 @@ struct GitInputScheme : InputScheme
-             });
-             Finally const _wait([&] { proc.waitAndCheck(); });
+diff --git a/lix/libmain/progress-bar.cc b/lix/libmain/progress-bar.cc
+index 490b1105f..4deeb5f21 100644
+--- a/lix/libmain/progress-bar.cc
++++ b/lix/libmain/progress-bar.cc
+@@ -519,13 +519,21 @@ std::string ProgressBar::getStatus(State & state)
  
--            TRY_AWAIT(unpackTarfile(*proc.getStdout(), tmpDir));
-+            TRY_AWAIT(unpackTarfile(_input.toURLString(), *proc.getStdout(), tmpDir));
-         }
+     showActivity(actBuilds, "%s built");
  
-         auto storePath = TRY_AWAIT(
-diff --git a/lix/libfetchers/tarball.cc b/lix/libfetchers/tarball.cc
-index d19dbebef..3ea47684d 100644
---- a/lix/libfetchers/tarball.cc
-+++ b/lix/libfetchers/tarball.cc
-@@ -195,7 +195,7 @@ try {
-     } else {
-         Path tmpDir = createTempDir();
-         AutoDelete autoDelete(tmpDir, true);
--        unpackTarfile(store->toRealPath(res.storePath), tmpDir);
-+        unpackTarfile(url, store->toRealPath(res.storePath), tmpDir);
-         auto members = readDirectory(tmpDir);
-         if (members.size() != 1)
-             throw nix::Error("tarball '%s' contains an unexpected number of top-level files", url);
-diff --git a/lix/libstore/builtins/unpack-channel.cc b/lix/libstore/builtins/unpack-channel.cc
-index 4a351db83..a4f9addc7 100644
---- a/lix/libstore/builtins/unpack-channel.cc
-+++ b/lix/libstore/builtins/unpack-channel.cc
-@@ -7,7 +7,7 @@ void builtinUnpackChannel(const Path & out, const std::string & channelName, con
- {
-     createDirs(out);
+-    auto s1 = renderActivity(actCopyPaths, "%s copied");
+-    auto s2 = renderActivity(actCopyPath, "%s MiB", "%.1f", MiB);
++    auto copiedPathsAmount = renderActivity(actCopyPaths, "%s copied");
++    auto copiedSize = renderActivity(actCopyPath, "%s MiB", "%.1f", MiB);
  
--    unpackTarfile(src, out);
-+    unpackTarfile(fmt("channel:%s", channelName), src, out);
+-    if (!s1.empty() || !s2.empty()) {
++    if (!copiedPathsAmount.empty() || !copiedSize.empty()) {
+         if (!res.empty()) res += ", ";
+-        if (s1.empty()) res += "0 copied"; else res += s1;
+-        if (!s2.empty()) { res += " ("; res += s2; res += ')'; }
++        if (copiedPathsAmount.empty()) {
++            // note: we know copiedSize isn't empty cause otherwise we
++            //       wouldn't be in this outer if anyway
++            res += copiedSize + " copied";
++        } else {
++            res += copiedPathsAmount;
++            if (!copiedSize.empty()) {
++                res += " (" + copiedSize + ")";
++            }
++        }
+     }
  
-     auto entries = readDirectory(out);
-     if (entries.size() != 1)
+     showActivity(actFileTransfer, "%s MiB DL", "%.1f", MiB);
 diff --git a/lix/libutil/compression.cc b/lix/libutil/compression.cc
-index b4f9b558f..b3093e2da 100644
+index c47137613..b3093e2da 100644
 --- a/lix/libutil/compression.cc
 +++ b/lix/libutil/compression.cc
-@@ -61,7 +61,7 @@ struct ArchiveDecompressionSource : Source
+@@ -61,7 +61,6 @@ struct ArchiveDecompressionSource : Source
      size_t read(char * data, size_t len) override {
          struct archive_entry * ae;
          if (!archive) {
--            archive = std::make_unique<TarArchive>(*src, true);
-+            archive = std::make_unique<TarArchive>("", *src, true);
+-            // note: this name is not actually used for anything, and we have no way of guessing it
+             archive = std::make_unique<TarArchive>("", *src, true);
              this->archive->check(
                  archive_read_next_header(this->archive->archive.get(), &ae),
-                 "failed to read header (%s)"
+diff --git a/lix/libutil/logging.hh b/lix/libutil/logging.hh
+index 8ea3ec63f..9cb034563 100644
+--- a/lix/libutil/logging.hh
++++ b/lix/libutil/logging.hh
+@@ -14,19 +14,8 @@ namespace nix {
+ 
+ enum ActivityType : uint8_t {
+     actUnknown = 0,
+-
+-    /** Fields:
+-     * 0: string: store path being copied
+-     * 1: string: URI of source store
+-     * 2: string: URI of destination store
+-     */
+     actCopyPath = 100,
+-
+-    /** Fields:
+-     * 0: string: URI of the file being transfered
+-     */
+     actFileTransfer = 101,
+-
+     actRealise = 102,
+     actCopyPaths = 103,
+     actBuilds = 104,
+@@ -38,7 +27,6 @@ enum ActivityType : uint8_t {
+      * 3: int: nrRounds, not used anymore always 1?
+      */
+     actBuild = 105,
+-
+     actOptimiseStore = 106,
+     actVerifyPaths = 107,
+ 
+@@ -58,7 +46,6 @@ enum ActivityType : uint8_t {
+      * 0: string: store path
+      */
+     actPostBuildHook = 110,
+-
+     actBuildWaiting = 111,
+ };
+ 
 diff --git a/lix/libutil/tarfile.cc b/lix/libutil/tarfile.cc
-index 0ea05d950..265108644 100644
+index 2c9245d3b..da85edea6 100644
 --- a/lix/libutil/tarfile.cc
 +++ b/lix/libutil/tarfile.cc
-@@ -4,6 +4,7 @@
- 
- #include "async-io.hh"
- #include "file-descriptor.hh"
-+#include "libutil/error.hh"
- #include "lix/libutil/c-calls.hh"
- #include "lix/libutil/charptr-cast.hh"
- #include "lix/libutil/file-system.hh"
-@@ -49,10 +50,11 @@ void TarArchive::check(int err, const std::string & reason)
-     }
- }
- 
--TarArchive::TarArchive(Source & source, bool raw)
-+TarArchive::TarArchive(std::string name, Source & source, bool raw)
-     : archive{archive_read_new()}
-     , source(&source)
-     , buffer(65536)
-+    , name(name)
- {
-     if (!raw) {
-         archive_read_support_filter_all(archive.get());
-@@ -71,7 +73,9 @@ TarArchive::TarArchive(Source & source, bool raw)
-     );
- }
- 
--TarArchive::TarArchive(const Path & path) : archive{archive_read_new()}
-+TarArchive::TarArchive(const Path & path, std::optional<std::string> name)
-+    : archive{archive_read_new()}
-+    , name(name.value_or(path))
- {
-     archive_read_support_filter_all(archive.get());
-     archive_read_support_format_all(archive.get());
-@@ -91,6 +95,23 @@ static void extract_archive(TarArchive & archive, const Path & destDir)
+@@ -95,7 +95,24 @@ static void extract_archive(TarArchive & archive, const Path & destDir)
  {
      requireCString(destDir);
  
-+    // if there is both an actCopyPath and an actCopyPath*s* at the same time,
-+    // `progress-bar.cc` will combine them and show "X copied (Y MiB)"
-+    // we can use this to show both how many files have been unpacked, but also
-+    // how much storage they represent
-+    auto unpackedCount =
-+        logger->startActivity(lvlInfo, actCopyPaths, fmt("unpacking tarball '%s'", archive.name));
+-    logger->startActivity(lvlTalkative, actUnknown, fmt("unpacking tarball '%s'", archive.name));
 +    auto unpackedSize =
-+        logger->startActivity(lvlInfo, actCopyPath, fmt("unpacking tarball '%s'", archive.name));
++        logger->startActivity(
++            lvlInfo,
++            actCopyPath,
++            fmt("unpacking tarball '%s'", archive.name),
++            {
++                fmt("/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-%s", baseNameOf(archive.name)),
++                archive.name,
++                fmt("file://%s", destDir),
++            }
++        );
 +
-+    size_t processedFiles = 0;
 +    size_t processedBytes = 0;
 +
 +    // keeps track of the value of `processedBytes` the last time we reported progress
 +    size_t lastLoggedBytes = 0;
 +    // to avoid log spam, we only log at constant size increments (here, 100 KiB)
 +    constexpr auto logIncrement = 100l * 1024;
-+
+ 
      int flags =
          ARCHIVE_EXTRACT_TIME | ARCHIVE_EXTRACT_SECURE_SYMLINKS | ARCHIVE_EXTRACT_SECURE_NODOTDOT;
- 
-@@ -129,12 +150,29 @@ static void extract_archive(TarArchive & archive, const Path & destDir)
+@@ -135,8 +152,22 @@ static void extract_archive(TarArchive & archive, const Path & destDir)
          }
  
          archive.check(archive_read_extract(archive.archive.get(), entry, flags));
 +
 +        // only count regular files (e.g. directories would double-count the size of the files under them)
 +        if (archive_entry_filetype(entry) == AE_IFREG) {
-+            processedFiles++;
 +            processedBytes += archive_entry_size(entry);
 +            // avoid log chatter by only progressing every once in a while
 +            if ((processedBytes - lastLoggedBytes) > logIncrement) {
 +                lastLoggedBytes = processedBytes;
 +                // note: we discard the BufferState because these logs are not essential and
 +                //       don't need to wait for flushing
-+                (void) unpackedCount.progress(processedFiles);
 +                (void) unpackedSize.progress(processedBytes);
 +            }
 +        }
      }
  
-+    (void) unpackedCount.progress(processedFiles);
 +    (void) unpackedSize.progress(processedBytes);
 +
      archive.close();
  }
  
--kj::Promise<Result<void>> unpackTarfile(AsyncInputStream & source, const Path & destDir)
-+kj::Promise<Result<void>> unpackTarfile(std::string name, AsyncInputStream & source, const Path & destDir)
- try {
-     Pipe pipe;
-     pipe.create();
-@@ -143,7 +181,7 @@ try {
-         std::launch::async,
-         [&](AutoCloseFD fd) {
-             FdSource source(fd.get());
--            auto archive = TarArchive(source);
-+            auto archive = TarArchive(name, source);
- 
-             createDirs(destDir);
-             extract_archive(archive, destDir);
-@@ -159,9 +197,9 @@ try {
-     co_return result::current_exception();
- }
- 
--void unpackTarfile(const Path & tarFile, const Path & destDir)
-+void unpackTarfile(std::string name, const Path & tarFile, const Path & destDir)
- {
--    auto archive = TarArchive(tarFile);
-+    auto archive = TarArchive(tarFile, name);
- 
-     createDirs(destDir);
-     extract_archive(archive, destDir);
-diff --git a/lix/libutil/tarfile.hh b/lix/libutil/tarfile.hh
-index 292221ba4..7b6185397 100644
---- a/lix/libutil/tarfile.hh
-+++ b/lix/libutil/tarfile.hh
-@@ -14,12 +14,13 @@ struct TarArchive
-     std::unique_ptr<struct archive, decltype([](auto * p) { archive_read_free(p); })> archive;
-     Source * source;
-     std::vector<unsigned char> buffer;
-+    std::string name;
- 
-     void check(int err, const std::string & reason = "failed to extract archive (%s)");
- 
--    TarArchive(Source & source, bool raw = false);
-+    TarArchive(std::string name, Source & source, bool raw = false);
- 
--    TarArchive(const Path & path);
-+    TarArchive(const Path & path, std::optional<std::string> name = {});
- 
-     /// disable copy constructor
-     TarArchive(const TarArchive &) = delete;
-@@ -27,8 +28,7 @@ struct TarArchive
-     void close();
- };
- 
--kj::Promise<Result<void>> unpackTarfile(AsyncInputStream & source, const Path & destDir);
--
--void unpackTarfile(const Path & tarFile, const Path & destDir);
-+kj::Promise<Result<void>> unpackTarfile(std::string name, AsyncInputStream & source, const Path & destDir);
- 
-+void unpackTarfile(std::string name, const Path & tarFile, const Path & destDir);
- }
-diff --git a/lix/nix/prefetch.cc b/lix/nix/prefetch.cc
-index 855254532..85ce02205 100644
---- a/lix/nix/prefetch.cc
-+++ b/lix/nix/prefetch.cc
-@@ -108,10 +108,9 @@ std::tuple<StorePath, Hash> prefetchFile(
- 
-         /* Optionally unpack the file. */
-         if (unpack) {
--            auto act = logger->startActivity(lvlChatty, actUnknown, fmt("unpacking '%s'", url));
-             Path unpacked = (Path) tmpDir + "/unpacked";
-             createDirs(unpacked);
--            unpackTarfile(tmpFile, unpacked);
-+            unpackTarfile(url, tmpFile, unpacked);
- 
-             /* If the archive unpacks to a single file/directory, then use
-                that as the top-level. */
-diff --git a/tests/unit/libutil/tarfile.cc b/tests/unit/libutil/tarfile.cc
-index eaefaeba6..a3f66e531 100644
---- a/tests/unit/libutil/tarfile.cc
-+++ b/tests/unit/libutil/tarfile.cc
-@@ -177,7 +177,7 @@ FileChecker TarFixture::extract()
-     AsyncIoRoot aio;
-     auto stream = AsyncStringInputStream{sink.s};
- 
--    aio.blockOn(unpackTarfile(stream, tmpDir));
-+    aio.blockOn(unpackTarfile("test", stream, tmpDir));
- 
-     return FileChecker{tmpDir};
- }
