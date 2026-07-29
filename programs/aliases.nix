@@ -96,9 +96,9 @@ let
       preexec = "sudo";
     };
 
-    lix-optimize = {
+    lix-optimise = {
       pkg = pkgs.fast-nix-gc;
-      baseCmd = "fast-nix-optimize";
+      baseCmd = "fast-nix-optimise";
       flags = [];
       mergeWithBasePkg = true;
       preexec = "sudo";
