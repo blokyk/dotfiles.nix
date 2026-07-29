@@ -2,6 +2,15 @@
 
 # create a new shell/env with a NIX_PATH based on the pins in npins/sources.json
 
+print_usage() {
+    echo "Usage: npins-shell [--directory <npins-dir> | --file <sources.json-file>] [-- <shell args...>]"
+}
+
+if { ! [[ -v 1 ]]; }|| [[ "$1" = "-h" ]] || [[ "$1" = "--help" ]]; then
+    print_usage
+    exit 0
+fi
+
 pinsDir="${NPINS_DIRECTORY:-npins}"
 if [[ -v 1 ]] && { [[ "$1" = "-d" ]] || [[ "$1" = "--directory" ]]; }; then
     shift
@@ -27,7 +36,7 @@ fi
 
 if [[ $# -gt 0 ]]; then
     echo "Unexpected arguments: $*"
-    echo "Usage: npins-shell [--directory <npins-dir> | --file <sources.json-file>] [-- <shell args...>]"
+    print_usage
     exit 1
 fi
 
