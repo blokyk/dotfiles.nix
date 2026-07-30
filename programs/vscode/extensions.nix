@@ -53,13 +53,15 @@ let
 
   marketplaceExtensions = pkgs.vscode-utils.extensionsFromVscodeMarketplace [
     # a systemd unit file language server
-    { name = "vscode-systemd-support"; publisher = "hangxingliu"; version = "3.0.0"; sha256 = "sha256-K1fXE0AxkWdHsQC3uUFcJecJqB5PpJVzVdtfPSw4+eg="; }
+    { name = "vscode-systemd-support"; publisher = "hangxingliu"; version = "3.0.0"; sha256 = "K1fXE0AxkWdHsQC3uUFcJecJqB5PpJVzVdtfPSw4+eg="; }
 
+    # open currently open file in the corresponding forge
+    { name = "open-file-on-git-remote"; publisher = "WesleyHansen"; version = "0.0.4"; sha256 = "FZy4Rp4/9xYo8BjszBxDqgwd5YqgBLkWBGLzyOaqidk="; }
     # time tracker for repo, language, read/write ratio, etc.
     # todo: should we replace it with an active fork? (e.g. DavidLundholm.slashcoded-vscode-extension)
-    { name = "vscode-coding-tracker"; publisher = "hangxingliu"; version = "0.6.0"; sha256 = "sha256-wZT0coYMPrdMVWOSA4FuYZ9v2AyeUocDFm/t6H+Ae9M="; }
+    { name = "vscode-coding-tracker"; publisher = "hangxingliu"; version = "0.6.0"; sha256 = "wZT0coYMPrdMVWOSA4FuYZ9v2AyeUocDFm/t6H+Ae9M="; }
     # create new files based on snippets and templates
-    { name = "vscode-file-templates"; publisher = "rioj7"; version = "1.18.2"; sha256 = "sha256-oJMen+ioMxHoDPha8HWkHRNMCL8IbphFt2ChRdVDIso="; }
+    { name = "vscode-file-templates"; publisher = "rioj7"; version = "1.18.2"; sha256 = "oJMen+ioMxHoDPha8HWkHRNMCL8IbphFt2ChRdVDIso="; }
     # add a unique accent color to each window based on workspace path
     { name = "unique-window-colors"; publisher = "stuart"; version = "1.2.9"; sha256 = "0lbjnihxaznm2r6zh6a1mz96h89430ba6cr4k43qhpk2gpk3d2vf"; }
 
