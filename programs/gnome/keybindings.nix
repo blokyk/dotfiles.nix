@@ -1,6 +1,16 @@
-{ lib, ... }:
-let inherit (lib.modules) importApply; in
-{
+{ config, lib, pkgs, ... }:
+let
+  inherit (lib.modules) importApply;
+
+  firefox =
+    if config.programs.firefox.enable then
+      lib.getExe config.programs.firefox.package
+    else
+      "firefox";
+
+  tilix = lib.getExe pkgs.tilix;
+  ringboard-egui = lib.getExe' config.services.ringboard.client.package "ringboard-egui";
+in {
   imports = [
     (importApply <zoeee/hm-modules/mk-keybindings> {
       optPath = [ "programs" "gnome-shell" "keybindings" ];
@@ -21,22 +31,22 @@ let inherit (lib.modules) importApply; in
   programs.gnome-shell.custom-actions = {
     "Clipboard manager" = {
       binding = ["<Super>" "v"];
-      command = "ringboard-egui toggle";
+      command = "${ringboard-egui} toggle";
     };
 
     "Firefox" = {
       binding = ["<Ctrl>" "<Alt>" "g"];
-      command = "firefox";
+      command = "${firefox}";
     };
 
     "Firefox (private)" = {
       binding = ["<Shift>" "<Ctrl>" "<Alt>" "g"];
-      command = "firefox --private-window";
+      command = "${firefox} --private-window";
     };
 
     "Nix REPL" = {
       binding = ["<Ctrl>" "<Alt>" "n"];
-      command = ''tilix --title "Nix REPL" -e "nix repl -f <nixpkgs>"'';
+      command = ''${tilix} --title "Nix REPL" -e "nix repl -f <nixpkgs>"'';
     };
   };
 
