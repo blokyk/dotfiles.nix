@@ -1,4 +1,4 @@
-{ config, ... }: {
+{ config, pkgs, ... }: {
   imports = [
     ./search.nix
     ./extensions.nix
@@ -7,6 +7,8 @@
 
   programs.firefox = {
     enable = true;
+    # use dev version for unsigned addon support
+    package = pkgs.firefox-devedition;
     configPath = "${config.xdg.configHome}/mozilla/firefox";
     settings = {
       "browser.bookmarks.file" = toString ./bookmarks.html;
