@@ -2,7 +2,7 @@
 let
   nix-flake-icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
 in {
-  programs.firefox.profiles.default.search = {
+  programs.firefox.search = {
     # necessary because firefox overwrites it (with basically identical content) and then home-manager complains
     force = true;
 
@@ -34,6 +34,15 @@ in {
           params = [
             { name = "query"; value = "{searchTerms}"; }
           ];
+        }];
+      };
+
+      nptr = {
+        name = "nixpkgs pr status";
+        definedAliases = [ "nptr" ];
+
+        urls = [{
+          template = "https://nixpk.gs/pr-tracker.html?pr={searchTerms}";
         }];
       };
 

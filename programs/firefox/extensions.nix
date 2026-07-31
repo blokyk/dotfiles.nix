@@ -1,24 +1,33 @@
-{ pkgs, ... }:
-let
-  rycee-nur = import <rycee-nur> { };
-  hotline-suwayomi = pkgs.callPackage <hotline-suwayomi/package.nix> { };
-in {
-  programs.firefox.profiles.default.extensions = {
-    packages = with rycee-nur.firefox-addons; [
+{ pkgs, ... }: {
+  imports = [ ./extensions ];
+
+  nixpkgs.overlays = [(
+    final: prev: {
+      # firefox-addons = lib.makeExtensible (_: (import <rycee-nur> { pkgs = final; }).firefox-addons);
+      inherit (import <rycee-nur> { pkgs = final; }) firefox-addons;
+    }
+  )];
+
+  programs.firefox.addons = {
+    packages = with pkgs.firefox-addons; [
       auto-tab-discard
       bitwarden
       darkreader
       french-dictionary
-      hotline-suwayomi
       # mpris-integration
-      redirector
       tab-session-manager
-      ublock-origin
     ];
   };
 
-  # don't disable extensions by default
-  programs.firefox.profiles.default.settings = {
+  programs.firefox.settings = {
+    # don't disable extensions by default (wtf firefox??????????)
     "extensions.autoDisableScopes" = 0;
+
+    # disable extension signing verification
+    "xpinstall.signatures.required" = false;
+    "extensions.langpacks.signatures.required" = false;
+
+    # store extension settings in json instead of IndexedDB
+    "extensions.webextensions.ExtensionStorageIDB.enabled" = false;
   };
 }
