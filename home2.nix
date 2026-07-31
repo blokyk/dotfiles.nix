@@ -55,11 +55,6 @@
     }
   )];
 
-  home.file = {
-    # ".screenrc".source = dotfiles/screenrc;
-    # ".gradle/gradle.properties".text = "..";
-  };
-
   programs.home-manager.diff-on-activation = {
     enable = true;
     ask-for-confirmation = true;

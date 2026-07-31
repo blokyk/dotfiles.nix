@@ -4,10 +4,12 @@
         "clipcopy",
         "clippaste",
         "compinit",
+        "egui",
         "gnused",
         "MANPAGER",
         "manpages",
         "pciutils",
+        "ringboard",
         "specialisation",
         "xclip"
     ],

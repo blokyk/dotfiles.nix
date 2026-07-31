@@ -5,7 +5,8 @@
 pins:
 let
   pkgs = import <nixpkgs> {};
-  env = import <home-manager/modules> {
+
+  topModule = import <home-manager/modules> {
     configuration = ./home2.nix;
 
     pkgs = pkgs;
@@ -19,7 +20,7 @@ let
     };
   };
 in {
-  inherit (env)
+  inherit (topModule)
     activationPackage
     config
     pkgs
