@@ -7,9 +7,10 @@ let
   syno = lib.getExe scripts.syno;
 in {
   home.shellAliases = {
+    # todo: should be a normal alias
     ssh = "ssh -C"; # always use compression
 
-    cdtmp = "cd $(${mktemp} -d)";
+    cdtmp = "pushd $(${mktemp} -d)";
 
     syno-fr = "LANG=fr ${syno}";
     pwdcp = "pwd | clipcopy"; # todo: use `aliases.clipcopy` (when that's a thing)
