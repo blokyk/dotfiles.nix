@@ -59,7 +59,7 @@ let
     { name = "open-file-on-git-remote"; publisher = "WesleyHansen"; version = "0.0.4"; sha256 = "FZy4Rp4/9xYo8BjszBxDqgwd5YqgBLkWBGLzyOaqidk="; }
     # time tracker for repo, language, read/write ratio, etc.
     # todo: should we replace it with an active fork? (e.g. DavidLundholm.slashcoded-vscode-extension)
-    { name = "vscode-coding-tracker"; publisher = "hangxingliu"; version = "0.6.0"; sha256 = "wZT0coYMPrdMVWOSA4FuYZ9v2AyeUocDFm/t6H+Ae9M="; }
+    # { name = "vscode-coding-tracker"; publisher = "hangxingliu"; version = "0.6.0"; sha256 = "wZT0coYMPrdMVWOSA4FuYZ9v2AyeUocDFm/t6H+Ae9M="; }
     # create new files based on snippets and templates
     { name = "vscode-file-templates"; publisher = "rioj7"; version = "1.18.2"; sha256 = "oJMen+ioMxHoDPha8HWkHRNMCL8IbphFt2ChRdVDIso="; }
     # add a unique accent color to each window based on workspace path
