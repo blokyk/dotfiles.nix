@@ -1,4 +1,7 @@
-{ ... }: {
+{ config, lib, ... }:
+let
+  firefox = config.programs.firefox.package;
+in {
   imports = [
     ./extensions
     ./keybindings.nix
@@ -10,7 +13,7 @@
     "org/gnome/shell" = {
       favorite-apps = [
         "org.gnome.Nautilus.desktop"
-        "firefox.desktop"
+        "${lib.getName (firefox.desktopItem or firefox)}.desktop"
         "com.gexperts.Tilix.desktop"
       ];
     };
