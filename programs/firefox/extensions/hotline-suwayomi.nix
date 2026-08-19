@@ -12,5 +12,14 @@ in {
 
   programs.firefox.addons = {
     packages = [ hotline-suwayomi ];
+    allowInPrivateMode = [ "@blokyk.hotline-suwayomi" ];
+
+    settings."@blokyk.hotline-suwayomi" = {
+      force = true;
+      settings = {
+        # fixme: doesn't work :(
+        #suwayomi_url = "https://manga.zoeee.net";
+      };
+    };
   };
 }
