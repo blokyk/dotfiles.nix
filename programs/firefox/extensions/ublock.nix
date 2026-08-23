@@ -4,6 +4,7 @@
     allowInPrivateMode = [ "uBlock0@raymondhill.net" ];
 
     settings."uBlock0@raymondhill.net" = {
+      force = true;
       settings = {
         selectedFilterLists = [
           "ublock-filters"

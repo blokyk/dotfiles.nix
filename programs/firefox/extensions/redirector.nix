@@ -4,6 +4,7 @@
     allowInPrivateMode = [ "redirector@einaregilsson.com" ];
 
     settings."redirector@einaregilsson.com" = {
+      force = true;
       settings = {
         redirects = [
           {
