@@ -39,6 +39,9 @@ in {
         # if the preceding line is the beginning of a paragraph.
         autoindent = false; # `autoindent` messes with system copy-paste :(
 
+        # Accept 'filename:linenumber' notation
+        colonparsing = true;
+
         # Constantly display the cursor position in the status bar.  Note that
         # this overrides "quickblank".
         constantshow = true;
