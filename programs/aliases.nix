@@ -80,7 +80,7 @@ let
     la = {
       pkg = pkgs.coreutils;
       baseCmd = "ls";
-      flags = [ "--almost-all" ];
+      flags = [ "--almost-all" "--color=auto" ];
     };
 
     lix-diff-drv = {
@@ -121,7 +121,7 @@ let
     ll = {
       pkg = pkgs.coreutils;
       baseCmd = "ls";
-      flags = [ "-lha" ];
+      flags = [ "-lha" "--color=auto" ];
     };
 
     lspci-tree = {
