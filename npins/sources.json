@@ -1,5 +1,18 @@
 {
   "pins": {
+    "circular-battery-indicator": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "RaphaelRochet",
+        "repo": "circular-battery-indicator"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "a9c5864202c683989cb04995efaf495a09d016f8",
+      "url": "https://github.com/RaphaelRochet/circular-battery-indicator/archive/a9c5864202c683989cb04995efaf495a09d016f8.tar.gz",
+      "hash": "sha256-hY/aETzDQkmGItTd3oNz4pVC4x+kzXNtTFcG887Jdag="
+    },
     "fast-nix-gc": {
       "type": "Git",
       "repository": {
