@@ -66,6 +66,19 @@
       "url": "https://git.lix.systems/lix-project/lix/archive/e780cc6c9ac9889aafa226f9dbd4f8cbe35860ac.tar.gz",
       "hash": "sha256-Mnjl2vgu8jgVfMRQC+G0jU4sizw1wHDf9d1Lpjx+7ns="
     },
+    "nano-syntax-highlighting": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "galenguyer",
+        "repo": "nano-syntax-highlighting"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "a1df5b66aabe9048b13b58beec1e61abbd729c77",
+      "url": "https://github.com/galenguyer/nano-syntax-highlighting/archive/a1df5b66aabe9048b13b58beec1e61abbd729c77.tar.gz",
+      "hash": "sha256-tcRNoeg0j/z9wFZjIc1CJXOKieWrvlLq9pblB0kE6yc="
+    },
     "nanonix": {
       "type": "Git",
       "repository": {
@@ -144,6 +157,19 @@
       "revision": "5ad360b6d3cb0aa1b61f9cb27fef113ca9117c37",
       "url": "https://gitlab.com/api/v4/projects/rycee%2Fnur-expressions/repository/archive.tar.gz?sha=5ad360b6d3cb0aa1b61f9cb27fef113ca9117c37",
       "hash": "sha256-NhyLP9G4DFOn/7aYr7K/D7hWrzEGr5EgUBV+lpdmJ24="
+    },
+    "thesauruses": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "hunspell",
+        "repo": "mythes"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "e43e32167d8cbcd94eef36895b39706946ce1479",
+      "url": "https://github.com/hunspell/mythes/archive/e43e32167d8cbcd94eef36895b39706946ce1479.tar.gz",
+      "hash": "sha256-m/pEpiktnFbOW7Ms1vkzVecCPLVi+gdCWI0MgPn8wTQ="
     },
     "wrapper-manager": {
       "type": "Git",
