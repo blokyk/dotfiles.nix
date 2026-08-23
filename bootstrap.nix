@@ -17,6 +17,21 @@ let
 
     extraSpecialArgs = {
       inherit pins;
+
+      # since HM specializations are extremely slow and inconvenient,
+      # (because they evaluate and build the config for each specialization),
+      # we instead just use the $HOST variable and then use a bunch of `mkIf`
+      # and such to shape the config however we want
+      hostname =
+        let
+          # fixme: why the hell can't we use $HOST normally???
+          hostEnv = builtins.getEnv "HOST";
+          hostFile = pkgs.lib.fileContents "/etc/hostname"; # strip ending '\n'
+        in
+          if hostEnv != "" then
+            hostEnv
+          else
+            hostFile;
     };
   };
 in {

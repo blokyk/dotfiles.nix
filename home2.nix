@@ -1,8 +1,14 @@
-{ config, lib, pkgs, ... }: {
+{ config, hostname, lib, pkgs, ... }: {
   # inject 'zpkgs' arg into other modules to easily get zoeee/pkgs
   _module.args.zpkgs = pkgs.callPackage <zoeee/pkgs> {};
 
-  home.username = "blokyk";
+  # select username based on host
+  home.username = {
+    LOQ-15AHP9 = "blokyk";
+    dragonnier = "courvoie";
+    aa = "courvoie";
+  }.${hostname};
+
   home.homeDirectory = "/home/${config.home.username}";
   targets.ubuntu = {
     enable = true;
