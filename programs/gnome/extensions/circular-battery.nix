@@ -6,6 +6,8 @@
 
       src = <circular-battery-indicator>;
 
+      patches = [ ./circular-upgrade.patch ];
+
       installPhase = ''
         runHook preInstall
 

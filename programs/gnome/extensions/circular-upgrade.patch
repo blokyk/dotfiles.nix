@@ -1,0 +1,115 @@
+diff --git a/extension.js b/extension.js
+index f527ac0..7e8044e 100644
+--- a/extension.js
++++ b/extension.js
+@@ -1,4 +1,4 @@
+-/*  
++/*
+ 
+     This program is free software: you can redistribute it and/or modify
+     it under the terms of the GNU General Public License as published by
+@@ -18,37 +18,41 @@
+ 
+ **/
+ 
+-const St = imports.gi.St;
+-const GObject = imports.gi.GObject;
+-const Clutter = imports.gi.Clutter;
+-const GLib = imports.gi.GLib;
+-const Gio = imports.gi.Gio;
+-const UPower = imports.gi.UPowerGlib;
++import St from "gi://St";
++import GObject from "gi://GObject";
++import Clutter from "gi://Clutter";
++import GLib from "gi://GLib";
++import Gio from "gi://Gio";
++import UPower from "gi://UPowerGlib";
+ 
+-const Main = imports.ui.main;
+-const Panel = imports.ui.panel;
++import * as System from 'resource:///org/gnome/shell/ui/status/system.js';
++import * as Main from 'resource:///org/gnome/shell/ui/main.js';
++import * as Panel from 'resource:///org/gnome/shell/ui/panel.js';
+ 
+-const CircularBatteryIndicator = GObject.registerClass(
+-	{
+-		_pT: null,				// the PowerToggle instance
+-		_old_qs_icon: null,		// ref to icon in quickSettings we replace (to put it back later)
+-		_indic_box: null, 		// ref to indicator container (contains battery icon and percentage text)
+-		_old_indic_icon: null,	// ref to indicator icon we replace (to put it back later)
+-		_qs_drawing: null,		// drawing replacement for QuickSettings panel
+-		_indic_drawing: null,	// drawing replacement for indicator panel
+-		_percentage: null,		// % full
+-		_charging: null,		// is battery charging
+-		_idle: null,			// is plugged but not charging
++export default class CircularBatteryIndicator /*extends GObject.Object*/ {
++	constructor() {
++        //super();
++		this._pT = null				// the PowerToggle instance
++		this._old_qs_icon = null		// ref to icon in quickSettings we replace (to put it back later)
++		this._indic_box = null		// ref to indicator container (contains battery icon and percentage text)
++		this._old_indic_icon = null	// ref to indicator icon we replace (to put it back later)
++		this._qs_drawing = null		// drawing replacement for QuickSettings panel
++		this._indic_drawing = null	// drawing replacement for indicator panel
++		this._percentage = null		// % full
++		this._charging = null		// is battery charging
++		this._idle = null			// is plugged but not charging
+ 		// Various event Id we shall track to disable later
+-		_TimeoutId: null,
+-		_qs_repaintId: null,
+-		_indic_repaintId: null,
+-		_powerProxyId: null,
+-	},
++		this._TimeoutId = null
++		this._qs_repaintId = null
++		this._indic_repaintId = null
++		this._powerProxyId = null
++	}
+ 
+-class CircularBatteryIndicator extends GObject.Object {
++    enable() { this._init(); }
++    disable() { this.destroy(); }
+ 
+ 	_init() {
++        //constructor();
+ 		// Prepare drawing areas
+ 		this._indic_drawing = new St.DrawingArea({ y_align: Clutter.ActorAlign.CENTER });
+ 		this._indic_drawing.set_width(Panel.PANEL_ICON_SIZE);
+@@ -65,7 +69,7 @@ class CircularBatteryIndicator extends GObject.Object {
+ 		if (this._pT) {
+ 			return;
+ 		}
+-		var PowerToggle = imports.ui.status.system.PowerToggle;
++        var PowerToggle = System.PowerToggle;
+ 		if (!PowerToggle) {
+ 			this._TimeoutId = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 1, ()=>{this.patch();	return true;});
+ 			return;
+@@ -166,15 +170,4 @@ class CircularBatteryIndicator extends GObject.Object {
+ 
+ 		ctx.restore();
+ 	}
+-});
+-
+-let circularbatteryindicator;
+-
+-function enable() {
+-	circularbatteryindicator = new CircularBatteryIndicator();
+-}
+-
+-function disable() {
+-	circularbatteryindicator.destroy();
+-	circularbatteryindicator = null;
+ }
+diff --git a/metadata.json b/metadata.json
+index d593efa..4fac6e2 100644
+--- a/metadata.json
++++ b/metadata.json
+@@ -3,7 +3,7 @@
+   "description": "Displays a circular battery indicator",
+   "name": "Circular Battery Indicator",
+   "shell-version": [
+-    "43"
++    "43", "46", "48"
+   ],
+   "url": "https://github.com/RaphaelRochet/circular-battery-indicator",
+   "uuid": "circular-battery-indicator@RaphaelRochet",
