@@ -57,7 +57,7 @@ NIX_PATH="$(
 # (yes, i know there's a shorter way to do this, but it's harder to read/understand)
 if [[ -n "${args[*]}" ]]; then
     # shellcheck disable=SC2086 # we want $args to fully expand
-    env NIX_PATH="$NIX_PATH" "$SHELL" "${args[@]}"
+    env IN_NIX_SHELL=npins NIX_PATH="$NIX_PATH" "$SHELL" "${args[@]}"
 else
-    env NIX_PATH="$NIX_PATH" "$SHELL"
+    env IN_NIX_SHELL=npins NIX_PATH="$NIX_PATH" "$SHELL"
 fi

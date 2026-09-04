@@ -101,11 +101,6 @@ in {
   npins-shell = writeShellApplication {
     name = "npins-shell";
     runtimeInputs = [ coreutils npins ];
-    # fixme: npins-shell with zsh broken since i fixed sessionVariables
-    # (because zsh overwrites the NIX_PATH everytime)
-    runtimeEnv = {
-      SHELL = runtimeShell;
-    };
     text = read ./npins-shell.sh;
   };
 
