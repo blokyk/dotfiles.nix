@@ -29,6 +29,7 @@
     "extensions.autoUpdate": "off",
     "extensions.autoCheckUpdates": false,
     "extensions.ignoreRecommendations": true,
+    "update.mode": "none",
     "search.collapseResults": "auto",
     "search.sortOrder": "countDescending",
     "search.smartCase": true,
