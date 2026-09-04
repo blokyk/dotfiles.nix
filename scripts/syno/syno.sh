@@ -83,14 +83,50 @@ function handle_query() {
     return 1
   fi
 
+  # entries in the index file are of the form:
+  #   foo|1234
+  #   bar|1354
+  # where the first field is the actual word we're searching for,
+  # and the second is the byte offset into the .dat file
+
   WORD="$(echo "$QUERY" | cut -d'|' -f1)"
   OFFSET="$(echo "$QUERY" | cut -d'|' -f2)"
 
-  SYNS_LINE="$(tail "$DAT" -c "+$OFFSET" | tail +3 | head -n 1)"
+  # words that don't have any synonymes just don't have an offset at all
+  if [[ "$OFFSET" = "" ]]; then
+    echo "No synonyms found for '$WORD'"
+    return 1
+  fi
 
   echo "Synonyms for '$WORD':"
 
-  echo "$SYNS_LINE" | cut -d'|' -f1- --output-delimiter=$'\n  - '
+  # entries in the data file are of the form:
+  #   system|9
+  #   (noun)|scheme|group|grouping
+  #   (noun)|instrumentality|instrumentation
+  #   <7 more lines...>
+  # where the initial '9' is the number of different meanings for the entry,
+  # and where the first line of each meaning is the kind of that meaning
+
+  # get the "synonym header" that describes how many synonym groupings there are
+  # (+1 to ensure we don't include the newline before it)
+  tail "$DAT" -c "+$((OFFSET + 1))" | awk -F'|' '
+    # set the output delimiter to print in list form
+    # note that this does not apply to the first field, but it is always
+    #      the kind of the word, not an actual synonym, so it works out!
+    BEGIN {
+      OFS="\n - "
+    }
+    # when processing the first line, extract the number of synonym and then skip printing it
+    NR == 1 {
+      nsym=$2;
+      next
+    }
+    # for the other lines (which are the )
+    NR <= (nsym+1) {
+      $1=$1;
+      print
+    }'
 }
 
 # export so that fzf can use it
