@@ -21,20 +21,28 @@
 # To use custom thesauruses, see the THES_DIR/THES variables in the INSTALLATION section.
 #
 # == INSTALLATION ==
-# To use this, you need to instal MyThes 2.x thesaurus files into either
+# The thesaurus is expected to be stored as a duo of MyThes 2.x files.
+# You can find basic files for english at https://github.com/hunspell/mythes
+# For french, the Grammalecte thesaurus is a reliable source: https://grammalecte.net/dic/thesaurus-v3.0.zip
+#
+# To use this, you need to install MyThes 2.x thesaurus files into either
 #    - ~/.local/share/thesaurus/
 #    - /usr/share/thesaurus
 # These directories should contain files named thes_CC.idx and thes_CC.dat,
 # where CC is the country code of the language you want. The language is
-# detected based on the start of your $LANG envirotnment variable.
+# detected based on the start of your $LANG environment variable.
 #
 # If you don't want to use those directories, set the THES_DIR environment
 # variable to the folder where you stored those files. You can also set
 # the THES variable to the exact path to these files, without their extension.
+# (Note that the THES variable overrides the THES_DIR.)
 # For example:
-#   THES=~/.syno syno
+#   THES_DIR=~/.syno syno
+# will use files ~/.syno/thes_en.idx and ~/.syno/thes_en.dat (assuming LANG
+# is set to en_US or en_GB)
 #   THES=~/Downloads/my_thes syno
 # Will use the files ~/Downloads/my_thes.idx and ~/Downloads/my_thes.dat
+#
 # For even more control, set the IDX and DAT variables to point to the
 # index and data files, respectively.
 
@@ -70,6 +78,7 @@ if ! { [[ -f "$IDX" ]] && [[ -f "$DAT" ]]; }; then
   echo -e "\e[1;31mThesaurus files not installed.\e[0m"
   echo -e "\e[33mSearched for '$IDX' and '$DAT', given that THES is '${THES:-not defined}' and THES_DIR is '${THES_DIR:-not defined}'\e[0m"
   echo -e "\e[31mThesaurus files must be in OpenOffice/LibreOffice's MyThes 2.x format\e[0m"
+  echo -e "\e[31mYou can find an english version at 'https://github.com/hunspell/mythes'.\e[0m"
   echo -e "\e[31mYou can find a french version at 'https://grammalecte.net/dic/thesaurus-v3.0.zip'.\e[0m"
   exit 1
 fi
