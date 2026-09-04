@@ -42,7 +42,10 @@ fi
 
 NIX_PATH="$(
     set -o errexit -o pipefail;
-    for pin in $(npins --lock-file "$pinsFile" show | cut -d' ' -f1 | sed '/^[[:space:]]*$/d' | tr -d ':'); do
+    if ! pins="$(npins --lock-file "$pinsFile" show | cut -d' ' -f1 | sed '/^[[:space:]]*$/d' | tr -d ':')"; then
+        exit 1
+    fi
+    for pin in $pins; do
         # note: `get-path` doesn't add a newline after its output, so we can just use the
         #       output directly as if it were a normal string (and add a separator after it)
         printf '%s=%s:' "$pin" "$(npins --lock-file "$pinsFile" get-path "$pin")"
