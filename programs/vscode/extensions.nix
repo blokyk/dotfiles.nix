@@ -55,6 +55,8 @@ let
     # a systemd unit file language server
     { name = "vscode-systemd-support"; publisher = "hangxingliu"; version = "3.0.0"; sha256 = "K1fXE0AxkWdHsQC3uUFcJecJqB5PpJVzVdtfPSw4+eg="; }
 
+    # uk english dictionary for cspell
+    { name = "code-spell-checker-british-english"; publisher = "streetsidesoftware"; version = "1.4.37"; sha256 = "sha256-Um9tZ/o3iPQ9xbo39mOULJoDsb+WMA4QTj0C5iT+Gdo="; }
     # open currently open file in the corresponding forge
     { name = "open-file-on-git-remote"; publisher = "WesleyHansen"; version = "0.0.4"; sha256 = "FZy4Rp4/9xYo8BjszBxDqgwd5YqgBLkWBGLzyOaqidk="; }
     # time tracker for repo, language, read/write ratio, etc.
