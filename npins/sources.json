@@ -65,6 +65,19 @@
       "url": "https://github.com/blokyk/hotline-suwayomi/archive/372759d486d49efb46556ef803b2f266954aab51.tar.gz",
       "hash": "sha256-UNzAIT2opdjiExaZAe3e0vt98m2/EODMwSdMJuG3DiM="
     },
+    "indie-wiki-buddy-data": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "IndieWikiBuddy",
+        "repo": "indie-wiki-buddy-data"
+      },
+      "branch": "dist",
+      "submodules": false,
+      "revision": "6ef0d88d7e85a219af3f51cb78218f0c15d6acc6",
+      "url": "https://github.com/IndieWikiBuddy/indie-wiki-buddy-data/archive/6ef0d88d7e85a219af3f51cb78218f0c15d6acc6.tar.gz",
+      "hash": "sha256-yXfjaRnBfsNrdlaqLXOm4/KD1/YpyZBSk6JoYT2UA1A="
+    },
     "lix": {
       "type": "Git",
       "repository": {

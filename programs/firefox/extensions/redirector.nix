@@ -1,4 +1,6 @@
 { pkgs, ... }: {
+  imports = [ ./redirector-indie-wiki.nix ];
+
   programs.firefox.addons = {
     packages = [ pkgs.firefox-addons.redirector ];
     allowInPrivateMode = [ "redirector@einaregilsson.com" ];
@@ -21,7 +23,7 @@
             excludePattern = "https://nixos.wiki/wiki/*?force=true";
 
             patternDesc = "";
-            patternType = "W";
+            patternType = "W"; # wildcard
 
             error = null;
             disabled = false;
