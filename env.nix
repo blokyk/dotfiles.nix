@@ -8,8 +8,8 @@ let
     # not just on graphical environment start
     # (but only if we're not in a nix-shell, cause in that case we want to prioritize the shell's env)
     if [[ "''${IN_NIX_SHELL:-}" = "" ]]; then
-    unset __HM_SESS_VARS_SOURCED
-    unset __HM_ZSH_SESS_VARS_SOURCED
+      unset __HM_SESS_VARS_SOURCED
+      unset __HM_ZSH_SESS_VARS_SOURCED
     fi
   '';
 in {
