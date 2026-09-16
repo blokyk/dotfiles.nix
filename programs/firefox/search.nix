@@ -1,6 +1,22 @@
 { pkgs, ... }:
 let
   nix-flake-icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+
+  wikipedia-icon = pkgs.fetchurl {
+    url = "https://upload.wikimedia.org/wikipedia/en/8/80/Wikipedia-logo-v2.svg";
+    hash = "sha256-kOAe969TprYk+iTuOkjH1t2fVbD5mbyMcwP40ons15g=";
+  };
+
+  wikitionary-icon = pkgs.fetchurl {
+    url = "https://upload.wikimedia.org/wikipedia/commons/f/ff/WiktionaryEn.svg";
+    hash = "sha256-BPEQnuk2mm/ciChFzEnzH9DLAPJQI3ev+vHfabjMS00=";
+  };
+
+  yt-icon = pkgs.fetchurl {
+    name = "youtube-logo.svg";
+    url = "https://upload.wikimedia.org/wikipedia/commons/f/fd/YouTube_full-color_icon_%282024%29.svg";
+    hash = "sha256-8igmt9medFu9pU3EIcLC8IY3OyAMXn97QExNecPfaOI=";
+  };
 in {
   programs.firefox.search = {
     # necessary because firefox overwrites it (with basically identical content) and then home-manager complains
@@ -59,6 +75,45 @@ in {
         }];
       };
 
+      wp = {
+        name = "wikipedia";
+        definedAliases = [ "wp" ];
+        icon = wikipedia-icon;
+
+        urls = [{
+          template = "https://en.wikipedia.org/w/index.php";
+          params = [
+            { name = "search"; value = "{searchTerms}"; }
+          ];
+        }];
+      };
+
+      wd = {
+        name = "wikitionary (en)";
+        definedAliases = [ "wd" ];
+        icon = wikitionary-icon;
+
+        urls = [{
+          template = "https://en.wikitionary.org/w/index.php";
+          params = [
+            { name = "search"; value = "{searchTerms}"; }
+          ];
+        }];
+      };
+
+      wdf = {
+        name = "wikitionary (fr)";
+        definedAliases = [ "wdf" ];
+        icon = wikitionary-icon;
+
+        urls = [{
+          template = "https://fr.wikitionary.org/w/index.php";
+          params = [
+            { name = "search"; value = "{searchTerms}"; }
+          ];
+        }];
+      };
+
       # gh = {
       #   name = "github quick access";
       #   definedAliases = [ "gh" ];
@@ -71,11 +126,7 @@ in {
       y = {
         name = "youtube";
         definedAliases = [ "y" ];
-        icon = pkgs.fetchurl {
-          url = "https://upload.wikimedia.org/wikipedia/commons/f/fd/YouTube_full-color_icon_%282024%29.svg";
-          name = "youtube-logo.svg";
-          hash = "sha256-8igmt9medFu9pU3EIcLC8IY3OyAMXn97QExNecPfaOI=";
-        };
+        icon = yt-icon;
 
         urls = [{
           template = "https://youtube.com/results";
