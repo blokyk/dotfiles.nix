@@ -10,6 +10,7 @@
     "workbench.iconTheme": "seti-minimal-folder",
     "workbench.productIconTheme": "old-codicon",
     "workbench.editor.useModal": "off", // don't open settings in a weird half-editor modal
+    "workbench.layoutControl.enabled": false,
     "files.insertFinalNewline": true,
     "editor.fontFamily": "'Iosevka Extended', 'Droid Sans Mono', 'monospace', monospace",
     "editor.fontLigatures": false,
@@ -19,6 +20,7 @@
     ],
     "editor.guides.bracketPairs": true,
     "explorer.confirmDragAndDrop": false,
+    "explorer.confirmPasteNative": false,
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.expand": false,
     "explorer.fileNesting.patterns": {
@@ -191,6 +193,7 @@
     "dotnet.server.suppressMiscellaneousFilesToasts": true,
     "dotnet.typeMembers.memberInsertionLocation": "withOtherMembersOfTheSameKind",
     "dotnet.typeMembers.propertyGenerationBehavior": "preferAutoProperties",
+    "dotnetAcquisitionExtension.enableLanguageModelTools": false,
 
     // c/cpp
     "clangd.fallbackFlags": [
