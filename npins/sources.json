@@ -22,9 +22,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "254a2ba0a4f1570b3880bc10bb6166afe1e25936",
-      "url": "https://github.com/Mic92/fast-nix-gc/archive/254a2ba0a4f1570b3880bc10bb6166afe1e25936.tar.gz",
-      "hash": "sha256-KNAjsTgfweOoqYxMAsIolrDcIV5AikvrSW9EpJ7fnK8="
+      "revision": "de33bdb8a5ca304d443252dd61702f8649dcc26b",
+      "url": "https://github.com/Mic92/fast-nix-gc/archive/de33bdb8a5ca304d443252dd61702f8649dcc26b.tar.gz",
+      "hash": "sha256-EbXqCoQYMtNBjbPOW+6A5wp8Xn9d2wcnyUq2OJ6qXKY="
     },
     "figlet-fonts": {
       "type": "Git",
@@ -48,9 +48,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "353742587cbaf079b3caee743115d037bc51fea6",
-      "url": "https://github.com/nix-community/home-manager/archive/353742587cbaf079b3caee743115d037bc51fea6.tar.gz",
-      "hash": "sha256-MTGMFlLDTklsXhCp4r5GXB4VAVadPdalXLvUjd/K7h0="
+      "revision": "e3b0881f91f42bea70bcc516220880cce9daf122",
+      "url": "https://github.com/nix-community/home-manager/archive/e3b0881f91f42bea70bcc516220880cce9daf122.tar.gz",
+      "hash": "sha256-PFNTZbWRxWk5/JreN2mB8e2ED3s/KiwGuBjl0Vg9pbw="
     },
     "hotline-suwayomi": {
       "type": "Git",
@@ -74,9 +74,9 @@
       },
       "branch": "dist",
       "submodules": false,
-      "revision": "6ef0d88d7e85a219af3f51cb78218f0c15d6acc6",
-      "url": "https://github.com/IndieWikiBuddy/indie-wiki-buddy-data/archive/6ef0d88d7e85a219af3f51cb78218f0c15d6acc6.tar.gz",
-      "hash": "sha256-yXfjaRnBfsNrdlaqLXOm4/KD1/YpyZBSk6JoYT2UA1A="
+      "revision": "d873c268fe03fb253c133a352da5918daabf0d2e",
+      "url": "https://github.com/IndieWikiBuddy/indie-wiki-buddy-data/archive/d873c268fe03fb253c133a352da5918daabf0d2e.tar.gz",
+      "hash": "sha256-A7I/imstzzmxRkzoROkE+2q9JpR9kjYbwPfSu48k/Sc="
     },
     "lix": {
       "type": "Git",
@@ -99,11 +99,11 @@
         "owner": "galenguyer",
         "repo": "nano-syntax-highlighting"
       },
-      "branch": "main",
+      "branch": "master",
       "submodules": false,
-      "revision": "a1df5b66aabe9048b13b58beec1e61abbd729c77",
-      "url": "https://github.com/galenguyer/nano-syntax-highlighting/archive/a1df5b66aabe9048b13b58beec1e61abbd729c77.tar.gz",
-      "hash": "sha256-tcRNoeg0j/z9wFZjIc1CJXOKieWrvlLq9pblB0kE6yc="
+      "revision": "20107875890cf137dc7d8449c64866105bdd7a86",
+      "url": "https://github.com/galenguyer/nano-syntax-highlighting/archive/20107875890cf137dc7d8449c64866105bdd7a86.tar.gz",
+      "hash": "sha256-Hhh/pk24qyZlm9RVN5B8D7dLHbo0hHD+lMcYPeNp1Lw="
     },
     "nanonix": {
       "type": "Git",
@@ -127,9 +127,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "c2c5c0c204df3c2b131dc529e8de2c9acbd90953",
-      "url": "https://github.com/blokyk/nix-debug/archive/c2c5c0c204df3c2b131dc529e8de2c9acbd90953.tar.gz",
-      "hash": "sha256-pL27Fxmlrh7pGuWL/IPHu/naT6reib2SN4m4M+h2BIE="
+      "revision": "fabe9c96492d4d52ce6453d4a496408398ae1c80",
+      "url": "https://github.com/blokyk/nix-debug/archive/fabe9c96492d4d52ce6453d4a496408398ae1c80.tar.gz",
+      "hash": "sha256-fkP3Wn32y6rk6wGCsovtLKnPz6ydXFSr039+hIBOqrQ="
     },
     "nix-diff-rs": {
       "type": "Git",
@@ -140,22 +140,16 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "6c9d3d6cba4ef4fc8b158dfbc118254feb4b438c",
-      "url": "https://github.com/Mic92/nix-diff-rs/archive/6c9d3d6cba4ef4fc8b158dfbc118254feb4b438c.tar.gz",
-      "hash": "sha256-c9tGpP4NYngN6s/jAd2Qt9pavBCVm+FFqhasn/vOB4k="
+      "revision": "a8c9a1b679bf412f5a9d3707cdb41dba20938c23",
+      "url": "https://github.com/Mic92/nix-diff-rs/archive/a8c9a1b679bf412f5a9d3707cdb41dba20938c23.tar.gz",
+      "hash": "sha256-+cc2D67WrpBHagcqLqVEbkFk8mvZaIAW3NUM1JWqeqE="
     },
     "nixpkgs": {
-      "type": "Git",
-      "repository": {
-        "type": "GitHub",
-        "owner": "nixos",
-        "repo": "nixpkgs"
-      },
-      "branch": "master",
-      "submodules": false,
-      "revision": "78217402f14b72cc3b05dfdc2527f44c03226cab",
-      "url": "https://github.com/nixos/nixpkgs/archive/78217402f14b72cc3b05dfdc2527f44c03226cab.tar.gz",
-      "hash": "sha256-PrySJJ17K92JuDkzMSUo5MxLypv/yUmzKBqzrey8Fv0="
+      "type": "Channel",
+      "name": "nixpkgs-unstable",
+      "artifact": "nixexprs.tar.xz",
+      "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.11pre1078969.34ca302a9572/nixexprs.tar.xz",
+      "hash": "sha256-nuO5fxDxKTeYxSEfD4mVB+XwzOy5qj9T2LxVc5vk4Bc="
     },
     "nom": {
       "type": "Git",
@@ -167,9 +161,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "b568a2584ed3619a6ebe41a2910e2bfc674bf836",
-      "url": "https://code.maralorn.de/maralorn/nix-output-monitor/archive/b568a2584ed3619a6ebe41a2910e2bfc674bf836.tar.gz",
-      "hash": "sha256-t/OKt1G1UnHTRRtNuJ/yC1oOV4Fn39HkNsKzyd3DlYQ="
+      "revision": "bcecf42740627e01376caea1edc3194f39857890",
+      "url": "https://code.maralorn.de/maralorn/nix-output-monitor/archive/bcecf42740627e01376caea1edc3194f39857890.tar.gz",
+      "hash": "sha256-kWGA2zNVrHZpKgeXA0urHvw7FWCTEp5rjyUAhCikXuc="
     },
     "rycee-nur": {
       "type": "Git",
@@ -180,9 +174,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "5ad360b6d3cb0aa1b61f9cb27fef113ca9117c37",
-      "url": "https://gitlab.com/api/v4/projects/rycee%2Fnur-expressions/repository/archive.tar.gz?sha=5ad360b6d3cb0aa1b61f9cb27fef113ca9117c37",
-      "hash": "sha256-NhyLP9G4DFOn/7aYr7K/D7hWrzEGr5EgUBV+lpdmJ24="
+      "revision": "adef9edfdc3ac8c3227f55673a9d31728d0c21ab",
+      "url": "https://gitlab.com/api/v4/projects/rycee%2Fnur-expressions/repository/archive.tar.gz?sha=adef9edfdc3ac8c3227f55673a9d31728d0c21ab",
+      "hash": "sha256-mdLkg/UZLof2+GQOwULbHzC8wXBbO+zLYL+5G89hHI0="
     },
     "thesauruses": {
       "type": "Git",
@@ -191,24 +185,25 @@
         "owner": "hunspell",
         "repo": "mythes"
       },
-      "branch": "main",
+      "branch": "master",
       "submodules": false,
-      "revision": "e43e32167d8cbcd94eef36895b39706946ce1479",
-      "url": "https://github.com/hunspell/mythes/archive/e43e32167d8cbcd94eef36895b39706946ce1479.tar.gz",
-      "hash": "sha256-m/pEpiktnFbOW7Ms1vkzVecCPLVi+gdCWI0MgPn8wTQ="
+      "revision": "3d296572882a81f9efd6de8ff0e43dd71296c2ec",
+      "url": "https://github.com/hunspell/mythes/archive/3d296572882a81f9efd6de8ff0e43dd71296c2ec.tar.gz",
+      "hash": "sha256-06v3qtXMLLny6GWVIYwVnwMf69XYH4AmXTb6k7hLrVE="
     },
     "wrapper-manager": {
       "type": "Git",
       "repository": {
-        "type": "GitHub",
+        "type": "Forgejo",
+        "server": "https://codeberg.org/",
         "owner": "viperML",
         "repo": "wrapper-manager"
       },
       "branch": "master",
       "submodules": false,
-      "revision": "531d7752716f5097f05c709d6727299d70c69b62",
-      "url": "https://github.com/viperML/wrapper-manager/archive/531d7752716f5097f05c709d6727299d70c69b62.tar.gz",
-      "hash": "sha256-LqqlRrZVLdCr/fmfXj/j7bUpvv02Ct3TVInWRxs20a8="
+      "revision": "5dbc685119c53a10c3f9a74b2716107413889796",
+      "url": "https://codeberg.org/viperML/wrapper-manager/archive/5dbc685119c53a10c3f9a74b2716107413889796.tar.gz",
+      "hash": "sha256-JEuM7FjlX48cpDhDrkeIch5nNYANux5o0wcw8vnwUuE="
     },
     "zoeee": {
       "type": "Git",
@@ -219,9 +214,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "373cc7f3c329a973b6bedf172aa39c3c89b7e465",
-      "url": "https://github.com/blokyk/packages.nix/archive/373cc7f3c329a973b6bedf172aa39c3c89b7e465.tar.gz",
-      "hash": "sha256-LBnOywZXX94P3XZ+ZxN8ofVmnzY5/T0xJuSkwhCDGTI="
+      "revision": "e05fa87e7af436ba93ca290d6b55aab1cb980913",
+      "url": "https://github.com/blokyk/packages.nix/archive/e05fa87e7af436ba93ca290d6b55aab1cb980913.tar.gz",
+      "hash": "sha256-HnBts6DVAxM1y0xR0DJ0dlphB3chu6+iN+p+ZHp6Mi0="
     }
   },
   "version": 8
