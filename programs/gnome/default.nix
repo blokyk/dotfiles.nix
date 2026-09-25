@@ -13,7 +13,7 @@ in {
     "org/gnome/shell" = {
       favorite-apps = [
         "org.gnome.Nautilus.desktop"
-        "${lib.getName (firefox.desktopItem or firefox)}.desktop"
+        "${lib.getName firefox.desktopItem}"
         "com.gexperts.Tilix.desktop"
       ];
     };
