@@ -1,5 +1,8 @@
 {
   callPackage,
+  lib,
+
+  clangStdenv,
   lixPackageSets,
   rustPlatform,
 }:
@@ -14,9 +17,19 @@
     cargoDeps = rustPlatform.fetchCargoVendor {
       name = "lix-${version}";
       inherit src;
-      hash = "sha256-WbSHmK8d8SLF1WqB9NZTBa18/pQSXtnZzygIIc8AEEM=";
+      hash = "";
     };
   };
 }).overrideScope (finalScope: prevScope: {
-  lix = callPackage ./package.nix { inherit (prevScope) lix; };
+  lix = (callPackage <lix/package.nix> { stdenv = clangStdenv; })
+    .overrideAttrs (final: prev: {
+      patches = (prev.patches or []) ++ [
+        # undo the new boring 'unpack tarfile' message and
+        # add back the old-new 'unpack %s' progress bar
+        ./unpack-progress.patch
+      ];
+
+      doCheck = false;
+      doInstallCheck = false;
+    });
 })
