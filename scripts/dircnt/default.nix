@@ -11,10 +11,11 @@ let
     meta.mainProgram = pname;
   };
 in
+# note: we don't use writeCBin because we want to use -O2 and ASan
 runCommandCC pname args ''
-    mkdir -p $out/bin
-    $CC \
-      -Wall -Wextra -Wno-format-truncation \
-      -fsanitize=address -g -O2 \
-      -xc ${./dircnt.c} -o $out/bin/${pname}
-  ''
+  mkdir -p $out/bin
+  $CC \
+    -Wall -Wextra -Wno-format-truncation \
+    -fsanitize=address -O2 \
+    -xc "${./dircnt.c}" -o "$out/bin/${pname}"
+''
