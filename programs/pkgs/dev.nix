@@ -14,6 +14,8 @@
     lurk
     # wrapper around nix-shell for debugging derivations
     nix-debug
+    # quickly generate a basic derivation from a given repo URL
+    nix-init
     # prettify and summarize nix build output
     nix-output-monitor
     # tool for pinning and managing nix dependencies
