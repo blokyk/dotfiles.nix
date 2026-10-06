@@ -1,7 +1,4 @@
-{ config, lib, ... }:
-let
-  firefox = config.programs.firefox.package;
-in {
+{ ... }: {
   imports = [
     ./extensions
     ./keybindings.nix
@@ -10,14 +7,6 @@ in {
   programs.gnome-shell.enable = true;
 
   dconf.settings = {
-    "org/gnome/shell" = {
-      favorite-apps = [
-        "org.gnome.Nautilus.desktop"
-        "${lib.getName firefox.desktopItem}"
-        "com.gexperts.Tilix.desktop"
-      ];
-    };
-
     "org/gnome/mutter" = {
       dynamic-workspaces = true;
     };
