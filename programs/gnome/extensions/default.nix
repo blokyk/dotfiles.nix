@@ -10,6 +10,7 @@
   };
 
   programs.gnome-shell.extensions = let exts = pkgs.gnomeCurrentExtensions; in [
+    { package = exts."applications-overview-tooltip@RaphaelRochet"; }
     { package = exts."alt-tab-scroll-workaround@lucasresck.github.io"; }
     { package = exts."lockkeys@vaina.lt"; }
     { package = exts."steal-my-focus-window@steal-my-focus-window"; }
