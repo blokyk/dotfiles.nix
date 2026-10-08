@@ -1,3 +1,5 @@
+# todo: look into using https://github.com/nix-community/naersk ?
+
 let
   pins = import ./npins {};
   pkgs = import pins.nixpkgs {};
@@ -6,8 +8,8 @@ in
 with pkgs;
 mkShell {
   packages = [
-    glsl_analyzer
-    glslang
+    cargo
+    rustc
 
     vscode-ext-hook
   ];
@@ -15,14 +17,15 @@ mkShell {
   vscodeExtensions =
     let
       nixExts = with vscode-extensions; [
+        rust-lang.rust-analyzer
       ];
 
       mktplcExts = vscode-utils.extensionsFromVscodeMarketplace [
-        # fixme: this extension should bundle glslangValidator (from pkgs.glslang)
-        { name = "vscode-glsllint"; publisher = "dtoplak"; version = "latest"; sha256 = ""; }
-        # fixme: this extension should bundle glsl_analyzer
-        { name = "glsl-analyzer"; publisher = "nolanderc"; version = "latest"; sha256 = ""; }
       ];
     in
      nixExts ++ mktplcExts;
+
+  env = {
+    RUST_SRC_PATH = "${rustPlatform.rustLibSrc}";
+  };
 }

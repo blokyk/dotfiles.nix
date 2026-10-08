@@ -1,26 +1,30 @@
 let
   pins = import ./npins {};
-  pkgs = import pins.nixpkgs {};
+  pkgs = import pins.nixpkgs {
+    overlays = [ (import pins.press) ];
+  };
   vscode-ext-hook = pkgs.callPackage pins.vscode-ext-hook.outPath {};
 
-  python3 = pkgs.python3.withPackages (p: with p; [
+  document = pkgs.buildTypstDocument {
+    name = "{{ cookiecutter.project_slug }}";
+    src = ./.;
+    fonts = with pkgs; [];
+    typstEnv = universe: with universe; [
 
-  ]);
+    ];
+  };
 in
 with pkgs;
 mkShell {
+  inputsFrom = [ document ];
   packages = [
-    python3
-
     vscode-ext-hook
   ];
 
   vscodeExtensions =
     let
       nixExts = with vscode-extensions; [
-        ms-python.python
-        ms-python.vscode-pylance
-        ms-python.debugpy
+        myriad-dreamin.tinymist
       ];
 
       mktplcExts = vscode-utils.extensionsFromVscodeMarketplace [
