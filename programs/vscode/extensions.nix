@@ -56,7 +56,7 @@ let
     { name = "vscode-systemd-support"; publisher = "hangxingliu"; version = "3.0.0"; sha256 = "K1fXE0AxkWdHsQC3uUFcJecJqB5PpJVzVdtfPSw4+eg="; }
 
     # uk english dictionary for cspell
-    { name = "code-spell-checker-british-english"; publisher = "streetsidesoftware"; version = "1.4.37"; sha256 = "sha256-Um9tZ/o3iPQ9xbo39mOULJoDsb+WMA4QTj0C5iT+Gdo="; }
+    { name = "code-spell-checker-british-english"; publisher = "streetsidesoftware"; version = "1.4.37"; sha256 = "Um9tZ/o3iPQ9xbo39mOULJoDsb+WMA4QTj0C5iT+Gdo="; }
     # open currently open file in the corresponding forge
     { name = "open-file-on-git-remote"; publisher = "WesleyHansen"; version = "0.0.4"; sha256 = "FZy4Rp4/9xYo8BjszBxDqgwd5YqgBLkWBGLzyOaqidk="; }
     # time tracker for repo, language, read/write ratio, etc.
@@ -72,7 +72,7 @@ let
     # normal vscode icons w/ folder icons instead of '>'
     { name = "seti-minimal-folder"; publisher = "sabaken";  version = "1.0.3"; sha256 = "0ip528v3jpbyalpimw4myddmxfvr51bs5104lx5anad9icm37pm4"; }
     # nice light theme for when i need a light theme
-    { name = "vscode-theme-onelight"; publisher = "akamud"; version = "2.3.0"; sha256 = "sha256-CTD0s2lRMCi/WCGr6dP1Utrvtsdcbg4srRcrZJSFDqU="; }
+    { name = "vscode-theme-onelight"; publisher = "akamud"; version = "2.3.0"; sha256 = "CTD0s2lRMCi/WCGr6dP1Utrvtsdcbg4srRcrZJSFDqU="; }
   ];
 in {
   nixpkgs.config.allowUnfreePackages = [
