@@ -60,7 +60,8 @@ def prefetch_url(url : str, name: str | None = None, unpack: bool = False, execu
 
     return sri.stdout.strip().decode()
 
-def prefetch_ext_spec(publisher: str, name: str) -> str:
+def prefetch_vscode_ext(publisher: str, name: str) -> str:
+    print(f"Fetching VSCode extension '{publisher}.{name}'...")
     version = get_latest_version(publisher, name)
     url = f"https://{publisher}.gallery.vsassets.io/_apis/public/gallery/publisher/{publisher}/extension/{name}/{version}/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
     hash = prefetch_url(url, f"vscode-extension-{publisher}-{name}-{version}")
@@ -68,6 +69,6 @@ def prefetch_ext_spec(publisher: str, name: str) -> str:
 
 class PrefetchExtension(Extension):
     def __init__(self, env):
-        super().__init__(env)
-        env.filters['prefetch_url'] = prefetch_url
-        env.filters['prefetch_vscode_ext'] = prefetch_ext_spec
+        super(PrefetchExtension, self).__init__(env)
+        env.globals['prefetch_url'] = prefetch_url
+        env.globals['prefetch_vscode_ext'] = prefetch_vscode_ext

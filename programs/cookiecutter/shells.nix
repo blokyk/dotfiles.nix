@@ -4,6 +4,21 @@
 }:
 let
   shells = {
+    "c.shell" = {
+      useCC = true;
+      packages = [
+        "clangd"
+        "lldb"
+      ];
+      nixExts = [
+        # fixme: this extension should bundle clangd
+        "llvm-vs-code-extensions.vscode-clangd"
+        # fixme: this extension should bundle lldb
+        "llvm-vs-code-extensions.lldb-dap"
+        "ms-vscode.makefile-tools"
+      ];
+    };
+
     "dotnet.shell" = {
       packages = [ "dotnet-sdk "];
       nixExts = [

@@ -19,8 +19,9 @@ let
     project_name = "Placeholder";
     project_slug = "{{ cookiecutter.project_name.lower().replace(' ', '-') }}";
     author = "blokyk"; # todo: if only we could source this from home.username...
+    use_system_nixpkgs = true;
     _extensions = [
-      "local_extensions.PrefetchExtension"
+      "prefetch.PrefetchExtension"
     ];
   };
 in
@@ -51,10 +52,8 @@ runCommandLocal name {} ''
     --replace-fail '$nix-prefetch-url$' '${lib.getExe' nix "nix-prefetch-url"}' \
     --replace-fail '$nix-hash$' '${lib.getExe' nix "nix-hash"}'
 
-  mkdir "$out/hooks"
-
-  cp "${./pre_gen_project.sh}" "$out/pre_gen_project.sh"
-  substituteInPlace "$out/pre_gen_project.sh" \
+  cp -r "${./hooks}" -T "$out/hooks"
+  substituteInPlace "$out/hooks/pre_gen_project.py" \
     --replace-fail '$npins$' '${lib.getExe npins}' \
     --replace-fail '$BASE_NPINS_JSON_PATH$' '${nixpkgsPinJson}'
 
