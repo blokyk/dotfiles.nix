@@ -20,7 +20,7 @@ in {
           echo "Usage : mkclone [repo-dir] <options...>"
           return 1
       else
-          dst="$(${mktemp} -d)"
+          dst="$(${mktemp} --directory --tmpdir $(basename "$1")-XXXXXXXXXXXX)"
           ${git} clone "$1" "$dst" --quiet --depth 1 "''${@:2}" && chdir "$dst"
           return $?
       fi
