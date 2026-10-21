@@ -114,9 +114,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "fabe9c96492d4d52ce6453d4a496408398ae1c80",
-      "url": "https://github.com/blokyk/nix-debug/archive/fabe9c96492d4d52ce6453d4a496408398ae1c80.tar.gz",
-      "hash": "sha256-fkP3Wn32y6rk6wGCsovtLKnPz6ydXFSr039+hIBOqrQ="
+      "revision": "7c02de143c976a38a3a3423888efff966dd17cc8",
+      "url": "https://github.com/blokyk/nix-debug/archive/7c02de143c976a38a3a3423888efff966dd17cc8.tar.gz",
+      "hash": "sha256-KPZB60pI0p1qzSzxtfFxwl3xRH00VN1PvWhV4ea8d/s="
     },
     "nix-diff-rs": {
       "type": "Git",
@@ -201,9 +201,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "e05fa87e7af436ba93ca290d6b55aab1cb980913",
-      "url": "https://github.com/blokyk/packages.nix/archive/e05fa87e7af436ba93ca290d6b55aab1cb980913.tar.gz",
-      "hash": "sha256-HnBts6DVAxM1y0xR0DJ0dlphB3chu6+iN+p+ZHp6Mi0="
+      "revision": "daf2ac5ec16666953f94e7fbef90f11dd3cb997c",
+      "url": "https://github.com/blokyk/packages.nix/archive/daf2ac5ec16666953f94e7fbef90f11dd3cb997c.tar.gz",
+      "hash": "sha256-zyziJwPwHTqv0DwI927cPwSwLW4QuEn4ggzqPKUdwWo="
     }
   },
   "version": 8
