@@ -11,10 +11,12 @@ let
 in {
   nix = {
     settings = {
-      experimental-features = [
+      extra-experimental-features = [
         "flakes"
         "nix-command"
         "lix-custom-sub-commands"
+
+        "pipe-operator"
       ];
 
       repl-overlays = [
