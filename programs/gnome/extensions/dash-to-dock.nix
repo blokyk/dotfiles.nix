@@ -1,7 +1,7 @@
 { config, pkgs, ... }: {
-  programs.gnome-shell.extensions = [
-    { package = pkgs.gnomeCurrentExtensions."dash-to-dock@micxgx.gmail.com"; }
-  ];
+  programs.gnome-shell.extensions = [{
+    package = pkgs.gnomeCurrentExtensions."dash-to-dock@micxgx.gmail.com";
+  }];
 
   assertions = [{
     assertion = !(builtins.elem
