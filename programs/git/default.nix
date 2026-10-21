@@ -49,6 +49,9 @@
       rebase.autostash = true;  # always stash before starting a rebase, and then pop it when the rebase is done
       rebase.updateRefs = true; # when rebasing a branch that is the base of other branches, update the commits these branches are based on
 
+      # prevent repos that contain embedded bare repos with malicious hooks
+      safe.bareRepository = "explicit";
+
       rerere.enabled = true;
 
       submodule.recurse = true;
