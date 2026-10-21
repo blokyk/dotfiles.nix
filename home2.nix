@@ -66,6 +66,13 @@
     ask-for-confirmation = true;
   };
 
+  home.activation = {
+    printGenerations = lib.hm.dag.entryBefore ["reportGenDiff" "writeBoundary"] ''
+      echo -e "\e[31m- /nix/store/\e[1m$(echo -n "$oldGenPath" | cut -c 12-43)\e[22m-home-manager-generation\e[0m"
+      echo -e "\e[32m+ /nix/store/\e[1m$(echo -n "$newGenPath" | cut -c 12-43)\e[22m-home-manager-generation\e[0m"
+    '';
+  };
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
   home.stateVersion = "25.11";
