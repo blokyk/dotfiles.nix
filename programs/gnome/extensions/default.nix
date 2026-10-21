@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }: {
+{ lib, pkgs, zpkgs, ... }: {
   imports = [(
     lib.modules.importApply <self/misc/importNixFilesAndDirs.nix> ./.
   )];
@@ -15,5 +15,6 @@
     { package = exts."lockkeys@vaina.lt"; }
     { package = exts."steal-my-focus-window@steal-my-focus-window"; }
     { package = exts."ubuntu-appindicators@ubuntu.com"; }
+    { package = zpkgs.gnome-github-manager; }
   ];
 }
