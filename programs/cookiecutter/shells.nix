@@ -1,9 +1,5 @@
-{
-  mkShellCutter,
-  mkShellText,
-}:
-let
-  shells = {
+{ ... }: {
+  nix.devshells = {
     "c.shell" = {
       useCC = true;
       packages = [
@@ -74,10 +70,4 @@ let
       ];
     };
   };
-in
-  builtins.mapAttrs (
-    name: spec: mkShellCutter {
-      inherit name;
-      devshell = builtins.toFile name (mkShellText spec);
-    }
-  ) shells
+}

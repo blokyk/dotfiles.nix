@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, ... }:
 let
   templates = {
     # for (f in ./templates)
@@ -9,9 +9,12 @@ let
     #   else
     #     $f (-> assume normal/"raw" cookiecutter)
   };
-
-  basicShellCutters = pkgs.callValue ./shells.nix {};
 in {
+  imports = [
+    ./shells-impl.nix
+    ./shells.nix
+  ];
+
   nixpkgs.overlays = [(
     self: super: {
       mkShellText = import ./mkShellText.nix;
@@ -27,7 +30,7 @@ in {
       replay_dir = config.xdg.cacheHome + "/cookiecutters/replay";
     };
 
-    cutters = basicShellCutters // templates // {
+    cutters = templates // {
       # todo: migrate stuff from nix/templates here
     };
   };
