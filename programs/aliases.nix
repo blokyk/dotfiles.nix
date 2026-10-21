@@ -96,6 +96,13 @@ let
       preexec = "sudo";
     };
 
+    # nix-init already exists so /shrug
+    lix-new = {
+      pkg = pkgs.cookiecutter;
+      flags = [];
+      mergeWithBasePkg = true;
+    };
+
     lix-optimise = {
       pkg = pkgs.fast-nix-gc;
       baseCmd = "fast-nix-optimise";
