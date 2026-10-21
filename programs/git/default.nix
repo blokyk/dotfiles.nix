@@ -6,6 +6,7 @@
 
     settings.alias = {
       unstage = "restore --staged";
+      unshallow = "fetch --unshallow";
 
       # show/checkout last branches
       lb =
