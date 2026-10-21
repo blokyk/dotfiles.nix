@@ -7,7 +7,7 @@ let
     hash = "sha256-kOAe969TprYk+iTuOkjH1t2fVbD5mbyMcwP40ons15g=";
   };
 
-  wikitionary-icon = pkgs.fetchurl {
+  wiktionary-icon = pkgs.fetchurl {
     url = "https://upload.wikimedia.org/wikipedia/commons/f/ff/WiktionaryEn.svg";
     hash = "sha256-BPEQnuk2mm/ciChFzEnzH9DLAPJQI3ev+vHfabjMS00=";
   };
@@ -89,12 +89,12 @@ in {
       };
 
       wd = {
-        name = "wikitionary (en)";
+        name = "wiktionary (en)";
         definedAliases = [ "wd" ];
-        icon = wikitionary-icon;
+        icon = wiktionary-icon;
 
         urls = [{
-          template = "https://en.wikitionary.org/w/index.php";
+          template = "https://en.wiktionary.org/w/index.php";
           params = [
             { name = "search"; value = "{searchTerms}"; }
           ];
@@ -102,12 +102,12 @@ in {
       };
 
       wdf = {
-        name = "wikitionary (fr)";
+        name = "wiktionary (fr)";
         definedAliases = [ "wdf" ];
-        icon = wikitionary-icon;
+        icon = wiktionary-icon;
 
         urls = [{
-          template = "https://fr.wikitionary.org/w/index.php";
+          template = "https://fr.wiktionary.org/w/index.php";
           params = [
             { name = "search"; value = "{searchTerms}"; }
           ];
