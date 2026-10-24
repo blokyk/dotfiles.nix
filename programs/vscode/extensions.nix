@@ -1,5 +1,7 @@
 { pkgs, ... }:
 let
+  open-on-git-remote = import <open-on-git-remote> { inherit pkgs; };
+
   nixpkgsExtensions = with pkgs.vscode-extensions; [
     # suggestions and go-to for path-like things, mainly files and folders
     christian-kohler.path-intellisense
@@ -39,6 +41,8 @@ let
     ms-vscode-remote.remote-ssh-edit
     # multi-user live coding by a simple link
     ms-vsliveshare.vsliveshare
+    # open currently local files on github/forgejo etc.
+    open-on-git-remote
     # highlight trailing spaces at the end of lines
     shardulm94.trailing-spaces
     # code-spell code and comments
@@ -57,8 +61,6 @@ let
 
     # uk english dictionary for cspell
     { name = "code-spell-checker-british-english"; publisher = "streetsidesoftware"; version = "1.4.37"; sha256 = "Um9tZ/o3iPQ9xbo39mOULJoDsb+WMA4QTj0C5iT+Gdo="; }
-    # open currently open file in the corresponding forge
-    { name = "open-file-on-git-remote"; publisher = "WesleyHansen"; version = "0.0.4"; sha256 = "FZy4Rp4/9xYo8BjszBxDqgwd5YqgBLkWBGLzyOaqidk="; }
     # time tracker for repo, language, read/write ratio, etc.
     # todo: should we replace it with an active fork? (e.g. DavidLundholm.slashcoded-vscode-extension)
     # { name = "vscode-coding-tracker"; publisher = "hangxingliu"; version = "0.6.0"; sha256 = "wZT0coYMPrdMVWOSA4FuYZ9v2AyeUocDFm/t6H+Ae9M="; }

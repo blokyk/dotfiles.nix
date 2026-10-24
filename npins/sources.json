@@ -152,6 +152,19 @@
       "url": "https://code.maralorn.de/maralorn/nix-output-monitor/archive/bcecf42740627e01376caea1edc3194f39857890.tar.gz",
       "hash": "sha256-kWGA2zNVrHZpKgeXA0urHvw7FWCTEp5rjyUAhCikXuc="
     },
+    "open-on-git-remote": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "blokyk",
+        "repo": "open-file-on-git-remote"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "aa53bf674b84bb06d1bef3e905e5dbe886ebd54a",
+      "url": "https://github.com/blokyk/open-file-on-git-remote/archive/aa53bf674b84bb06d1bef3e905e5dbe886ebd54a.tar.gz",
+      "hash": "sha256-3ntvTW3FwT3b9qvxSnsggab/CJ7cp0/Upy9P+F5ullM="
+    },
     "rycee-nur": {
       "type": "Git",
       "repository": {
