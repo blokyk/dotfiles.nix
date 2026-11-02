@@ -57,7 +57,9 @@
 
       zpkgs = config._module.args.zpkgs;
 
-      gnomeCurrentExtensions = prev.${"gnome${toString config.targets.genericLinux.extraInfo.gnome.version}Extensions"};
+      inherit (import <nixpkgs-gnome-48> {}) gnome48Extensions;
+
+      gnomeCurrentExtensions = final.${"gnome${toString config.targets.genericLinux.extraInfo.gnome.version}Extensions"};
     }
   )];
 

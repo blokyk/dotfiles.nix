@@ -5,7 +5,7 @@ pkgs.ringboard.overrideAttrs (prev: {
     ./on-primary-monitor.lock.patch
   ];
 
-  cargoHash = "sha256-hO67tlykfPjkc/v7JhJ4yIJMFSL/powWD7UDrBbfkII=";
+  cargoHash = "sha256-T65TxIes0171uDxDE72SnFeRVAgw5FR2z6yTcmH3Z6k=";
 
   buildInputs = (prev.buildInputs or []) ++ [ pkgs.libxcb ];
 })
