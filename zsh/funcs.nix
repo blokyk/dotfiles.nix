@@ -21,8 +21,14 @@ in {
           return 1
       else
           dst="$(${mktemp} --directory --tmpdir $(basename "$1")-XXXXXXXXXXXX)"
-          ${git} clone "$1" "$dst" --quiet --depth 1 "''${@:2}" && chdir "$dst"
-          return $?
+          if ${git} clone "$1" "$dst" --quiet --depth 1 "''${@:2}"; then
+            chdir "$dst"
+            return 0
+          else
+            # if we couldn't clone it, remove the tmp folder
+            rm -rf "$dst"
+            return 1
+          fi
       fi
     '';
 
