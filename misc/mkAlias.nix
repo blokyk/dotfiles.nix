@@ -28,6 +28,10 @@
   # (this could be used to, e.g., prepend sudo before the command,
   # or wrap the program with systemd-run or bubblewrap)
   preexec ? "",
+  # true: use the argv0 of the program as called from the command line
+  # false: sest argv0 to baseCmd [default]
+  # a string: use the given string as argv0
+  inheritArgv0 ? false,
 }:
 let
   formatFlag =
@@ -41,11 +45,19 @@ let
       formatFlag
       flags;
 
+  argv0 =
+    if lib.isString inheritArgv0 then
+      inheritArgv0
+    else if inheritArgv0 then
+      "$0"
+    else
+      baseCmd;
+
   baseAttrs = {
     inherit name;
 
     text = ''
-      exec -a "$(basename "$0")" ${preexec} ${lib.getExe' pkg baseCmd} \
+      exec -a "${argv0}" ${preexec} ${lib.getExe' pkg baseCmd} \
           ${flagsText} \
           "''${@}"
     '';
