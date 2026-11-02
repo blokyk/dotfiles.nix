@@ -45,7 +45,7 @@ let
     inherit name;
 
     text = ''
-      ${preexec} ${lib.getExe' pkg baseCmd} \
+      exec -a "$(basename "$0")" ${preexec} ${lib.getExe' pkg baseCmd} \
           ${flagsText} \
           "''${@}"
     '';
