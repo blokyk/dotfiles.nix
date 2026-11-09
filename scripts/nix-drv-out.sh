@@ -7,8 +7,5 @@ if [[ "$1" = "" ]]; then
     echo "Usage: $0 <drv-path> [output name]"
     echo "The default output will be 'out', but it can be dev, bin, debug, etc."
 else
-    nix \
-        --extra-experimental-features nix-command \
-        derivation show "$1"'^*' \
-    | jq --exit-status --raw-output ".[].outputs.${2:-out}.path"
+    nix path-info "$1"'^'"${2:-out}"
 fi
