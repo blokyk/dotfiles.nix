@@ -46,7 +46,7 @@ in {
 
     "Nix REPL" = {
       binding = ["<Ctrl>" "<Alt>" "n"];
-      command = ''${tilix} --title "Nix REPL" -e "nix repl -f <nixpkgs>"'';
+      command = ''${tilix} --title "Nix REPL" -e "nix repl -f ${toString pkgs.path}"'';
     };
   };
 
